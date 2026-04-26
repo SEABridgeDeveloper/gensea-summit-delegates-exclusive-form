@@ -1,0 +1,281 @@
+{
+  "universities": [
+    {
+      "id": "chula",
+      "name": { "en": "Chulalongkorn University", "th": "จุฬาลงกรณ์มหาวิทยาลัย" },
+      "domain": "chula.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Commerce and Accountancy", "th": "คณะพาณิชยศาสตร์และการบัญชี" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of Arts", "th": "คณะอักษรศาสตร์" },
+        { "en": "Faculty of Economics", "th": "คณะเศรษฐศาสตร์" },
+        { "en": "Faculty of Political Science", "th": "คณะรัฐศาสตร์" },
+        { "en": "Faculty of Architecture", "th": "คณะสถาปัตยกรรมศาสตร์" },
+        { "en": "Faculty of Communication Arts", "th": "คณะนิเทศศาสตร์" }
+      ]
+    },
+    {
+      "id": "mahidol",
+      "name": { "en": "Mahidol University", "th": "มหาวิทยาลัยมหิดล" },
+      "domain": "mahidol.ac.th",
+      "faculties": [
+        { "en": "Faculty of Medicine Siriraj Hospital", "th": "คณะแพทยศาสตร์ศิริราชพยาบาล" },
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of ICT", "th": "คณะเทคโนโลยีสารสนเทศและการสื่อสาร" },
+        { "en": "College of Management", "th": "วิทยาลัยการจัดการ" }
+      ]
+    },
+    {
+      "id": "thammasat",
+      "name": { "en": "Thammasat University", "th": "มหาวิทยาลัยธรรมศาสตร์" },
+      "domain": "thammasat.ac.th",
+      "faculties": [
+        { "en": "Faculty of Commerce and Accountancy", "th": "คณะพาณิชยศาสตร์และการบัญชี" },
+        { "en": "Faculty of Economics", "th": "คณะเศรษฐศาสตร์" },
+        { "en": "Faculty of Law", "th": "คณะนิติศาสตร์" },
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Political Science", "th": "คณะรัฐศาสตร์" }
+      ]
+    },
+    {
+      "id": "kmutt",
+      "name": { "en": "King Mongkut's University of Technology Thonburi", "th": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี" },
+      "domain": "kmutt.ac.th",
+      "faculties": [
+        { "en": "School of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "School of Information Technology", "th": "คณะเทคโนโลยีสารสนเทศ" },
+        { "en": "School of Architecture and Design", "th": "คณะสถาปัตยกรรมศาสตร์และการออกแบบ" },
+        { "en": "School of Liberal Arts", "th": "คณะศิลปศาสตร์" }
+      ]
+    },
+    {
+      "id": "kmitl",
+      "name": { "en": "King Mongkut's Institute of Technology Ladkrabang", "th": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง" },
+      "domain": "kmitl.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of Architecture", "th": "คณะสถาปัตยกรรมศาสตร์" },
+        { "en": "Faculty of Information Technology", "th": "คณะเทคโนโลยีสารสนเทศ" }
+      ]
+    },
+    {
+      "id": "kasetsart",
+      "name": { "en": "Kasetsart University", "th": "มหาวิทยาลัยเกษตรศาสตร์" },
+      "domain": "ku.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of Economics", "th": "คณะเศรษฐศาสตร์" },
+        { "en": "Faculty of Business Administration", "th": "คณะบริหารธุรกิจ" },
+        { "en": "Faculty of Agriculture", "th": "คณะเกษตร" }
+      ]
+    },
+    {
+      "id": "kku",
+      "name": { "en": "Khon Kaen University", "th": "มหาวิทยาลัยขอนแก่น" },
+      "domain": "kku.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of Medicine", "th": "คณะแพทยศาสตร์" },
+        { "en": "Faculty of Business Administration", "th": "คณะบริหารธุรกิจและการบัญชี" },
+        { "en": "Faculty of Humanities and Social Sciences", "th": "คณะมนุษยศาสตร์และสังคมศาสตร์" }
+      ]
+    },
+    {
+      "id": "cmu",
+      "name": { "en": "Chiang Mai University", "th": "มหาวิทยาลัยเชียงใหม่" },
+      "domain": "cmu.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of Medicine", "th": "คณะแพทยศาสตร์" },
+        { "en": "Faculty of Business Administration", "th": "คณะบริหารธุรกิจ" }
+      ]
+    },
+    {
+      "id": "msu",
+      "name": { "en": "Mahasarakham University", "th": "มหาวิทยาลัยมหาสารคาม" },
+      "domain": "msu.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Informatics", "th": "คณะวิทยาการสารสนเทศ" },
+        { "en": "Faculty of Accountancy and Management", "th": "คณะการบัญชีและการจัดการ" }
+      ]
+    },
+    {
+      "id": "buu",
+      "name": { "en": "Burapha University", "th": "มหาวิทยาลัยบูรพา" },
+      "domain": "buu.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Informatics", "th": "คณะวิทยาการสารสนเทศ" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" }
+      ]
+    },
+    {
+      "id": "silpakorn",
+      "name": { "en": "Silpakorn University", "th": "มหาวิทยาลัยศิลปากร" },
+      "domain": "su.ac.th",
+      "faculties": [
+        { "en": "Faculty of Painting, Sculpture and Graphic Arts", "th": "คณะจิตรกรรม ประติมากรรม และภาพพิมพ์" },
+        { "en": "Faculty of Architecture", "th": "คณะสถาปัตยกรรมศาสตร์" },
+        { "en": "Faculty of Decorative Arts", "th": "คณะมัณฑนศิลป์" },
+        { "en": "Faculty of Management Science", "th": "คณะวิทยาการจัดการ" }
+      ]
+    },
+    {
+      "id": "psu",
+      "name": { "en": "Prince of Songkla University", "th": "มหาวิทยาลัยสงขลานครินทร์" },
+      "domain": "psu.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of Medicine", "th": "คณะแพทยศาสตร์" },
+        { "en": "Faculty of Management Sciences", "th": "คณะวิทยาการจัดการ" }
+      ]
+    },
+    {
+      "id": "kmutnb",
+      "name": { "en": "King Mongkut's University of Technology North Bangkok", "th": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ" },
+      "domain": "kmutnb.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Information Technology", "th": "คณะเทคโนโลยีสารสนเทศและนวัตกรรมดิจิทัล" },
+        { "en": "Faculty of Applied Science", "th": "คณะวิทยาศาสตร์ประยุกต์" }
+      ]
+    },
+    {
+      "id": "sut",
+      "name": { "en": "Suranaree University of Technology", "th": "มหาวิทยาลัยเทคโนโลยีสุรนารี" },
+      "domain": "sut.ac.th",
+      "faculties": [
+        { "en": "Institute of Engineering", "th": "สำนักวิชาวิศวกรรมศาสตร์" },
+        { "en": "Institute of Science", "th": "สำนักวิชาวิทยาศาสตร์" },
+        { "en": "Institute of Social Technology", "th": "สำนักวิชาเทคโนโลยีสังคม" }
+      ]
+    },
+    {
+      "id": "swu",
+      "name": { "en": "Srinakharinwirot University", "th": "มหาวิทยาลัยศรีนครินทรวิโรฒ" },
+      "domain": "swu.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of Business Administration", "th": "คณะบริหารธุรกิจเพื่อสังคม" }
+      ]
+    },
+    {
+      "id": "rsu",
+      "name": { "en": "Rangsit University", "th": "มหาวิทยาลัยรังสิต" },
+      "domain": "rsu.ac.th",
+      "faculties": [
+        { "en": "College of Engineering", "th": "วิทยาลัยวิศวกรรมศาสตร์" },
+        { "en": "College of Information and Communication Technology", "th": "วิทยาลัยเทคโนโลยีสารสนเทศและการสื่อสาร" },
+        { "en": "College of Business Administration", "th": "วิทยาลัยบริหารธุรกิจ" }
+      ]
+    },
+    {
+      "id": "au",
+      "name": { "en": "Assumption University", "th": "มหาวิทยาลัยอัสสัมชัญ" },
+      "domain": "au.edu",
+      "faculties": [
+        { "en": "School of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "School of Business Administration", "th": "คณะบริหารธุรกิจ" },
+        { "en": "School of Communication Arts", "th": "คณะนิเทศศาสตร์" }
+      ]
+    },
+    {
+      "id": "bu",
+      "name": { "en": "Bangkok University", "th": "มหาวิทยาลัยกรุงเทพ" },
+      "domain": "bu.ac.th",
+      "faculties": [
+        { "en": "School of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "School of Business Administration", "th": "คณะบริหารธุรกิจ" },
+        { "en": "School of Communication Arts", "th": "คณะนิเทศศาสตร์" },
+        { "en": "School of Information Technology", "th": "คณะเทคโนโลยีสารสนเทศและนวัตกรรม" }
+      ]
+    },
+    {
+      "id": "tu",
+      "name": { "en": "Naresuan University", "th": "มหาวิทยาลัยนเรศวร" },
+      "domain": "nu.ac.th",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "คณะวิศวกรรมศาสตร์" },
+        { "en": "Faculty of Science", "th": "คณะวิทยาศาสตร์" },
+        { "en": "Faculty of Business, Economics and Communications", "th": "คณะบริหารธุรกิจ เศรษฐศาสตร์และการสื่อสาร" }
+      ]
+    },
+    {
+      "id": "nus",
+      "name": { "en": "National University of Singapore", "th": "มหาวิทยาลัยแห่งชาติสิงคโปร์" },
+      "domain": "nus.edu.sg",
+      "faculties": [
+        { "en": "School of Computing", "th": "School of Computing" },
+        { "en": "Faculty of Engineering", "th": "Faculty of Engineering" },
+        { "en": "NUS Business School", "th": "NUS Business School" }
+      ]
+    },
+    {
+      "id": "ntu",
+      "name": { "en": "Nanyang Technological University", "th": "มหาวิทยาลัยเทคโนโลยีนันยาง" },
+      "domain": "ntu.edu.sg",
+      "faculties": [
+        { "en": "School of Computer Science and Engineering", "th": "School of Computer Science and Engineering" },
+        { "en": "College of Engineering", "th": "College of Engineering" },
+        { "en": "Nanyang Business School", "th": "Nanyang Business School" }
+      ]
+    },
+    {
+      "id": "um",
+      "name": { "en": "Universiti Malaya", "th": "มหาวิทยาลัยมาลายา" },
+      "domain": "um.edu.my",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "Faculty of Engineering" },
+        { "en": "Faculty of Computer Science & Information Technology", "th": "Faculty of Computer Science & IT" },
+        { "en": "Faculty of Business & Economics", "th": "Faculty of Business & Economics" }
+      ]
+    },
+    {
+      "id": "ui",
+      "name": { "en": "Universitas Indonesia", "th": "มหาวิทยาลัยอินโดนีเซีย" },
+      "domain": "ui.ac.id",
+      "faculties": [
+        { "en": "Faculty of Engineering", "th": "Faculty of Engineering" },
+        { "en": "Faculty of Computer Science", "th": "Faculty of Computer Science" },
+        { "en": "Faculty of Economics and Business", "th": "Faculty of Economics and Business" }
+      ]
+    },
+    {
+      "id": "up",
+      "name": { "en": "University of the Philippines", "th": "มหาวิทยาลัยฟิลิปปินส์" },
+      "domain": "up.edu.ph",
+      "faculties": [
+        { "en": "College of Engineering", "th": "College of Engineering" },
+        { "en": "College of Science", "th": "College of Science" },
+        { "en": "College of Business Administration", "th": "College of Business Administration" }
+      ]
+    },
+    {
+      "id": "vnu",
+      "name": { "en": "Vietnam National University", "th": "มหาวิทยาลัยแห่งชาติเวียดนาม" },
+      "domain": "vnu.edu.vn",
+      "faculties": [
+        { "en": "University of Engineering and Technology", "th": "University of Engineering and Technology" },
+        { "en": "University of Science", "th": "University of Science" },
+        { "en": "University of Economics and Business", "th": "University of Economics and Business" }
+      ]
+    },
+    {
+      "id": "other",
+      "name": { "en": "Other — please contact us", "th": "อื่นๆ — กรุณาติดต่อเรา" },
+      "domain": "",
+      "faculties": [
+        { "en": "Other", "th": "อื่นๆ" }
+      ]
+    }
+  ]
+}

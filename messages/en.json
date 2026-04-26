@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "title": "Gen SEA Summit 2026 — Apply for Scholarship",
+    "description": "Win your seat. 50 students. One room. ASEAN's next decade starts here."
+  },
+  "nav": {
+    "summit": "Summit",
+    "sectors": "Sectors",
+    "timeline": "Timeline",
+    "apply": "Apply"
+  },
+  "hero": {
+    "eyebrow": "16–18 July 2026 · Khon Kaen, Thailand",
+    "headline": "Win Your Seat.",
+    "subHeadline": "50 students. One room.",
+    "tertiary": "ASEAN's next decade starts here.",
+    "brandMark": "GEN SEA SUMMIT 2026 — DELEGATES",
+    "primaryCta": "Apply for Scholarship",
+    "secondaryCta": "Learn More"
+  },
+  "stats": {
+    "access": { "value": "3-DAY", "label": "Gen SEA Summit 2026" },
+    "attendees": { "value": "350+", "label": "Founders, Investors, Ministers" },
+    "bootcamp": { "value": "$1,500", "label": "Bootcamp value — FREE" },
+    "scholarship": { "value": "UP TO 100%", "label": "Scholarships (USD 1,800 pass)" },
+    "fastTrack": { "value": "FAST-TRACK", "label": "Fellowships & Internships" },
+    "location": { "value": "KHON KAEN", "label": "Isan Creative Festival 2026" }
+  },
+  "theme": {
+    "title": "Building Amidst Chaos",
+    "subtitle": "The theme of Gen SEA Summit 2026",
+    "body": "2026 is a year of immense challenge — global economic volatility, accelerating climate change, and AI reshaping every industry. Yet within this uncertainty lies extraordinary opportunity. ASEAN has over 200 million young people, and this next generation holds the power to drive the region forward. Gen SEA Summit 2026 is where 50 students will learn from leaders, build networks, and launch their entrepreneurial journeys."
+  },
+  "sectors": {
+    "title": "Five Sectors. One Future.",
+    "items": [
+      { "name": "Wellness & Longevity", "description": "The new economy of human flourishing" },
+      { "name": "Food & Nutrition", "description": "Feeding the region sustainably" },
+      { "name": "AI & Digital Technology", "description": "Building ASEAN's intelligence layer" },
+      { "name": "Creative Economy & IP", "description": "Stories, design, soft power" },
+      { "name": "Education 5.0 & Global Careers", "description": "Skills for a borderless workforce" }
+    ]
+  },
+  "whoCanApply": {
+    "title": "Who can apply",
+    "line1": "Students & recent graduates (18–30)",
+    "line2": "Any field · Any country"
+  },
+  "benefits": {
+    "title": "What You Get",
+    "items": [
+      "3-day access to Gen SEA Summit 2026",
+      "350+ founders, investors, ministers, ecosystem partners",
+      "Gen SEA Bootcamp (USD 1,500 value) — free",
+      "Scholarships up to 100% (USD 1,800 Delegate Pass)",
+      "Fast-track to SEA Bridge Fellowships & internships",
+      "Experience Khon Kaen during Isan Creative Festival 2026"
+    ]
+  },
+  "howToGetIn": {
+    "title": "How to Get In",
+    "steps": [
+      { "title": "Apply or get nominated", "description": "University (up to 10) · Faculty (up to 5)" },
+      { "title": "Complete Gen SEA Bootcamp", "description": "Learn and build your project" },
+      { "title": "Top 50 selected based on Bootcamp + application", "description": "The most outstanding applicants" }
+    ],
+    "caveat": "Nomination = priority, not a guarantee."
+  },
+  "timeline": {
+    "title": "Timeline",
+    "milestones": [
+      { "date": "Apr 28", "label": "Applications open" },
+      { "date": "May 15", "label": "Nomination & application deadline" },
+      { "date": "May 16 – Jun 5", "label": "Gen SEA Bootcamp" },
+      { "date": "Jun 6", "label": "Capstone due" },
+      { "date": "Jun 7", "label": "50 Delegates announced" },
+      { "date": "Jul 16–18", "label": "Gen SEA Summit 2026" }
+    ]
+  },
+  "finalCta": {
+    "heading": "Ready to take your seat?",
+    "sub": "Applications close 15 May 2026.",
+    "button": "Apply Now"
+  },
+  "footer": {
+    "tagline": "Build. Scale. Bridge.",
+    "links": {
+      "about": "About",
+      "sectors": "Sectors",
+      "apply": "Apply",
+      "contact": "Contact"
+    },
+    "copyright": "© 2026 SEA Bridge Institute of Entrepreneurship. All rights reserved.",
+    "pdpa": "Privacy Policy"
+  },
+  "apply": {
+    "title": "Apply for Gen SEA Delegates Scholarship",
+    "steps": ["Identity", "Academic", "Recommender", "Essay", "Logistics & Consent"],
+    "back": "Back",
+    "continue": "Continue",
+    "submit": "Submit Application",
+    "step1": {
+      "title": "Student Identity",
+      "nameTh": "Full name (Thai)",
+      "nameThPlaceholder": "e.g. ธนกฤต เสริมสุขสันต์",
+      "nameEn": "Full name (English)",
+      "nameEnPlaceholder": "e.g. Tanakrit Sermsuksan",
+      "nameEnHelper": "Used for certificate + reserved seat",
+      "email": "University email",
+      "phone": "Mobile phone",
+      "lineId": "LINE ID",
+      "discord": "Discord handle",
+      "contactHelper": "At least one of LINE ID or Discord must be filled"
+    },
+    "step2": {
+      "title": "Academic Info",
+      "university": "University",
+      "universityPlaceholder": "Search university...",
+      "faculty": "Faculty",
+      "facultyPlaceholder": "Select faculty",
+      "department": "Department / Major",
+      "yearOfStudy": "Year of study",
+      "years": ["Year 1", "Year 2", "Year 3", "Year 4", "Year 5+", "Recent graduate (within 12 months)"],
+      "gpa": "GPA",
+      "gpaHelper": "Used as tie-breaker only"
+    },
+    "step3": {
+      "title": "Recommender",
+      "profName": "Professor's full name",
+      "profEmail": "Professor's institutional email",
+      "profEmailError": "Please use an institutional email (e.g. ending in .ac.th)",
+      "profTitle": "Professor's title",
+      "titles": ["Lecturer", "Asst. Prof.", "Assoc. Prof.", "Prof."],
+      "letter": "Recommendation letter",
+      "letterHelper": "PDF only, max 5MB"
+    },
+    "step4": {
+      "title": "Scholarship Essay",
+      "prompt": "Tell us why you want to join Gen SEA Summit 2026 and the venture idea or sector challenge you're most excited to explore (200–500 words).",
+      "helper": "Your essay is the most important part of your application. Be specific.",
+      "wordCount": "Word count"
+    },
+    "step5": {
+      "title": "Logistics & Consent",
+      "accommodation": "Need accommodation?",
+      "accommodationYes": "Yes",
+      "accommodationNo": "No",
+      "accommodationHelper": "Accommodation is provided to Top 25 only. Other delegates receive a subsidized booking link.",
+      "dietary": "Dietary requirements",
+      "dietaryOptions": ["Vegetarian", "Vegan", "Halal", "No pork", "No beef", "Gluten-free", "Other (specify)"],
+      "allergies": "Allergies",
+      "accessibility": "Accessibility needs",
+      "emergencyName": "Emergency contact name",
+      "emergencyPhone": "Emergency contact phone",
+      "emergencyRelation": "Emergency contact relationship",
+      "relations": ["Parent", "Sibling", "Spouse", "Friend", "Other"],
+      "consent1": "I consent to SEA Bridge collecting and processing my personal data, including sharing with event sponsors and partners, in accordance with Thailand's Personal Data Protection Act (PDPA).",
+      "consent2": "I allow Gen SEA Summit to use my name and photo in promotional materials.",
+      "consent3": "I confirm that all information submitted is true and accurate."
+    }
+  },
+  "success": {
+    "title": "Application received",
+    "body": "We've sent a confirmation to {email}. Selection results will be announced 7 June 2026. In the meantime, watch for the Bootcamp invite — Bootcamp begins 16 May.",
+    "button": "Back to home"
+  }
+}
