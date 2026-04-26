@@ -7,15 +7,15 @@ export function LanguageToggle() {
   const { locale, setLocale } = useLocale()
 
   return (
-    <div className="flex items-center rounded-full border border-border bg-muted p-1">
+    <div className="flex items-center rounded-full border border-cream-200 bg-cream-100 p-1">
       <Button
         variant="ghost"
         size="sm"
         onClick={() => setLocale("th")}
         className={`h-7 rounded-full px-3 text-xs font-medium transition-colors ${
           locale === "th"
-            ? "bg-background text-foreground shadow-sm"
-            : "text-muted-foreground hover:text-foreground"
+            ? "bg-white text-navy-900 shadow-sm"
+            : "text-navy-700 hover:text-navy-900"
         }`}
       >
         TH
@@ -26,8 +26,8 @@ export function LanguageToggle() {
         onClick={() => setLocale("en")}
         className={`h-7 rounded-full px-3 text-xs font-medium transition-colors ${
           locale === "en"
-            ? "bg-background text-foreground shadow-sm"
-            : "text-muted-foreground hover:text-foreground"
+            ? "bg-white text-navy-900 shadow-sm"
+            : "text-navy-700 hover:text-navy-900"
         }`}
       >
         EN

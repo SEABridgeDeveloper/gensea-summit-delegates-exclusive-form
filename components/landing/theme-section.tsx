@@ -29,7 +29,7 @@ export function ThemeSection() {
     <section
       id="theme"
       ref={sectionRef}
-      className="py-24 md:py-32 bg-navy-900"
+      className="py-24 md:py-32 bg-cream-100"
     >
       <div className="container mx-auto px-4">
         <div
@@ -39,7 +39,7 @@ export function ThemeSection() {
         >
           {/* Title */}
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900">
               {t("theme.title")}
             </h2>
             <p className="text-xl md:text-2xl text-gold-500 font-medium">
@@ -55,7 +55,7 @@ export function ThemeSection() {
           </div>
 
           {/* Body text */}
-          <p className="text-lg md:text-xl text-navy-100 leading-relaxed">
+          <p className="text-lg md:text-xl text-navy-700 leading-relaxed">
             {t("theme.body")}
           </p>
         </div>

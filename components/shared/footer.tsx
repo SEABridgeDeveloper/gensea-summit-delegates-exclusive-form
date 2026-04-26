@@ -14,14 +14,14 @@ export function Footer() {
   ]
 
   return (
-    <footer className="border-t border-border bg-card">
+    <footer className="border-t border-cream-200 bg-cream-100">
       <div className="container mx-auto px-4 py-12">
         <div className="grid gap-8 md:grid-cols-3">
           {/* Logo & Tagline */}
           <div className="flex flex-col gap-4">
             <div>
-              <span className="text-xl font-bold tracking-tight">
-                <span className="text-foreground">SEA BRIDGE</span>
+              <span className="text-xl font-bold tracking-tight text-navy-900">
+                SEA BRIDGE
               </span>
             </div>
             <p className="text-sm text-gold-500 font-medium">
@@ -31,31 +31,31 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-navy-300">
               Quick Links
             </h3>
             <nav className="flex flex-col gap-2">
               <Link
                 href="#theme"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-navy-700 hover:text-navy-900 transition-colors"
               >
                 {t("footer.links.about")}
               </Link>
               <Link
                 href="#sectors"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-navy-700 hover:text-navy-900 transition-colors"
               >
                 {t("footer.links.sectors")}
               </Link>
               <Link
                 href="/apply"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-navy-700 hover:text-navy-900 transition-colors"
               >
                 {t("footer.links.apply")}
               </Link>
               <Link
                 href="mailto:team@seabridge.space"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-navy-700 hover:text-navy-900 transition-colors"
               >
                 {t("footer.links.contact")}
               </Link>
@@ -64,7 +64,7 @@ export function Footer() {
 
           {/* Social & Contact */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-navy-300">
               Connect
             </h3>
             <div className="flex items-center gap-4">
@@ -74,7 +74,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-navy-700 hover:text-navy-900 transition-colors"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -83,7 +83,7 @@ export function Footer() {
             </div>
             <a
               href="mailto:team@seabridge.space"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-2 text-sm text-navy-700 hover:text-navy-900 transition-colors"
             >
               <Mail className="h-4 w-4" />
               team@seabridge.space
@@ -92,11 +92,11 @@ export function Footer() {
         </div>
 
         {/* Bottom strip */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
-          <p className="text-xs text-muted-foreground">{t("footer.copyright")}</p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-cream-200 pt-8 sm:flex-row">
+          <p className="text-xs text-navy-700">{t("footer.copyright")}</p>
           <Link
             href="#"
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="text-xs text-navy-700 hover:text-navy-900 transition-colors"
           >
             {t("footer.pdpa")}
           </Link>

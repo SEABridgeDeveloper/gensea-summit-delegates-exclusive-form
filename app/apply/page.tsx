@@ -133,10 +133,10 @@ export default function ApplyPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-background py-12">
+      <main className="min-h-screen bg-cream-50 py-12">
         <div className="container mx-auto px-4 max-w-2xl">
           {/* Title */}
-          <h1 className="text-2xl md:text-3xl font-bold text-center mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-navy-900 text-center mb-8">
             {t("apply.title")}
           </h1>
 
@@ -149,7 +149,7 @@ export default function ApplyPage() {
                   className={`text-xs md:text-sm font-medium ${
                     index + 1 <= currentStep
                       ? "text-gold-500"
-                      : "text-muted-foreground"
+                      : "text-navy-300"
                   }`}
                 >
                   <span className="hidden md:inline">{name}</span>
@@ -158,7 +158,7 @@ export default function ApplyPage() {
               ))}
             </div>
             <Progress value={(currentStep / TOTAL_STEPS) * 100} className="h-2" />
-            <p className="text-center text-sm text-muted-foreground mt-2">
+            <p className="text-center text-sm text-navy-700 mt-2">
               {currentStep} / {TOTAL_STEPS}
             </p>
           </div>
@@ -167,7 +167,7 @@ export default function ApplyPage() {
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-8">
               {/* Current step */}
-              <div className="bg-card border border-border rounded-xl p-6 md:p-8">
+              <div className="bg-white border border-cream-200 rounded-xl p-6 md:p-8">
                 {renderStep()}
               </div>
 
@@ -178,7 +178,7 @@ export default function ApplyPage() {
                   variant="outline"
                   onClick={handleBack}
                   disabled={currentStep === 1}
-                  className="flex-1"
+                  className="flex-1 border-navy-900 text-navy-900 hover:bg-navy-900/5"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   {t("apply.back")}

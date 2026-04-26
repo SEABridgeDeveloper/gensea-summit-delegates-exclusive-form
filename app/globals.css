@@ -1,8 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   /* Brand colors from Gen SEA Summit poster */
   --navy-50: #E8ECF4;
@@ -15,14 +13,20 @@
   --red-500: #D32F2F;
   --red-600: #B82626;
 
+  --coral-100: #FCE4D4;
+  --coral-300: #F4A77A;
+  --coral-500: #E8854A;
+  --coral-700: #B8602A;
+
   --gold-300: #F5C470;
   --gold-500: #F0A933;
   --gold-700: #B07A1F;
 
   --cream-50: #FAF7F0;
   --cream-100: #F0EBDF;
+  --cream-200: #E5DFD0;
 
-  /* Light theme (Variant A - Sunset/Light) */
+  /* Warm editorial sunset theme - single committed light mode */
   --background: var(--cream-50);
   --foreground: var(--navy-900);
   --card: #FFFFFF;
@@ -31,7 +35,7 @@
   --popover-foreground: var(--navy-900);
   --primary: var(--red-500);
   --primary-foreground: #FFFFFF;
-  --secondary: var(--navy-100);
+  --secondary: var(--cream-100);
   --secondary-foreground: var(--navy-900);
   --muted: var(--cream-100);
   --muted-foreground: var(--navy-700);
@@ -41,31 +45,8 @@
   --destructive-foreground: #FFFFFF;
   --border: rgba(10, 26, 53, 0.12);
   --input: rgba(10, 26, 53, 0.12);
-  --ring: var(--gold-500);
-  --radius: 0.625rem;
-}
-
-.dark {
-  /* Dark theme (Variant B - Night/Dark) - Recommended default */
-  --background: var(--navy-900);
-  --foreground: #FFFFFF;
-  --card: var(--navy-700);
-  --card-foreground: #FFFFFF;
-  --popover: var(--navy-700);
-  --popover-foreground: #FFFFFF;
-  --primary: var(--red-500);
-  --primary-foreground: #FFFFFF;
-  --secondary: var(--navy-500);
-  --secondary-foreground: #FFFFFF;
-  --muted: var(--navy-700);
-  --muted-foreground: var(--navy-100);
-  --accent: var(--gold-500);
-  --accent-foreground: var(--navy-900);
-  --destructive: var(--red-600);
-  --destructive-foreground: #FFFFFF;
-  --border: rgba(255, 255, 255, 0.12);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: var(--gold-500);
+  --ring: var(--coral-500);
+  --radius: 0.75rem;
 }
 
 @theme inline {
@@ -104,11 +85,16 @@
   --color-navy-900: var(--navy-900);
   --color-red-500: var(--red-500);
   --color-red-600: var(--red-600);
+  --color-coral-100: var(--coral-100);
+  --color-coral-300: var(--coral-300);
+  --color-coral-500: var(--coral-500);
+  --color-coral-700: var(--coral-700);
   --color-gold-300: var(--gold-300);
   --color-gold-500: var(--gold-500);
   --color-gold-700: var(--gold-700);
   --color-cream-50: var(--cream-50);
   --color-cream-100: var(--cream-100);
+  --color-cream-200: var(--cream-200);
 }
 
 @layer base {
@@ -138,8 +124,17 @@ html {
   }
 }
 
-/* Focus styles */
+/* Focus styles - coral for warmth */
 :focus-visible {
-  outline: 2px solid var(--gold-500);
+  outline: 2px solid var(--coral-500);
   outline-offset: 2px;
+}
+
+/* Hide scrollbar for stats strip horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

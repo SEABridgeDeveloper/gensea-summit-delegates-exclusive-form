@@ -26,21 +26,21 @@ export function WhoCanApply() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 bg-card">
+    <section ref={sectionRef} className="py-24 bg-cream-50">
       <div className="container mx-auto px-4">
         <div
           className={`max-w-2xl mx-auto text-center space-y-6 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <h2 className="text-3xl md:text-4xl font-bold">
+          <h2 className="text-3xl md:text-4xl font-bold text-navy-900">
             {t("whoCanApply.title")}
           </h2>
           <div className="space-y-2">
-            <p className="text-xl md:text-2xl text-foreground font-medium">
+            <p className="text-xl md:text-2xl text-navy-700 font-medium">
               {t("whoCanApply.line1")}
             </p>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-navy-700">
               {t("whoCanApply.line2")}
             </p>
           </div>

@@ -29,7 +29,7 @@ export function FinalCta() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 bg-navy-900">
+    <section ref={sectionRef} className="py-24 bg-red-500">
       <div className="container mx-auto px-4">
         <div
           className={`max-w-2xl mx-auto text-center space-y-6 transition-all duration-700 ${
@@ -39,12 +39,13 @@ export function FinalCta() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
             {t("finalCta.heading")}
           </h2>
-          <p className="text-lg text-navy-100">{t("finalCta.sub")}</p>
+          <p className="text-lg text-white/90">{t("finalCta.sub")}</p>
           <div className="pt-4">
+            {/* Inverted button - white bg, red text */}
             <Button
               asChild
               size="lg"
-              className="bg-red-500 hover:bg-red-600 text-white font-medium px-8 py-6 text-base"
+              className="bg-white hover:bg-cream-100 text-red-500 font-medium px-8 py-6 text-base rounded-md"
             >
               <Link href="/apply">
                 {t("finalCta.button")}

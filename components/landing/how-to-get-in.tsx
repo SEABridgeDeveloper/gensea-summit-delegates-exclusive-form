@@ -29,10 +29,10 @@ export function HowToGetIn() {
   const steps = messages.howToGetIn.steps
 
   return (
-    <section ref={sectionRef} className="py-24 bg-card">
+    <section ref={sectionRef} className="py-24 bg-cream-100">
       <div className="container mx-auto px-4">
         <h2
-          className={`text-3xl md:text-4xl font-bold text-center mb-12 transition-all duration-700 ${
+          className={`text-3xl md:text-4xl font-bold text-navy-900 text-center mb-12 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
@@ -52,27 +52,27 @@ export function HowToGetIn() {
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                {/* Number */}
-                <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gold-500 text-navy-900 flex items-center justify-center font-bold text-lg">
+                {/* Red circle numeral - matches poster */}
+                <div className="flex-shrink-0 h-10 w-10 rounded-full bg-red-500 text-white flex items-center justify-center font-bold text-lg">
                   {index + 1}
                 </div>
                 {/* Content */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-1">{step.title}</h3>
-                  <p className="text-muted-foreground">{step.description}</p>
+                  <h3 className="text-xl font-semibold text-navy-900 mb-1">{step.title}</h3>
+                  <p className="text-navy-700">{step.description}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Caveat box */}
+          {/* Caveat box - gold-500 left border */}
           <div
-            className={`mt-12 p-6 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-start gap-4 transition-all duration-700 delay-500 ${
+            className={`mt-12 p-6 rounded-r-xl bg-cream-50 border-l-4 border-gold-500 flex items-start gap-4 transition-all duration-700 delay-500 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <Star className="h-5 w-5 text-gold-500 flex-shrink-0 mt-0.5" />
-            <p className="text-gold-500 font-medium">
+            <Star className="h-5 w-5 text-gold-500 flex-shrink-0 mt-0.5" fill="currentColor" />
+            <p className="text-navy-900 font-medium">
               {t("howToGetIn.caveat")}
             </p>
           </div>

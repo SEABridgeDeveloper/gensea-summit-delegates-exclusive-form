@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono, IBM_Plex_Sans_Thai } from "next/font/google"
-import { ThemeProvider } from "next-themes"
 import { Analytics } from "@vercel/analytics/next"
 import { I18nProvider } from "@/lib/i18n"
 import "./globals.css"
@@ -53,10 +52,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FAF7F0" },
-    { media: "(prefers-color-scheme: dark)", color: "#0A1A35" },
-  ],
+  themeColor: "#FAF7F0",
   width: "device-width",
   initialScale: 1,
 }
@@ -67,18 +63,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="th" suppressHydrationWarning>
+    <html lang="th" className="bg-cream-50" data-scroll-behavior="smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexSansThai.variable} font-sans antialiased bg-background`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexSansThai.variable} font-sans antialiased bg-cream-50 text-navy-900`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <I18nProvider>{children}</I18nProvider>
-        </ThemeProvider>
+        <I18nProvider>{children}</I18nProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

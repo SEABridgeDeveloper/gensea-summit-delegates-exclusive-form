@@ -3,14 +3,22 @@
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n"
 import { LanguageToggle } from "./language-toggle"
-import { ThemeToggle } from "./theme-toggle"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export function Header() {
   const { t } = useI18n()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const navLinks = [
     { href: "#theme", label: t("nav.summit") },
@@ -20,13 +28,19 @@ export function Header() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+        hasScrolled
+          ? "bg-cream-50/95 backdrop-blur border-b border-cream-200"
+          : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <span className="text-lg font-bold tracking-tight">
-            <span className="text-foreground">GEN SEA</span>{" "}
-            <span className="text-gold-500">2026</span>
+            <span className="text-navy-900">GEN SEA SUMMIT</span>{" "}
+            <span className="text-red-500">2026</span>
           </span>
         </Link>
 
@@ -36,23 +50,22 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm font-medium text-navy-700 transition-colors hover:text-navy-900"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* Right side - toggles */}
+        {/* Right side - language toggle only */}
         <div className="flex items-center gap-2">
           <LanguageToggle />
-          <ThemeToggle />
 
           {/* Mobile menu button */}
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="md:hidden text-navy-900"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
@@ -67,13 +80,13 @@ export function Header() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border/40 bg-background">
+        <div className="md:hidden border-t border-cream-200 bg-cream-50">
           <nav className="container mx-auto flex flex-col gap-2 px-4 py-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="py-2 text-sm font-medium text-navy-700 transition-colors hover:text-navy-900"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}

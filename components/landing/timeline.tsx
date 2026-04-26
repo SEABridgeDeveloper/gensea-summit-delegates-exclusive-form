@@ -28,10 +28,10 @@ export function Timeline() {
   const milestones = messages.timeline.milestones
 
   return (
-    <section id="timeline" ref={sectionRef} className="py-24 bg-background">
+    <section id="timeline" ref={sectionRef} className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <h2
-          className={`text-3xl md:text-4xl font-bold text-center mb-16 transition-all duration-700 ${
+          className={`text-3xl md:text-4xl font-bold text-navy-900 text-center mb-16 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
@@ -41,8 +41,8 @@ export function Timeline() {
         {/* Desktop horizontal timeline */}
         <div className="hidden md:block">
           <div className="relative">
-            {/* Line */}
-            <div className="absolute top-5 left-0 right-0 h-0.5 bg-border" />
+            {/* Gold-300 connecting line */}
+            <div className="absolute top-5 left-0 right-0 h-0.5 bg-gold-300" />
 
             {/* Milestones */}
             <div className="relative flex justify-between">
@@ -61,28 +61,22 @@ export function Timeline() {
                       width: `${100 / milestones.length}%`,
                     }}
                   >
-                    {/* Dot */}
+                    {/* Gold dot - larger for final milestone */}
                     <div
-                      className={`h-10 w-10 rounded-full flex items-center justify-center z-10 ${
-                        isLast
-                          ? "bg-red-500"
-                          : "bg-gold-500"
+                      className={`rounded-full flex items-center justify-center z-10 bg-gold-500 ${
+                        isLast ? "h-12 w-12" : "h-10 w-10"
                       }`}
                     >
-                      <div className="h-3 w-3 rounded-full bg-white" />
+                      <div className={`rounded-full bg-white ${isLast ? "h-4 w-4" : "h-3 w-3"}`} />
                     </div>
-                    {/* Date */}
-                    <p
-                      className={`mt-4 text-sm font-semibold ${
-                        isLast ? "text-red-500" : "text-gold-500"
-                      }`}
-                    >
+                    {/* Date - navy label */}
+                    <p className="mt-4 text-sm font-semibold text-navy-900">
                       {milestone.date}
                     </p>
                     {/* Label */}
                     <p
                       className={`mt-2 text-center text-sm ${
-                        isLast ? "font-bold" : "text-muted-foreground"
+                        isLast ? "font-bold text-navy-900" : "text-navy-700"
                       }`}
                     >
                       {milestone.label}
@@ -97,8 +91,8 @@ export function Timeline() {
         {/* Mobile vertical timeline */}
         <div className="md:hidden">
           <div className="relative pl-8">
-            {/* Line */}
-            <div className="absolute top-0 bottom-0 left-3 w-0.5 bg-border" />
+            {/* Gold-300 connecting line */}
+            <div className="absolute top-0 bottom-0 left-3 w-0.5 bg-gold-300" />
 
             {/* Milestones */}
             <div className="space-y-8">
@@ -114,26 +108,22 @@ export function Timeline() {
                     }`}
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    {/* Dot */}
+                    {/* Gold dot */}
                     <div
-                      className={`absolute -left-5 h-6 w-6 rounded-full flex items-center justify-center ${
-                        isLast ? "bg-red-500" : "bg-gold-500"
+                      className={`absolute rounded-full flex items-center justify-center bg-gold-500 ${
+                        isLast ? "-left-6 h-8 w-8" : "-left-5 h-6 w-6"
                       }`}
                     >
-                      <div className="h-2 w-2 rounded-full bg-white" />
+                      <div className={`rounded-full bg-white ${isLast ? "h-3 w-3" : "h-2 w-2"}`} />
                     </div>
                     {/* Content */}
                     <div>
-                      <p
-                        className={`text-sm font-semibold ${
-                          isLast ? "text-red-500" : "text-gold-500"
-                        }`}
-                      >
+                      <p className="text-sm font-semibold text-navy-900">
                         {milestone.date}
                       </p>
                       <p
                         className={`mt-1 ${
-                          isLast ? "font-bold" : "text-muted-foreground"
+                          isLast ? "font-bold text-navy-900" : "text-navy-700"
                         }`}
                       >
                         {milestone.label}

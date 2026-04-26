@@ -2,7 +2,16 @@
 
 import { useI18n } from "@/lib/i18n"
 import { useEffect, useRef, useState } from "react"
-import { Check } from "lucide-react"
+import {
+  Ticket,
+  Users,
+  GraduationCap,
+  Trophy,
+  Rocket,
+  MapPin,
+} from "lucide-react"
+
+const benefitIcons = [Ticket, Users, GraduationCap, Trophy, Rocket, MapPin]
 
 export function BenefitsList() {
   const { t, messages } = useI18n()
@@ -29,10 +38,10 @@ export function BenefitsList() {
   const benefits = messages.benefits.items
 
   return (
-    <section ref={sectionRef} className="py-24 bg-background">
+    <section ref={sectionRef} className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <h2
-          className={`text-3xl md:text-4xl font-bold text-center mb-12 transition-all duration-700 ${
+          className={`text-3xl md:text-4xl font-bold text-navy-900 text-center mb-12 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
@@ -40,23 +49,27 @@ export function BenefitsList() {
         </h2>
 
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {benefits.map((benefit, index) => (
-              <div
-                key={index}
-                className={`flex items-start gap-4 transition-all duration-500 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4"
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-red-500 flex items-center justify-center">
-                  <Check className="h-4 w-4 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {benefits.map((benefit, index) => {
+              const Icon = benefitIcons[index] || Ticket
+              return (
+                <div
+                  key={index}
+                  className={`flex items-start gap-4 transition-all duration-500 ${
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  {/* Coral icon halo - matching the warm sun-icon style from the poster */}
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-coral-500 flex items-center justify-center">
+                    <Icon className="h-5 w-5 text-navy-900" strokeWidth={1.75} />
+                  </div>
+                  <p className="text-lg text-navy-900 pt-2">{benefit}</p>
                 </div>
-                <p className="text-lg">{benefit}</p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </div>

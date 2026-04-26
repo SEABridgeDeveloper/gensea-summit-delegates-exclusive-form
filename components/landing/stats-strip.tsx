@@ -19,19 +19,22 @@ export function StatsStrip() {
   ]
 
   return (
-    <section id="stats" className="py-8 bg-card border-y border-border">
+    <section id="stats" className="py-12 bg-white border-y border-cream-200">
       <div className="container mx-auto px-4">
-        <div className="flex overflow-x-auto gap-6 pb-4 md:pb-0 md:grid md:grid-cols-6 md:gap-4 scrollbar-hide">
+        <div className="flex overflow-x-auto gap-8 pb-4 md:pb-0 md:grid md:grid-cols-6 md:gap-6 scrollbar-hide">
           {statItems.map((stat) => (
             <div
               key={stat.key}
-              className="flex-shrink-0 flex flex-col items-center text-center gap-2 min-w-[140px] md:min-w-0"
+              className="flex-shrink-0 flex flex-col items-center text-center gap-3 min-w-[140px] md:min-w-0"
             >
-              <stat.icon className="h-6 w-6 text-gold-500" />
-              <p className="text-lg md:text-xl font-bold text-foreground whitespace-nowrap">
+              {/* Coral icon halo - the "sun-warmed circle" style */}
+              <div className="w-14 h-14 rounded-full bg-coral-500 flex items-center justify-center">
+                <stat.icon className="h-7 w-7 text-navy-900" strokeWidth={1.75} />
+              </div>
+              <p className="text-lg md:text-xl font-bold text-navy-900 whitespace-nowrap">
                 {stat.value}
               </p>
-              <p className="text-xs md:text-sm text-muted-foreground leading-tight">
+              <p className="text-xs md:text-sm text-navy-700 leading-tight">
                 {stat.label}
               </p>
             </div>
