@@ -1,100 +1,62 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useI18n } from "@/lib/i18n"
-import { LanguageToggle } from "./language-toggle"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { useState, useEffect } from "react"
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useLocale } from "@/lib/i18n/provider";
+import { cn } from "@/lib/cn";
+import { BrandMark } from "./brand-mark";
+import { LanguageToggle } from "./language-toggle";
+
+const NAV_LINKS = [
+  { href: "/#program", labelKey: "nav.program" },
+  { href: "/#sectors", labelKey: "nav.sectors" },
+  { href: "/#timeline", labelKey: "nav.timeline" },
+];
 
 export function Header() {
-  const { t } = useI18n()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [hasScrolled, setHasScrolled] = useState(false)
+  const { t } = useLocale();
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 10)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const navLinks = [
-    { href: "#theme", label: t("nav.summit") },
-    { href: "#sectors", label: t("nav.sectors") },
-    { href: "#timeline", label: t("nav.timeline") },
-    { href: "/apply", label: t("nav.apply") },
-  ]
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
-        hasScrolled
-          ? "bg-cream-50/95 backdrop-blur border-b border-cream-200"
-          : "bg-transparent"
-      }`}
+      className={cn(
+        "sticky top-0 z-40 w-full transition-colors",
+        scrolled ? "bg-white backdrop-blur-md border-b border-navy/10" : "bg-transparent",
+      )}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-lg font-bold tracking-tight">
-            <span className="text-navy-900">GEN SEA SUMMIT</span>{" "}
-            <span className="text-red-500">2026</span>
-          </span>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-navy focus:px-4 focus:py-2 focus:text-cream-50"
+      >
+        {t("nav.skipToContent")}
+      </a>
+      <div className="container-page flex items-center justify-between py-4">
+        <Link href="/" aria-label="1967 home">
+          <BrandMark />
         </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+        {/* <nav className="hidden items-center gap-20 md:flex"  aria-label="Primary">
+          {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-navy-700 transition-colors hover:text-navy-900"
+              className="text-sm font-medium text-navy/70 transition hover:text-navy"
             >
-              {link.label}
+              {t(link.labelKey)}
             </Link>
           ))}
-        </nav>
-
-        {/* Right side - language toggle only */}
-        <div className="flex items-center gap-2">
+        </nav> */}
+        <div className="flex items-center gap-3">
           <LanguageToggle />
-
-          {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-navy-900"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
+         
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-cream-200 bg-cream-50">
-          <nav className="container mx-auto flex flex-col gap-2 px-4 py-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="py-2 text-sm font-medium text-navy-700 transition-colors hover:text-navy-900"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
     </header>
-  )
+  );
 }

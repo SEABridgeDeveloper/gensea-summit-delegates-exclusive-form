@@ -1,167 +1,611 @@
 {
   "meta": {
-    "title": "Gen SEA Summit 2026 — Apply for Scholarship",
-    "description": "Win your seat. 50 students. One room. ASEAN's next decade starts here."
+    "title": "1967 — Win Your Seat",
+    "description": "50 students. One room. ASEAN's next decade starts here. Apply for the 1967 fellowship in Khon Kaen."
   },
   "nav": {
-    "summit": "Summit",
+    "apply": "Apply",
+    "program": "Program",
     "sectors": "Sectors",
     "timeline": "Timeline",
-    "apply": "Apply"
+    "faq": "FAQ",
+    "skipToContent": "Skip to content"
+  },
+  "brand": {
+    "name": "1967",
+    "year": "2026",
+    "tagline": "Building Amidst Chaos"
+  },
+  "applyPicker": {
+    "backHome": "Back to home",
+    "title": "Choose your application path",
+    "subtitle": "Two ways to join Gen SEA Summit 2026 — pick the one that fits you.",
+    "delegate": {
+      "kicker": "For Students",
+      "title": "Apply as Delegate",
+      "body": "For students and recent graduates (18–30) seeking scholarships up to 100% of the USD 1,800 program value.",
+      "cta": "Continue",
+      "deadline": "Deadline: 15 May 2026"
+    },
+    "venture": {
+      "kicker": "For Founders",
+      "title": "Submit a Venture",
+      "body": "For early-stage founders building in ASEAN. Selected ventures join the Gen SEA Ventures 33 cohort with a USD 9,000+ package.",
+      "cta": "Continue",
+      "deadline": "Deadline: 23 May 2026"
+    }
   },
   "hero": {
-    "eyebrow": "16–18 July 2026 · Khon Kaen, Thailand",
-    "headline": "Win Your Seat.",
-    "subHeadline": "50 students. One room.",
-    "tertiary": "ASEAN's next decade starts here.",
-    "brandMark": "GEN SEA SUMMIT 2026 — DELEGATES",
-    "primaryCta": "Apply for Scholarship",
-    "secondaryCta": "Learn More"
+    "imageAlt": "Golden hour view of a Thai temple skyline with a modern city behind it",
+    "kicker": {
+      "primary": "Exclusive Scholarship",
+      "secondary": "Nomination Only"
+    },
+    "badgeTop": "Join a group with",
+    "badgeBottom": "Your University",
+    "headlineLine1": "Gen SEA Summit",
+    "headlineLine2": "Delegates",
+    "subhead": "A fully-funded Gen SEA Bootcamp or Gen SEA Ventures 33 and a Summit Delegate Pass — open exclusively through partner universities and ecosystem institutions",
+    "pathDelegate": {
+      "kicker": "For Students",
+      "title": "Win Your Seat.",
+      "stat": "50 Delegates",
+      "statSub": "· Scholarships up to 100% (USD 1,800)",
+      "cta": "Apply as Delegate",
+      "deadline": "Application deadline: 15 May 2026"
+    },
+    "pathVenture": {
+      "kicker": "For Founders",
+      "title": "Showcase Your Venture.",
+      "stat": "33 Ventures",
+      "statSub": "· Package valued at USD 9,000+",
+      "cta": "Submit Your Venture",
+      "deadline": "Nomination deadline: 23 May 2026"
+    },
+    "cta": {
+      "label": "Apply For Scholarship"
+    }
+  },
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "words": "words"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email",
+    "phone": "Please enter a valid phone number",
+    "url": "Please enter a valid URL (https://...)",
+    "pdfOnly": "PDF files only",
+    "fileTooLarge": "File must be 10MB or less",
+    "foundedYearMin": "Year must be 2015 or later",
+    "foundedYearMax": "Year cannot be in the future",
+    "oneLinerMin": "At least 20 characters",
+    "oneLinerMax": "Max 140 characters",
+    "problemMin": "At least 80 characters",
+    "problemMax": "Max 800 characters",
+    "solutionMin": "At least 80 characters",
+    "solutionMax": "Max 800 characters",
+    "milestonesMin": "At least 80 characters",
+    "milestonesMax": "Max 1000 characters",
+    "essayMin": "At least 200 words",
+    "essayMax": "Max 500 words"
+  },
+  "apply": {
+    "header": {
+      "title": "Apply for 1967",
+      "subtitle": "Five steps. About 25 minutes. You can come back to finish later — answers stay in this browser.",
+      "back": "Back to home"
+    },
+    "progress": {
+      "step": "Step {current} of {total}",
+      "stepNames": [
+        "Identity",
+        "Academic",
+        "Recommender",
+        "Essay",
+        "Logistics"
+      ]
+    },
+    "actions": {
+      "back": "Back",
+      "next": "Continue",
+      "submit": "Submit application",
+      "submitting": "Submitting…"
+    },
+    "errors": {
+      "required": "This field is required",
+      "tooShort": "Please write at least {min} characters",
+      "invalidEmail": "Please enter a valid email",
+      "invalidPhone": "Please enter a valid phone number",
+      "contactRequired": "Provide LINE or Discord (at least one)",
+      "essayMin": "Essay must be at least 200 words",
+      "essayMax": "Essay must be at most 500 words",
+      "fileType": "File must be a PDF",
+      "fileSize": "File must be 5MB or smaller",
+      "instEmail": "Use an institutional email (.ac.th or partner university domain)",
+      "consent": "Required to submit"
+    },
+    "identity": {
+      "heading": "Who are you?",
+      "subhead": "Use your real name as it appears on your student ID. We'll use this on your fellowship badge.",
+      "fields": {
+        "fullNameTh": "Full name (Thai)",
+        "fullNameThPlaceholder": "เช่น สมชาย ใจดี",
+        "fullNameThHelp": "Optional if you do not write Thai.",
+        "fullNameEn": "Full name (English)",
+        "fullNameEnPlaceholder": "e.g. Somchai Jaidee",
+        "email": "University email",
+        "emailPlaceholder": "you@university.ac.th",
+        "emailHelp": "We send updates here. Use your university address if you have one.",
+        "phone": "Phone",
+        "phonePlaceholder": "+66 81 234 5678",
+        "line": "LINE ID",
+        "linePlaceholder": "@somchai",
+        "discord": "Discord username",
+        "discordPlaceholder": "somchai#0001",
+        "contactGroupHelp": "We need at least one of LINE or Discord to coordinate during the program."
+      }
+    },
+    "academic": {
+      "heading": "Where are you studying?",
+      "subhead": "Pick your university first — the faculty list updates to match. If your university isn't listed, choose Other.",
+      "fields": {
+        "university": "University",
+        "universityPlaceholder": "Search 140+ ASEAN universities",
+        "universitySearchEmpty": "No matches. Try a different spelling or pick Other.",
+        "faculty": "Faculty / School",
+        "facultyPlaceholder": "Pick your faculty",
+        "facultyDisabled": "Choose a university first",
+        "yearOfStudy": "Year of study",
+        "yearPlaceholder": "Pick year",
+        "yearOptions": [
+          "Year 1",
+          "Year 2",
+          "Year 3",
+          "Year 4",
+          "Year 5+",
+          "Recent graduate"
+        ],
+        "gpa": "GPA (optional)",
+        "gpaPlaceholder": "e.g. 3.45",
+        "gpaHelp": "Out of 4.0. Leave blank if your institution uses a different scale."
+      }
+    },
+    "recommender": {
+      "heading": "Your recommender",
+      "subhead": "One academic reference. We will not contact them without your prompting — the letter you upload is what we read.",
+      "fields": {
+        "name": "Recommender's full name",
+        "namePlaceholder": "e.g. Asst. Prof. Wirat Chai",
+        "title": "Title",
+        "titlePlaceholder": "Pick a title",
+        "titleOptions": [
+          "Professor",
+          "Associate Professor",
+          "Assistant Professor",
+          "Lecturer",
+          "Dean",
+          "Head of Department",
+          "Other"
+        ],
+        "email": "Institutional email",
+        "emailPlaceholder": "name@university.ac.th",
+        "emailHelp": "Must end in .ac.th or match a partner university domain.",
+        "letter": "Recommendation letter (PDF, max 5MB)",
+        "letterCta": "Upload PDF",
+        "letterReplace": "Replace file",
+        "letterEmpty": "No file selected"
+      }
+    },
+    "essay": {
+      "heading": "Your essay",
+      "subhead": "200–500 words. Two prompts in one — we want to read both threads inside the same answer.",
+      "promptTitle": "The prompt",
+      "promptBullets": [
+        "Why you want to be in this room. Specifically: who do you want to be in conversation with?",
+        "A venture, project, or sector question you are already working on (or can't stop thinking about)."
+      ],
+      "fields": {
+        "essay": "Your answer",
+        "essayPlaceholder": "Start writing. We're reading for clarity over polish.",
+        "wordCount": "{count} / 500 words",
+        "wordCountMin": "Minimum 200 words"
+      }
+    },
+    "logistics": {
+      "heading": "Logistics & consent",
+      "subhead": "A few practical questions and the consent items required to submit.",
+      "accommodation": {
+        "label": "Do you need accommodation?",
+        "options": [
+          "Yes, please",
+          "No, I'll arrange my own"
+        ],
+        "disclosure": "Heads up — accommodation is provided only for the Top 25 finalists. Choose Yes to indicate need; we'll confirm coverage on acceptance."
+      },
+      "dietary": {
+        "label": "Dietary preferences",
+        "help": "Pick all that apply.",
+        "options": [
+          "No restrictions",
+          "Halal",
+          "Vegetarian",
+          "Vegan",
+          "Gluten-free",
+          "Pescatarian"
+        ]
+      },
+      "allergies": {
+        "label": "Allergies",
+        "placeholder": "e.g. peanuts, shellfish, none",
+        "help": "Type 'none' if you have none."
+      },
+      "accessibility": {
+        "label": "Accessibility needs",
+        "placeholder": "e.g. step-free venue, sign interpretation, none",
+        "help": "Anything we should know to make the three days work for you."
+      },
+      "emergency": {
+        "label": "Emergency contact",
+        "name": "Name",
+        "namePlaceholder": "Full name",
+        "phone": "Phone",
+        "phonePlaceholder": "+66 81 234 5678",
+        "relationship": "Relationship",
+        "relationshipPlaceholder": "e.g. parent, sibling, partner"
+      },
+      "consents": {
+        "heading": "Consent",
+        "pdpa": "I consent to 1967 processing my personal data under Thailand's PDPA for the purpose of this application. (Required)",
+        "photo": "I consent to being photographed and filmed during the program for use in 1967's communications. (Optional)",
+        "truthful": "I confirm that everything I have submitted is true and complete to the best of my knowledge. (Required)"
+      }
+    },
+    "success": {
+      "title": "Application received.",
+      "subtitle": "Your seat in the room is one step closer.",
+      "body": "We've logged your application. Shortlist interviews run June 10–20. Final acceptances drop July 1. Watch your inbox — and your spam folder.",
+      "tipsHeading": "While you wait",
+      "tips": [
+        "Add team@seabridge.space to your contacts so our emails don't land in spam.",
+        "Block out July 16–18 in Khon Kaen, just in case.",
+        "Tell one person what you're working on this week. The room rewards momentum."
+      ],
+      "ctaHome": "Back to home",
+      "ctaShare": "Tell a friend",
+      "backHome": "Back to home"
+    },
+    "back": "Back",
+    "continue": "Continue",
+    "submitting": "Submitting…",
+    "backToPicker": "Back to application picker",
+    "delegate": {
+      "label": "DELEGATE",
+      "progress": {
+        "stepNames": [
+          "Identity",
+          "Academic",
+          "Recommender",
+          "Essay",
+          "Logistics"
+        ]
+      }
+    },
+    "venture": {
+      "label": "VENTURE",
+      "title": "Submit your venture for Gen SEA Ventures 33",
+      "subtitle": "Tell us about your team and what you're building. Selected ventures join the main cohort of Gen SEA Summit 2026.",
+      "progress": {
+        "stepNames": [
+          "Founder",
+          "Venture",
+          "Traction",
+          "Documents",
+          "Consent"
+        ]
+      },
+      "founder": {
+        "title": "About you",
+        "subtitle": "The lead founder applying on behalf of the venture",
+        "fullNameTh": "Full name (Thai)",
+        "fullNameEn": "Full name (English)",
+        "email": "Email",
+        "phone": "Phone",
+        "lineId": "LINE ID",
+        "role": "Your role",
+        "roleOther": "Specify your role",
+        "coFounderCount": "Number of co-founders (excluding you)",
+        "roles": {
+          "CEO": "CEO",
+          "CO_FOUNDER": "Co-founder",
+          "CTO": "CTO",
+          "COO": "COO",
+          "OTHER": "Other"
+        }
+      },
+      "venture": {
+        "title": "About your venture",
+        "subtitle": "The basics — name, sector, stage, location",
+        "name": "Venture name",
+        "websiteUrl": "Website",
+        "sector": "Primary sector",
+        "stage": "Current stage",
+        "stages": {
+          "idea": "Idea / Pre-product",
+          "pre_seed": "Pre-seed",
+          "seed": "Seed",
+          "series_a_plus": "Series A or beyond"
+        },
+        "foundedYear": "Founded year",
+        "hqCountry": "HQ country",
+        "hqCity": "HQ city",
+        "oneLiner": "One-line pitch",
+        "oneLinerPlaceholder": "e.g. We help ASEAN smallholder farmers reach fair-trade buyers via mobile",
+        "problem": "What problem are you solving?",
+        "problemPlaceholder": "Be specific — who has this problem, why now, and where today's solutions fall short",
+        "solution": "What's your solution?",
+        "solutionPlaceholder": "How is your approach different? What makes it defensible?"
+      },
+      "traction": {
+        "title": "Traction & real numbers",
+        "subtitle": "Real numbers, even if small. Honesty matters more than scale at this stage.",
+        "hasLaunched": "Have you launched a product or service?",
+        "launchedDate": "When did you launch?",
+        "activeUsers": "Active users / customers",
+        "monthlyRevenueUsd": "Monthly revenue (USD)",
+        "totalFundingUsd": "Total funding raised (USD)",
+        "optionalHint": "Optional",
+        "partnerships": "Notable partnerships",
+        "partnershipsPlaceholder": "Universities, corporates, government bodies, or other partners",
+        "milestones": "Key milestones & achievements",
+        "milestonesPlaceholder": "Awards, pilots, paying customers, press, regulatory wins — anything that signals momentum"
+      },
+      "documents": {
+        "title": "Documents & narrative",
+        "subtitle": "Upload your pitch deck and tell us why Gen SEA Summit matters to you",
+        "pitchDeck": "Pitch deck",
+        "uploadCta": "Click to upload",
+        "uploadOrDrop": "or drag and drop",
+        "uploadHint": "PDF only · max 10MB",
+        "demoVideoUrl": "Demo video URL",
+        "optionalHint": "Optional",
+        "nominatedBy": "Nominated by (incubator / accelerator / investor)",
+        "nominatedByHint": "If a partner organisation nominated you, list them here for selection priority",
+        "nominatedByPlaceholder": "e.g. NIA, TED Fund, NUS Enterprise, BLOCK71",
+        "whyGenSea": "Why Gen SEA Summit 2026?",
+        "whyGenSeaPlaceholder": "What do you hope to walk away with — investors, customers, hires, partnerships, validation? Be specific (200–500 words)"
+      },
+      "consent": {
+        "title": "Final details & consent",
+        "subtitle": "Last details before you submit",
+        "logistics": "Logistics",
+        "legalAndConsent": "Legal & consent",
+        "needAccommodation": "Do you need accommodation?",
+        "accommodationHint": "Provided only for top-tier ventures. Other selected ventures receive a discounted booking link.",
+        "availableAllDays": "Will you be available all three days (16–18 July 2026) in Khon Kaen?",
+        "availableHint": "Selection requires full-program attendance.",
+        "interestedInDemoSlot": "Interested in a demo slot on the main stage on day one?",
+        "demoSlotHint": "Standout ventures from the cohort get a live demo slot.",
+        "dietary": "Dietary preferences",
+        "dietaryOptions": {
+          "vegetarian": "Vegetarian",
+          "vegan": "Vegan",
+          "halal": "Halal",
+          "no_pork": "No pork",
+          "no_beef": "No beef",
+          "gluten_free": "Gluten-free"
+        },
+        "allergies": "Allergies",
+        "accessibilityNeeds": "Accessibility needs",
+        "pdpaConsent": "I consent to SEA Bridge collecting and processing my personal data and venture details, and to sharing them with Summit sponsors, investors, and partners under Thailand's Personal Data Protection Act (PDPA).",
+        "ipShareConsent": "I understand the information in this application may be reviewed by selection panellists, judges, and accredited investors during the Summit. Confidential or trade-secret information should not be included.",
+        "truthfulnessConfirm": "I confirm everything I have submitted is true and accurate, and that I am authorised to submit this application on behalf of my venture.",
+        "photoConsent": "I consent to Gen SEA Summit using the venture name, logo, and team photos in promotional materials.",
+        "submit": "Submit application"
+      },
+      "success": {
+        "title": "Application received.",
+        "body": "Thank you for sharing your venture with us. The team is reviewing every application closely. Selection results land on 7 June 2026.",
+        "next1Title": "Confirmation email",
+        "next1Body": "We've sent a confirmation to the email you provided. If it doesn't arrive in 30 minutes, check your spam folder.",
+        "next2Title": "Selection results",
+        "next2Body": "Every applicant hears back on 7 June 2026. Selected ventures receive onboarding details for Gen SEA Bootcamp.",
+        "next3Title": "Stay close",
+        "next3Body": "Follow @seabridge on LinkedIn for cohort announcements, partner updates, and Summit news."
+      }
+    }
   },
   "stats": {
-    "access": { "value": "3-DAY", "label": "Gen SEA Summit 2026" },
-    "attendees": { "value": "350+", "label": "Founders, Investors, Ministers" },
-    "bootcamp": { "value": "$1,500", "label": "Bootcamp value — FREE" },
-    "scholarship": { "value": "UP TO 100%", "label": "Scholarships (USD 1,800 pass)" },
-    "fastTrack": { "value": "FAST-TRACK", "label": "Fellowships & Internships" },
-    "location": { "value": "KHON KAEN", "label": "Isan Creative Festival 2026" }
+    "heading": "What's in the room",
+    "items": [
+      {
+        "label": "Three-day all-access pass",
+        "value": "3 days"
+      },
+      {
+        "label": "ASEAN founders, ministers, investors",
+        "value": "350+ leaders"
+      },
+      {
+        "label": "Bootcamp value, fully covered",
+        "value": "$1,500"
+      },
+      {
+        "label": "100% scholarship coverage",
+        "value": "100%"
+      },
+      {
+        "label": "Fast-track fellowships into partner labs",
+        "value": "Fast-track"
+      },
+      {
+        "label": "Hosted in Khon Kaen + Isan Creative Festival",
+        "value": "Khon Kaen"
+      }
+    ]
   },
   "theme": {
-    "title": "Building Amidst Chaos",
-    "subtitle": "The theme of Gen SEA Summit 2026",
-    "body": "2026 is a year of immense challenge — global economic volatility, accelerating climate change, and AI reshaping every industry. Yet within this uncertainty lies extraordinary opportunity. ASEAN has over 200 million young people, and this next generation holds the power to drive the region forward. Gen SEA Summit 2026 is where 50 students will learn from leaders, build networks, and launch their entrepreneurial journeys."
+    "kicker": "The 2026 theme",
+    "heading": "Gen SEA Summit",
+    "body": "Climate, conflict, capital flight, AI displacement — the next ten years will not be patient with anyone who waits for permission. 1967 brings together the under-30s already building inside the storm: founders, organisers, researchers, artists, civil servants. Three days. Five sectors. One question — what will you have built before you turn thirty?",
+    "pull": "We're not looking for the most polished applicants. We're looking for the ones already moving.",
+    "sponsor": {
+      "kicker": "Partners & Sponsors",
+      "body": "Help us make this happen. We're partnering with organizations who believe in ASEAN's next generation of builders.",
+      "cta": "Become a sponsor"
+    }
   },
   "sectors": {
-    "title": "Five Sectors. One Future.",
+    "kicker": "Five sectors, one room",
+    "heading": "Where the work is happening",
+    "body": "Each track is led by practitioners who have shipped at scale across ASEAN. You'll spend the three days deep in one sector and adjacent to the other four.",
     "items": [
-      { "name": "Wellness & Longevity", "description": "The new economy of human flourishing" },
-      { "name": "Food & Nutrition", "description": "Feeding the region sustainably" },
-      { "name": "AI & Digital Technology", "description": "Building ASEAN's intelligence layer" },
-      { "name": "Creative Economy & IP", "description": "Stories, design, soft power" },
-      { "name": "Education 5.0 & Global Careers", "description": "Skills for a borderless workforce" }
+      {
+        "key": "wellness",
+        "name": "Wellness & Public Health",
+        "blurb": "Mental health infrastructure, ageing populations, frontline care that actually scales."
+      },
+      {
+        "key": "food",
+        "name": "Food & Agriculture",
+        "blurb": "Climate-resilient farming, supply chains the next generation can inherit, food sovereignty."
+      },
+      {
+        "key": "ai",
+        "name": "AI & Frontier Tech",
+        "blurb": "Sovereign models, applied research, the tooling layer Southeast Asia keeps having to import."
+      },
+      {
+        "key": "creative",
+        "name": "Creative Industries",
+        "blurb": "Story, design, music, games — the soft power infrastructure of a region the world is finally watching."
+      },
+      {
+        "key": "education",
+        "name": "Education & Talent",
+        "blurb": "What replaces the degree, who teaches the next million engineers, why so many leave for nothing back home."
+      }
     ]
   },
   "whoCanApply": {
-    "title": "Who can apply",
-    "line1": "Students & recent graduates (18–30)",
-    "line2": "Any field · Any country"
+    "kicker": "Who can apply",
+    "heading": "Eligibility",
+    "criteria": [
+      {
+        "label": "Age",
+        "value": "18 to 30"
+      },
+      {
+        "label": "Field",
+        "value": "Any discipline, any major"
+      },
+      {
+        "label": "Geography",
+        "value": "Open to any nationality, with priority for ASEAN"
+      },
+      {
+        "label": "Status",
+        "value": "Currently studying, recently graduated, or building independently"
+      }
+    ],
+    "footnote": "If you are working on something you would defend in a room full of strangers, you are eligible."
   },
   "benefits": {
-    "title": "What You Get",
+    "heading": "",
     "items": [
-      "3-day access to Gen SEA Summit 2026",
-      "350+ founders, investors, ministers, ecosystem partners",
-      "Gen SEA Bootcamp (USD 1,500 value) — free",
-      "Scholarships up to 100% (USD 1,800 Delegate Pass)",
-      "Fast-track to SEA Bridge Fellowships & internships",
-      "Experience Khon Kaen during Isan Creative Festival 2026"
+      {
+        "value": "3 DAYS",
+        "label": "Full Summit access"
+      },
+      {
+        "value": "350+",
+        "label": "Founders, investors, ministers"
+      },
+      {
+        "value": "$1,500",
+        "label": "Bootcamp value — FREE"
+      },
+      {
+        "value": "UP TO 100%",
+        "label": "Scholarships (USD 1,800)"
+      },
+      {
+        "value": "KHON KAEN",
+        "label": "Isan Creative Festival 2026"
+      }
     ]
   },
   "howToGetIn": {
-    "title": "How to Get In",
+    "kicker": "How to get in",
+    "heading": "Three steps. No tricks.",
     "steps": [
-      { "title": "Apply or get nominated", "description": "University (up to 10) · Faculty (up to 5)" },
-      { "title": "Complete Gen SEA Bootcamp", "description": "Learn and build your project" },
-      { "title": "Top 50 selected based on Bootcamp + application", "description": "The most outstanding applicants" }
+      {
+        "n": "01",
+        "title": "Apply",
+        "body": "Five-step application. Identity, academics, one recommender, a 200–500 word essay, logistics. Plan for 25 minutes."
+      },
+      {
+        "n": "02",
+        "title": "Interview",
+        "body": "Shortlisted candidates meet a sector lead and an alum on a 20-minute call. We're listening for what you're actually building."
+      },
+      {
+        "n": "03",
+        "title": "Confirm your seat",
+        "body": "Acceptance lands by July 1. Confirm within 7 days. Travel and accommodation guidance follows for the Top 25."
+      }
     ],
-    "caveat": "Nomination = priority, not a guarantee."
+    "caveatTitle": "Nomination = priority, not a guarantee",
+    "caveatBody": "If a partner organisation nominated you, your application moves to the front of the queue. It does not skip the interview. Every accepted student earns the seat the same way."
   },
   "timeline": {
-    "title": "Timeline",
-    "milestones": [
-      { "date": "Apr 28", "label": "Applications open" },
-      { "date": "May 15", "label": "Nomination & application deadline" },
-      { "date": "May 16 – Jun 5", "label": "Gen SEA Bootcamp" },
-      { "date": "Jun 6", "label": "Capstone due" },
-      { "date": "Jun 7", "label": "50 Delegates announced" },
-      { "date": "Jul 16–18", "label": "Gen SEA Summit 2026" }
+    "kicker": "Timeline",
+    "heading": "Mark the dates",
+    "items": [
+      {
+        "date": "Apr 28",
+        "label": "Applications open"
+      },
+      {
+        "date": "May 30",
+        "label": "Applications close"
+      },
+      {
+        "date": "Jun 10–20",
+        "label": "Shortlist interviews"
+      },
+      {
+        "date": "Jul 1",
+        "label": "Acceptances released"
+      },
+      {
+        "date": "Jul 16–18",
+        "label": "1967 in Khon Kaen"
+      }
     ]
   },
   "finalCta": {
-    "heading": "Ready to take your seat?",
-    "sub": "Applications close 15 May 2026.",
-    "button": "Apply Now"
+    "heading": "The room is small. The window is open.",
+    "body": "Applications close May 30. The cohort is 50.",
+    "cta": "Apply for Scholarship"
   },
   "footer": {
-    "tagline": "Build. Scale. Bridge.",
+    "tagline": "Gen SEA Summit 2026 — Building amidst chaos.",
+    "rights": "Copyright © 2026 SEA Bridge. Confidential & Proprietary.",
+    "contact": "team@seabridge.space",
     "links": {
-      "about": "About",
-      "sectors": "Sectors",
+      "program": "Program",
       "apply": "Apply",
+      "sectors": "Sectors",
+      "timeline": "Timeline",
+      "privacy": "Privacy",
       "contact": "Contact"
-    },
-    "copyright": "© 2026 SEA Bridge Institute of Entrepreneurship. All rights reserved.",
-    "pdpa": "Privacy Policy"
-  },
-  "apply": {
-    "title": "Apply for Gen SEA Delegates Scholarship",
-    "steps": ["Identity", "Academic", "Recommender", "Essay", "Logistics & Consent"],
-    "back": "Back",
-    "continue": "Continue",
-    "submit": "Submit Application",
-    "step1": {
-      "title": "Student Identity",
-      "nameTh": "Full name (Thai)",
-      "nameThPlaceholder": "e.g. ธนกฤต เสริมสุขสันต์",
-      "nameEn": "Full name (English)",
-      "nameEnPlaceholder": "e.g. Tanakrit Sermsuksan",
-      "nameEnHelper": "Used for certificate + reserved seat",
-      "email": "University email",
-      "phone": "Mobile phone",
-      "lineId": "LINE ID",
-      "discord": "Discord handle",
-      "contactHelper": "At least one of LINE ID or Discord must be filled"
-    },
-    "step2": {
-      "title": "Academic Info",
-      "university": "University",
-      "universityPlaceholder": "Search university...",
-      "faculty": "Faculty",
-      "facultyPlaceholder": "Select faculty",
-      "department": "Department / Major",
-      "yearOfStudy": "Year of study",
-      "years": ["Year 1", "Year 2", "Year 3", "Year 4", "Year 5+", "Recent graduate (within 12 months)"],
-      "gpa": "GPA",
-      "gpaHelper": "Used as tie-breaker only"
-    },
-    "step3": {
-      "title": "Recommender",
-      "profName": "Professor's full name",
-      "profEmail": "Professor's institutional email",
-      "profEmailError": "Please use an institutional email (e.g. ending in .ac.th)",
-      "profTitle": "Professor's title",
-      "titles": ["Lecturer", "Asst. Prof.", "Assoc. Prof.", "Prof."],
-      "letter": "Recommendation letter",
-      "letterHelper": "PDF only, max 5MB"
-    },
-    "step4": {
-      "title": "Scholarship Essay",
-      "prompt": "Tell us why you want to join Gen SEA Summit 2026 and the venture idea or sector challenge you're most excited to explore (200–500 words).",
-      "helper": "Your essay is the most important part of your application. Be specific.",
-      "wordCount": "Word count"
-    },
-    "step5": {
-      "title": "Logistics & Consent",
-      "accommodation": "Need accommodation?",
-      "accommodationYes": "Yes",
-      "accommodationNo": "No",
-      "accommodationHelper": "Accommodation is provided to Top 25 only. Other delegates receive a subsidized booking link.",
-      "dietary": "Dietary requirements",
-      "dietaryOptions": ["Vegetarian", "Vegan", "Halal", "No pork", "No beef", "Gluten-free", "Other (specify)"],
-      "allergies": "Allergies",
-      "accessibility": "Accessibility needs",
-      "emergencyName": "Emergency contact name",
-      "emergencyPhone": "Emergency contact phone",
-      "emergencyRelation": "Emergency contact relationship",
-      "relations": ["Parent", "Sibling", "Spouse", "Friend", "Other"],
-      "consent1": "I consent to SEA Bridge collecting and processing my personal data, including sharing with event sponsors and partners, in accordance with Thailand's Personal Data Protection Act (PDPA).",
-      "consent2": "I allow Gen SEA Summit to use my name and photo in promotional materials.",
-      "consent3": "I confirm that all information submitted is true and accurate."
     }
   },
-  "success": {
-    "title": "Application received",
-    "body": "We've sent a confirmation to {email}. Selection results will be announced 7 June 2026. In the meantime, watch for the Bootcamp invite — Bootcamp begins 16 May.",
-    "button": "Back to home"
+  "languageToggle": {
+    "label": "Language",
+    "th": "ไทย",
+    "en": "EN"
   }
 }

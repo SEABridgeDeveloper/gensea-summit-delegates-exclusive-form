@@ -1,83 +1,50 @@
-"use client"
+"use client";
 
-import { useI18n } from "@/lib/i18n"
-import { useEffect, useRef, useState } from "react"
-import { Star } from "lucide-react"
+import { Info } from "lucide-react";
+import { useLocale } from "@/lib/i18n/provider";
+
+type Step = { n: string; title: string; body: string };
 
 export function HowToGetIn() {
-  const { t, messages } = useI18n()
-  const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.2 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  const steps = messages.howToGetIn.steps
+  const { t, tRaw } = useLocale();
+  const steps = tRaw<Step[]>("howToGetIn.steps") ?? [];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-cream-100">
-      <div className="container mx-auto px-4">
-        <h2
-          className={`text-3xl md:text-4xl font-bold text-navy-900 text-center mb-12 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          {t("howToGetIn.title")}
-        </h2>
+    <section className="bg-cream-100">
+      <div className="container-page py-20 sm:py-28">
+        <div className="mb-12 max-w-2xl">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-coral-600">
+            {t("howToGetIn.kicker")}
+          </span>
+          <h2 className="mt-4 font-display text-4xl font-bold text-navy sm:text-5xl">
+            {t("howToGetIn.heading")}
+          </h2>
+        </div>
 
-        <div className="max-w-3xl mx-auto">
-          {/* Steps */}
-          <div className="space-y-8">
-            {steps.map((step, index) => (
-              <div
-                key={index}
-                className={`flex items-start gap-6 transition-all duration-500 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4"
-                }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                {/* Red circle numeral - matches poster */}
-                <div className="flex-shrink-0 h-10 w-10 rounded-full bg-red-500 text-white flex items-center justify-center font-bold text-lg">
-                  {index + 1}
-                </div>
-                {/* Content */}
-                <div>
-                  <h3 className="text-xl font-semibold text-navy-900 mb-1">{step.title}</h3>
-                  <p className="text-navy-700">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <ol className="grid gap-6 lg:grid-cols-3">
+          {steps.map((s) => (
+            <li key={s.n} className="rounded-2xl border border-navy/10 bg-white p-7 shadow-soft">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-red font-display text-lg font-bold text-cream-50">
+                {s.n}
+              </span>
+              <h3 className="mt-5 font-display text-2xl font-semibold text-navy">{s.title}</h3>
+              <p className="mt-3 text-sm text-navy/70">{s.body}</p>
+            </li>
+          ))}
+        </ol>
 
-          {/* Caveat box - gold-500 left border */}
-          <div
-            className={`mt-12 p-6 rounded-r-xl bg-cream-50 border-l-4 border-gold-500 flex items-start gap-4 transition-all duration-700 delay-500 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            <Star className="h-5 w-5 text-gold-500 flex-shrink-0 mt-0.5" fill="currentColor" />
-            <p className="text-navy-900 font-medium">
-              {t("howToGetIn.caveat")}
-            </p>
+        <div className="mt-10 flex gap-4 rounded-2xl border-2 border-gold-500/70 bg-gold-500/5 p-6">
+          <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-500/20 text-gold-600">
+            <Info className="h-4 w-4" strokeWidth={2} />
+          </span>
+          <div>
+            <h4 className="font-display text-lg font-semibold text-navy">
+              {t("howToGetIn.caveatTitle")}
+            </h4>
+            <p className="mt-1 text-sm text-navy/75">{t("howToGetIn.caveatBody")}</p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

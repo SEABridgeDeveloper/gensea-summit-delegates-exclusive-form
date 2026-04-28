@@ -1,37 +1,42 @@
-"use client"
+"use client";
 
-import { useLocale } from "@/lib/i18n"
-import { Button } from "@/components/ui/button"
+import { useLocale } from "@/lib/i18n/provider";
+import { cn } from "@/lib/cn";
 
-export function LanguageToggle() {
-  const { locale, setLocale } = useLocale()
+export function LanguageToggle({ className }: { className?: string }) {
+  const { locale, setLocale, t } = useLocale();
 
   return (
-    <div className="flex items-center rounded-full border border-cream-200 bg-cream-100 p-1">
-      <Button
-        variant="ghost"
-        size="sm"
+    <div
+      role="group"
+      aria-label={t("languageToggle.label")}
+      className={cn(
+        "inline-flex items-center rounded-full border border-navy/15 bg-cream-50 p-1 text-xs font-semibold tracking-wide",
+        className,
+      )}
+    >
+      <button
+        type="button"
         onClick={() => setLocale("th")}
-        className={`h-7 rounded-full px-3 text-xs font-medium transition-colors ${
-          locale === "th"
-            ? "bg-white text-navy-900 shadow-sm"
-            : "text-navy-700 hover:text-navy-900"
-        }`}
+        aria-pressed={locale === "th"}
+        className={cn(
+          "rounded-full px-3 py-1.5 transition",
+          locale === "th" ? "bg-navy text-cream-50 shadow-sm" : "text-navy/60 hover:text-navy",
+        )}
       >
-        TH
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
+        {t("languageToggle.th")}
+      </button>
+      <button
+        type="button"
         onClick={() => setLocale("en")}
-        className={`h-7 rounded-full px-3 text-xs font-medium transition-colors ${
-          locale === "en"
-            ? "bg-white text-navy-900 shadow-sm"
-            : "text-navy-700 hover:text-navy-900"
-        }`}
+        aria-pressed={locale === "en"}
+        className={cn(
+          "rounded-full px-3 py-1.5 transition",
+          locale === "en" ? "bg-navy text-cream-50 shadow-sm" : "text-navy/60 hover:text-navy",
+        )}
       >
-        EN
-      </Button>
+        {t("languageToggle.en")}
+      </button>
     </div>
-  )
+  );
 }

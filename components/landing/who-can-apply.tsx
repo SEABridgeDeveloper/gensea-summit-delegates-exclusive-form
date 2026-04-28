@@ -1,51 +1,38 @@
-"use client"
+"use client";
 
-import { useI18n } from "@/lib/i18n"
-import { useEffect, useRef, useState } from "react"
+import { useLocale } from "@/lib/i18n/provider";
+
+type Item = { label: string; value: string };
 
 export function WhoCanApply() {
-  const { t } = useI18n()
-  const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.3 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  const { t, tRaw } = useLocale();
+  const items = tRaw<Item[]>("whoCanApply.criteria") ?? [];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-cream-50">
-      <div className="container mx-auto px-4">
-        <div
-          className={`max-w-2xl mx-auto text-center space-y-6 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-navy-900">
-            {t("whoCanApply.title")}
+    <section className="bg-cream-100">
+      <div className="container-page grid gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
+        <div>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-coral-600">
+            {t("whoCanApply.kicker")}
+          </span>
+          <h2 className="mt-4 font-display text-4xl font-bold text-navy sm:text-5xl">
+            {t("whoCanApply.heading")}
           </h2>
-          <div className="space-y-2">
-            <p className="text-xl md:text-2xl text-navy-700 font-medium">
-              {t("whoCanApply.line1")}
-            </p>
-            <p className="text-lg text-navy-700">
-              {t("whoCanApply.line2")}
-            </p>
-          </div>
+        </div>
+        <div>
+          <dl className="divide-y divide-navy/10 border-y border-navy/10">
+            {items.map((item) => (
+              <div key={item.label} className="grid gap-2 py-5 sm:grid-cols-[180px_1fr]">
+                <dt className="text-sm font-semibold uppercase tracking-[0.14em] text-navy/55">
+                  {item.label}
+                </dt>
+                <dd className="font-display text-xl text-navy sm:text-2xl">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 text-base text-navy/70">{t("whoCanApply.footnote")}</p>
         </div>
       </div>
     </section>
-  )
+  );
 }

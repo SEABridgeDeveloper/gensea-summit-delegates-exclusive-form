@@ -1,46 +1,39 @@
-"use client"
+"use client";
 
-import { useI18n } from "@/lib/i18n"
-import { Ticket, Users, GraduationCap, Trophy, Rocket, MapPin } from "lucide-react"
+import { Calendar, Users, BadgeDollarSign, GraduationCap, Rocket, MapPin } from "lucide-react";
+import { useLocale } from "@/lib/i18n/provider";
 
-const icons = [Ticket, Users, GraduationCap, Trophy, Rocket, MapPin]
+const ICONS = [Calendar, Users, BadgeDollarSign, GraduationCap, Rocket, MapPin];
+
+type Item = { label: string; value: string };
 
 export function StatsStrip() {
-  const { messages } = useI18n()
-  const stats = messages.stats
-
-  const statItems = [
-    { key: "access", icon: icons[0], ...stats.access },
-    { key: "attendees", icon: icons[1], ...stats.attendees },
-    { key: "bootcamp", icon: icons[2], ...stats.bootcamp },
-    { key: "scholarship", icon: icons[3], ...stats.scholarship },
-    { key: "fastTrack", icon: icons[4], ...stats.fastTrack },
-    { key: "location", icon: icons[5], ...stats.location },
-  ]
+  const { tRaw } = useLocale();
+  const items = tRaw<Item[]>("stats.items") ?? [];
 
   return (
-    <section id="stats" className="py-12 bg-white border-y border-cream-200">
-      <div className="container mx-auto px-4">
-        <div className="flex overflow-x-auto gap-8 pb-4 md:pb-0 md:grid md:grid-cols-6 md:gap-6 scrollbar-hide">
-          {statItems.map((stat) => (
-            <div
-              key={stat.key}
-              className="flex-shrink-0 flex flex-col items-center text-center gap-3 min-w-[140px] md:min-w-0"
-            >
-              {/* Coral icon halo - the "sun-warmed circle" style */}
-              <div className="w-14 h-14 rounded-full bg-coral-500 flex items-center justify-center">
-                <stat.icon className="h-7 w-7 text-navy-900" strokeWidth={1.75} />
+    <section id="program" className="bg-cream-50">
+      <div className="container-page py-16 sm:py-20">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item, i) => {
+            const Icon = ICONS[i] ?? Calendar;
+            return (
+              <div
+                key={item.label}
+                className="flex items-center gap-4 rounded-2xl border border-navy/10 bg-white p-5 shadow-soft"
+              >
+                <span className="icon-halo">
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                </span>
+                <div>
+                  <div className="font-display text-2xl font-bold text-navy">{item.value}</div>
+                  <div className="text-sm text-navy/65">{item.label}</div>
+                </div>
               </div>
-              <p className="text-lg md:text-xl font-bold text-navy-900 whitespace-nowrap">
-                {stat.value}
-              </p>
-              <p className="text-xs md:text-sm text-navy-700 leading-tight">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
-  )
+  );
 }

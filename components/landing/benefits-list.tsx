@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-import { useI18n } from "@/lib/i18n"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 import {
   Ticket,
   Users,
@@ -9,70 +8,89 @@ import {
   Trophy,
   Rocket,
   MapPin,
-} from "lucide-react"
+} from "lucide-react";
+import { useLocale } from "@/lib/i18n/provider";
 
-const benefitIcons = [Ticket, Users, GraduationCap, Trophy, Rocket, MapPin]
+const benefitIcons = [Ticket, Users, GraduationCap, Trophy, Rocket, MapPin];
+
+type Benefit = { value: string; label: string };
 
 export function BenefitsList() {
-  const { t, messages } = useI18n()
-  const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const { t, tRaw } = useLocale();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.2 }
-    )
+      { threshold: 0.2 },
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
+  const benefits = tRaw<Benefit[]>("benefits.items") ?? [];
+  const heading = t("benefits.heading");
+  const safeHeading = heading.startsWith("benefits.") ? "" : heading;
 
-    return () => observer.disconnect()
-  }, [])
-
-  const benefits = messages.benefits.items
+  if (benefits.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white">
+    <section
+      ref={sectionRef}
+      className="border-y border-cream-200/70 bg-white py-16 sm:py-20"
+    >
       <div className="container mx-auto px-4">
-        <h2
-          className={`text-3xl md:text-4xl font-bold text-navy-900 text-center mb-12 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          {t("benefits.title")}
-        </h2>
+        {safeHeading && (
+          <h2
+            className={`mb-12 text-center font-display text-3xl font-bold text-navy transition-all duration-700 md:text-4xl ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+          >
+            {safeHeading}
+          </h2>
+        )}
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Horizontal stats strip — scrolls horizontally on mobile, fits in row on lg+ */}
+        <div className="overflow-x-auto -mx-4 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <ul className="mx-auto flex min-w-max items-start justify-between gap-6 sm:gap-8 lg:min-w-0 lg:max-w-6xl lg:gap-4">
             {benefits.map((benefit, index) => {
-              const Icon = benefitIcons[index] || Ticket
+              const Icon = benefitIcons[index] ?? Ticket;
               return (
-                <div
-                  key={index}
-                  className={`flex items-start gap-4 transition-all duration-500 ${
+                <li
+                  key={benefit.label}
+                  className={`flex w-32 flex-col items-center text-center transition-all duration-500 sm:w-36 lg:w-auto lg:flex-1 ${
                     isVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-4"
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-4 opacity-0"
                   }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  style={{ transitionDelay: `${index * 80}ms` }}
                 >
-                  {/* Coral icon halo - matching the warm sun-icon style from the poster */}
-                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-coral-500 flex items-center justify-center">
-                    <Icon className="h-5 w-5 text-navy-900" strokeWidth={1.75} />
+                  {/* Coral icon halo */}
+                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-coral-500 shadow-sm">
+                    <Icon
+                      className="h-6 w-6 text-navy"
+                      strokeWidth={1.75}
+                    />
                   </div>
-                  <p className="text-lg text-navy-900 pt-2">{benefit}</p>
-                </div>
-              )
+
+                  {/* Big value */}
+                  <p className="mt-4 font-display text-2xl font-extrabold leading-tight text-navy sm:text-3xl">
+                    {benefit.value}
+                  </p>
+
+                  {/* Small label */}
+                  <p className="mt-2 max-w-[12rem] text-sm leading-snug text-navy/65">
+                    {benefit.label}
+                  </p>
+                </li>
+              );
             })}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
-  )
+  );
 }

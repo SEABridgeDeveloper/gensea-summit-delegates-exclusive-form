@@ -1,141 +1,46 @@
-"use client"
+"use client";
 
-import { useI18n } from "@/lib/i18n"
-import { useEffect, useRef, useState } from "react"
+import { useLocale } from "@/lib/i18n/provider";
+
+type Item = { date: string; label: string };
 
 export function Timeline() {
-  const { t, messages } = useI18n()
-  const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.2 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  const milestones = messages.timeline.milestones
+  const { t, tRaw } = useLocale();
+  const items = tRaw<Item[]>("timeline.items") ?? [];
 
   return (
-    <section id="timeline" ref={sectionRef} className="py-24 bg-white">
-      <div className="container mx-auto px-4">
-        <h2
-          className={`text-3xl md:text-4xl font-bold text-navy-900 text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          {t("timeline.title")}
-        </h2>
-
-        {/* Desktop horizontal timeline */}
-        <div className="hidden md:block">
-          <div className="relative">
-            {/* Gold-300 connecting line */}
-            <div className="absolute top-5 left-0 right-0 h-0.5 bg-gold-300" />
-
-            {/* Milestones */}
-            <div className="relative flex justify-between">
-              {milestones.map((milestone, index) => {
-                const isLast = index === milestones.length - 1
-                return (
-                  <div
-                    key={index}
-                    className={`flex flex-col items-center transition-all duration-500 ${
-                      isVisible
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-4"
-                    }`}
-                    style={{
-                      transitionDelay: `${index * 100}ms`,
-                      width: `${100 / milestones.length}%`,
-                    }}
-                  >
-                    {/* Gold dot - larger for final milestone */}
-                    <div
-                      className={`rounded-full flex items-center justify-center z-10 bg-gold-500 ${
-                        isLast ? "h-12 w-12" : "h-10 w-10"
-                      }`}
-                    >
-                      <div className={`rounded-full bg-white ${isLast ? "h-4 w-4" : "h-3 w-3"}`} />
-                    </div>
-                    {/* Date - navy label */}
-                    <p className="mt-4 text-sm font-semibold text-navy-900">
-                      {milestone.date}
-                    </p>
-                    {/* Label */}
-                    <p
-                      className={`mt-2 text-center text-sm ${
-                        isLast ? "font-bold text-navy-900" : "text-navy-700"
-                      }`}
-                    >
-                      {milestone.label}
-                    </p>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
+    <section id="timeline" className="bg-cream-50">
+      <div className="container-page py-20 sm:py-28">
+        <div className="mb-14 max-w-2xl">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-coral-600">
+            {t("timeline.kicker")}
+          </span>
+          <h2 className="mt-4 font-display text-4xl font-bold text-navy sm:text-5xl">
+            {t("timeline.heading")}
+          </h2>
         </div>
 
-        {/* Mobile vertical timeline */}
-        <div className="md:hidden">
-          <div className="relative pl-8">
-            {/* Gold-300 connecting line */}
-            <div className="absolute top-0 bottom-0 left-3 w-0.5 bg-gold-300" />
-
-            {/* Milestones */}
-            <div className="space-y-8">
-              {milestones.map((milestone, index) => {
-                const isLast = index === milestones.length - 1
-                return (
-                  <div
-                    key={index}
-                    className={`relative transition-all duration-500 ${
-                      isVisible
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-4"
-                    }`}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    {/* Gold dot */}
-                    <div
-                      className={`absolute rounded-full flex items-center justify-center bg-gold-500 ${
-                        isLast ? "-left-6 h-8 w-8" : "-left-5 h-6 w-6"
-                      }`}
-                    >
-                      <div className={`rounded-full bg-white ${isLast ? "h-3 w-3" : "h-2 w-2"}`} />
-                    </div>
-                    {/* Content */}
-                    <div>
-                      <p className="text-sm font-semibold text-navy-900">
-                        {milestone.date}
-                      </p>
-                      <p
-                        className={`mt-1 ${
-                          isLast ? "font-bold text-navy-900" : "text-navy-700"
-                        }`}
-                      >
-                        {milestone.label}
-                      </p>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
+        <div className="relative">
+          {/* horizontal connector — desktop only */}
+          <div className="absolute inset-x-0 top-3 hidden h-px bg-gold-500 lg:block" aria-hidden />
+          <ol className="grid gap-10 lg:grid-cols-5 lg:gap-6">
+            {items.map((item) => (
+              <li key={item.date} className="relative flex gap-4 lg:flex-col lg:gap-3 items-center">
+                <span
+                  className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-cream-50 ring-2 ring-gold-500"
+                  aria-hidden
+                >
+                  <span className="h-2.5 w-2.5 rounded-full bg-gold-500" />
+                </span>
+                <div>
+                  <div className="font-display text-xl font-semibold text-navy text-center">{item.date}</div>
+                  <div className="mt-1 text-sm text-navy/70 text-center">{item.label}</div>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
-  )
+  );
 }
