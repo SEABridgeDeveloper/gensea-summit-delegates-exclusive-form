@@ -20,7 +20,7 @@ export function FounderStep({ defaultValues, onNext }: Props) {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<FounderValues>({
     resolver: zodResolver(founderSchema),
     mode: "onBlur",
@@ -139,7 +139,7 @@ export function FounderStep({ defaultValues, onNext }: Props) {
         </Field>
       </div>
 
-      <FormFooter primaryLabel={t("apply.continue")} canSubmit={isValid} />
+      <FormFooter primaryLabel={t("apply.continue")} />
     </form>
   );
 }

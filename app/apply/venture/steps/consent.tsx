@@ -37,8 +37,9 @@ export function ConsentStep({
   const { t } = useLocale();
   const {
     register,
+    control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<ConsentValues>({
     resolver: zodResolver(consentSchema),
     mode: "onBlur",
@@ -71,7 +72,7 @@ export function ConsentStep({
           label={t("apply.venture.consent.needAccommodation")}
           hint={t("apply.venture.consent.accommodationHint")}
           name="needAccommodation"
-          register={register}
+          control={control}
           yesLabel={t("common.yes")}
           noLabel={t("common.no")}
         />
@@ -80,7 +81,7 @@ export function ConsentStep({
           label={t("apply.venture.consent.availableAllDays")}
           hint={t("apply.venture.consent.availableHint")}
           name="availableAllDays"
-          register={register}
+          control={control}
           required
           error={
             errors.availableAllDays?.message &&
@@ -94,7 +95,7 @@ export function ConsentStep({
           label={t("apply.venture.consent.interestedInDemoSlot")}
           hint={t("apply.venture.consent.demoSlotHint")}
           name="interestedInDemoSlot"
-          register={register}
+          control={control}
           yesLabel={t("common.yes")}
           noLabel={t("common.no")}
         />
@@ -181,7 +182,6 @@ export function ConsentStep({
         primaryLabel={t("apply.venture.consent.submit")}
         submittingLabel={t("apply.submitting")}
         backLabel={t("apply.back")}
-        canSubmit={isValid}
         onBack={onBack}
         submitting={isSubmitting}
       />

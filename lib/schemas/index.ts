@@ -169,8 +169,9 @@ export const tractionSchema = z.object({
   partnerships: z.string().max(500).optional(),
   milestones: z
     .string()
-    .min(80, "validation.milestonesMin")
-    .max(1000, "validation.milestonesMax"),
+    .max(1000, "validation.milestonesMax")
+    .optional()
+    .or(z.literal("")),
 });
 
 // ============================================

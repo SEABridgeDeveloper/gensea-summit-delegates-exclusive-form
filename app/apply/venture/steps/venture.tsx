@@ -24,7 +24,7 @@ export function VentureStep({ defaultValues, onNext, onBack }: Props) {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<VentureValues>({
     resolver: zodResolver(ventureSchema),
     mode: "onBlur",
@@ -177,7 +177,6 @@ export function VentureStep({ defaultValues, onNext, onBack }: Props) {
       <FormFooter
         primaryLabel={t("apply.continue")}
         backLabel={t("apply.back")}
-        canSubmit={isValid}
         onBack={onBack}
       />
     </form>

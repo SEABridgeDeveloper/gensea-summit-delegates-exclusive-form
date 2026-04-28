@@ -17,9 +17,10 @@ export function TractionStep({ defaultValues, onNext, onBack }: Props) {
   const { t } = useLocale();
   const {
     register,
+    control,
     handleSubmit,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<TractionValues>({
     resolver: zodResolver(tractionSchema),
     mode: "onBlur",
@@ -47,7 +48,7 @@ export function TractionStep({ defaultValues, onNext, onBack }: Props) {
         <YesNo
           label={t("apply.venture.traction.hasLaunched")}
           name="hasLaunched"
-          register={register}
+          control={control}
           yesLabel={t("common.yes")}
           noLabel={t("common.no")}
         />
@@ -128,9 +129,12 @@ export function TractionStep({ defaultValues, onNext, onBack }: Props) {
 
       <Field
         label={t("apply.venture.traction.milestones")}
-        required
         error={errors.milestones?.message && t(errors.milestones.message)}
-        hint={`${milestones.length} / 1000`}
+        hint={
+          <span>
+            {t("apply.venture.traction.optionalHint")} · {milestones.length} / 1000
+          </span>
+        }
       >
         <textarea
           {...register("milestones")}
@@ -144,7 +148,6 @@ export function TractionStep({ defaultValues, onNext, onBack }: Props) {
       <FormFooter
         primaryLabel={t("apply.continue")}
         backLabel={t("apply.back")}
-        canSubmit={isValid}
         onBack={onBack}
       />
     </form>

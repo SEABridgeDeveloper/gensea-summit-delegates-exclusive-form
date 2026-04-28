@@ -29,7 +29,7 @@ export function DocumentsStep({ defaultValues, onNext, onBack }: Props) {
     handleSubmit,
     setValue,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<DocumentsValues>({
     resolver: zodResolver(documentsSchema),
     mode: "onBlur",
@@ -191,7 +191,6 @@ export function DocumentsStep({ defaultValues, onNext, onBack }: Props) {
       <FormFooter
         primaryLabel={t("apply.continue")}
         backLabel={t("apply.back")}
-        canSubmit={isValid && wordCountValid}
         onBack={onBack}
       />
     </form>

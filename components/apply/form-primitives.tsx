@@ -2,7 +2,13 @@
 
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import type { ReactNode } from "react";
-import type { FieldValues, Path, UseFormRegister } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type FieldValues,
+  type Path,
+  type UseFormRegister,
+} from "react-hook-form";
 import { cn } from "@/lib/cn";
 
 /**
@@ -107,7 +113,7 @@ export function YesNo<T extends FieldValues>({
   name,
   required,
   error,
-  register,
+  control,
   yesLabel = "Yes",
   noLabel = "No",
 }: {
@@ -116,10 +122,13 @@ export function YesNo<T extends FieldValues>({
   name: Path<T>;
   required?: boolean;
   error?: string;
-  register: UseFormRegister<T>;
+  control: Control<T>;
   yesLabel?: string;
   noLabel?: string;
 }) {
+  // Use Controller (not register) so that the stored value is the boolean we
+  // pass to onChange — register on radios stores the `value` attribute as a
+  // string, which breaks `z.boolean()` validation and `if (value)` checks.
   return (
     <fieldset>
       <legend className="field-label">
@@ -127,25 +136,33 @@ export function YesNo<T extends FieldValues>({
         {required && <span className="ml-0.5 text-brand-red">*</span>}
       </legend>
       {hint && <p className="field-help mb-2 mt-0">{hint}</p>}
-      <div className="grid gap-3 sm:grid-cols-2">
-        {[
-          { v: "true", l: yesLabel },
-          { v: "false", l: noLabel },
-        ].map(({ v, l }) => (
-          <label
-            key={v}
-            className="flex cursor-pointer items-center gap-3 rounded-xl border border-navy/15 bg-white px-4 py-3 transition has-[:checked]:border-coral-500 has-[:checked]:bg-coral-500/5"
-          >
-            <input
-              type="radio"
-              {...register(name)}
-              value={v}
-              className="h-4 w-4 accent-coral-500"
-            />
-            <span className="text-sm text-navy">{l}</span>
-          </label>
-        ))}
-      </div>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              { v: true, l: yesLabel },
+              { v: false, l: noLabel },
+            ].map(({ v, l }) => (
+              <label
+                key={String(v)}
+                className="flex cursor-pointer items-center gap-3 rounded-xl border border-navy/15 bg-white px-4 py-3 transition has-[:checked]:border-coral-500 has-[:checked]:bg-coral-500/5"
+              >
+                <input
+                  type="radio"
+                  name={field.name}
+                  checked={field.value === v}
+                  onChange={() => field.onChange(v)}
+                  onBlur={field.onBlur}
+                  className="h-4 w-4 accent-coral-500"
+                />
+                <span className="text-sm text-navy">{l}</span>
+              </label>
+            ))}
+          </div>
+        )}
+      />
       {error && (
         <p className="field-error" role="alert">
           {error}
