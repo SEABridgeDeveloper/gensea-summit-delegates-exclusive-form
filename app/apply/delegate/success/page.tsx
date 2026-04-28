@@ -1,15 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Check, Home } from "lucide-react";
-import { useLocale } from "@/lib/i18n/provider";
+import { Check, Home, Mail } from "lucide-react";
 import { BrandMark } from "@/components/shared/brand-mark";
-import { LanguageToggle } from "@/components/shared/language-toggle";
 
-export default function ApplySuccessPage() {
-  const { t, tArray } = useLocale();
-  const tips = tArray("apply.success.tips");
+const ADVISOR_LETTER_DEADLINE = "22 May 2026";
 
+export default function IndividualSuccessPage() {
   return (
     <div className="min-h-screen bg-cream-50">
       <header className="border-b border-navy/10 bg-cream-50/80 backdrop-blur">
@@ -17,7 +14,6 @@ export default function ApplySuccessPage() {
           <Link href="/" className="inline-flex items-center gap-3">
             <BrandMark />
           </Link>
-          <LanguageToggle />
         </div>
       </header>
 
@@ -28,31 +24,55 @@ export default function ApplySuccessPage() {
           </span>
           <div>
             <h1 className="font-display text-4xl font-bold text-navy sm:text-5xl">
-              {t("apply.success.title")}
+              Application received.
             </h1>
-            <p className="mt-3 text-lg text-navy/75">{t("apply.success.subtitle")}</p>
+            <p className="mt-3 text-lg text-navy/75">
+              You&apos;re in the Gen SEA Bootcamp. Top 50 selection happens after the Capstone.
+            </p>
           </div>
-          <p className="text-base text-navy/80">{t("apply.success.body")}</p>
 
-          <div className="mt-4 w-full rounded-2xl border border-navy/10 bg-white p-6 shadow-soft">
+          <div className="mt-2 w-full rounded-2xl border border-navy/10 bg-white p-6 shadow-soft">
             <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-coral-600">
-              {t("apply.success.tipsHeading")}
+              What happens next
             </h2>
-            <ul className="mt-4 space-y-3">
-              {tips.map((tip) => (
-                <li key={tip} className="flex gap-3 text-sm text-navy">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-coral-500" />
-                  {tip}
-                </li>
-              ))}
+            <ul className="mt-4 space-y-4 text-sm text-navy">
+              <li className="flex gap-3">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-coral-500" />
+                <div>
+                  <strong className="block text-navy">Bootcamp access — sent to your inbox</strong>
+                  <span className="text-navy/70">
+                    A confirmation email with your Gen SEA Bootcamp (GVP) enrollment link and Team
+                    Flow workspace invite is on its way.
+                  </span>
+                </div>
+              </li>
+              <li className="flex gap-3">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-coral-500" />
+                <div>
+                  <strong className="block text-navy">Advisor letter — they&apos;ll get a private link</strong>
+                  <span className="text-navy/70">
+                    We&apos;ve emailed your advisor a unique upload link. They have until{" "}
+                    <strong className="text-navy">{ADVISOR_LETTER_DEADLINE}</strong> to submit the
+                    recommendation letter.
+                  </span>
+                </div>
+              </li>
+              <li className="flex gap-3">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-coral-500" />
+                <div>
+                  <strong className="block text-navy">Bootcamp Capstone — 6 June</strong>
+                  <span className="text-navy/70">
+                    Top 50 Delegates announced 7 June. Block out 16–18 July in Khon Kaen, just in
+                    case.
+                  </span>
+                </div>
+              </li>
             </ul>
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link href="/" className="btn-primary">
-              <Home className="h-4 w-4" /> {t("apply.success.ctaHome")}
-            </Link>
-          </div>
+          <Link href="/" className="btn-primary mt-2">
+            <Home className="h-4 w-4" /> Back to home
+          </Link>
         </div>
       </main>
     </div>

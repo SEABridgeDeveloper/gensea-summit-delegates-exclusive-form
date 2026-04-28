@@ -12,9 +12,9 @@ const thai = IBM_Plex_Sans_Thai({
 });
 
 export const metadata: Metadata = {
-  title: "Gen SEA Summit - Apply for your Scholarship",
+  title: "Gen SEA Summit 2026 — Apply",
   description:
-    "50 students. One room. ASEAN's next decade starts here. Apply for the 1967 fellowship in Khon Kaen.",
+    "Three days in Khon Kaen. 350+ founders, investors, and ministers from 10+ countries. Apply as an individual or as a startup.",
 };
 
 export const viewport: Viewport = {
@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="th" className={`${GeistSans.variable} ${thai.variable}`}>
+    <html lang="en" className={`${GeistSans.variable} ${thai.variable}`}>
       <body className="font-sans">
         <LocaleProvider>{children}</LocaleProvider>
       </body>

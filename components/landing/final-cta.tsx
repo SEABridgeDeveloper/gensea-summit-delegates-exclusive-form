@@ -13,7 +13,7 @@ export function FinalCta() {
           <h2 className="font-display text-4xl font-bold sm:text-5xl">{t("finalCta.heading")}</h2>
           <p className="mt-4 text-lg text-cream-50/85">{t("finalCta.body")}</p>
         </div>
-        <Link href="/apply" className="btn-inverse">
+        <Link href="/#tracks" className="btn-inverse">
           {t("finalCta.cta")} <ArrowRight className="h-4 w-4" />
         </Link>
       </div>

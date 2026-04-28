@@ -38,14 +38,14 @@
   "hero": {
     "imageAlt": "Golden hour view of a Thai temple skyline with a modern city behind it",
     "kicker": {
-      "primary": "Exclusive Scholarship",
-      "secondary": "Nomination Only"
+      "primary": "Gen SEA Summit 2026",
+      "secondary": "16–18 July · Khon Kaen"
     },
     "badgeTop": "Join a group with",
     "badgeBottom": "Your University",
     "headlineLine1": "Gen SEA Summit",
-    "headlineLine2": "Delegates",
-    "subhead": "A fully-funded Gen SEA Bootcamp or Gen SEA Ventures 33 and a Summit Delegate Pass — open exclusively through partner universities and ecosystem institutions",
+    "headlineLine2": "2026",
+    "subhead": "Three days. 350+ founders, investors, and ministers from 10+ countries. Apply as an individual or as a startup — both tracks open below.",
     "pathDelegate": {
       "kicker": "For Students",
       "title": "Win Your Seat.",
@@ -63,7 +63,7 @@
       "deadline": "Nomination deadline: 23 May 2026"
     },
     "cta": {
-      "label": "Apply For Scholarship"
+      "label": "Choose your track"
     }
   },
   "common": {
@@ -116,13 +116,23 @@
     "errors": {
       "required": "This field is required",
       "tooShort": "Please write at least {min} characters",
+      "tooShort50": "Please write at least 50 characters",
+      "tooLong800": "Maximum 800 characters",
+      "tooLong1200": "Maximum 1,200 characters",
       "invalidEmail": "Please enter a valid email",
       "invalidPhone": "Please enter a valid phone number",
+      "invalidUrl": "Please enter a valid URL (https://…)",
+      "invalidDate": "Please enter a valid date",
       "contactRequired": "Provide LINE or Discord (at least one)",
       "essayMin": "Essay must be at least 200 words",
       "essayMax": "Essay must be at most 500 words",
       "fileType": "File must be a PDF",
       "fileSize": "File must be 5MB or smaller",
+      "pdfOnly": "Pitch deck must be a PDF",
+      "fileTooLarge": "File must be 10MB or smaller",
+      "videoTooLarge": "Video file must be 100MB or smaller",
+      "ageRange": "Must be between 18 and 30",
+      "eligibility": "At least one founder must have graduated within the last 5 years",
       "instEmail": "Use an institutional email (.ac.th or partner university domain)",
       "consent": "Required to submit"
     },
@@ -587,8 +597,8 @@
   },
   "finalCta": {
     "heading": "The room is small. The window is open.",
-    "body": "Applications close May 30. The cohort is 50.",
-    "cta": "Apply for Scholarship"
+    "body": "Individual applications close 15 May. Startup applications close 23 May.",
+    "cta": "Choose your track"
   },
   "footer": {
     "tagline": "Gen SEA Summit 2026 — Building amidst chaos.",

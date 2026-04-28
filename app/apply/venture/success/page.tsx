@@ -1,66 +1,76 @@
 "use client";
 
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
-
-import { useLocale } from "@/lib/i18n/provider";
+import { Check, Home, Mail } from "lucide-react";
 import { BrandMark } from "@/components/shared/brand-mark";
-import { LanguageToggle } from "@/components/shared/language-toggle";
 
-export default function VentureSuccessPage() {
-  const { t } = useLocale();
-
+export default function StartupSuccessPage() {
   return (
     <main className="min-h-screen bg-cream-50">
       <header className="border-b border-navy/10 bg-white/80 backdrop-blur">
         <div className="container-page flex items-center justify-between py-4">
           <BrandMark />
-          <LanguageToggle />
         </div>
       </header>
 
-      <div className="container-page flex flex-col items-center py-20 text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gold-500/15 text-gold-500">
-          <CheckCircle2 className="h-12 w-12" strokeWidth={1.75} />
-        </div>
-
-        <span className="mt-6 inline-flex items-center gap-2 rounded-md bg-brand-red px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
-          {t("apply.venture.label")}
+      <div className="container-page flex max-w-2xl flex-col items-start gap-6 py-20">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-red/10 text-brand-red">
+          <Check className="h-7 w-7" strokeWidth={2.4} />
         </span>
 
-        <h1 className="mt-4 max-w-2xl font-display text-4xl font-extrabold leading-tight text-navy sm:text-5xl">
-          {t("apply.venture.success.title")}
-        </h1>
-
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-navy/70 sm:text-lg">
-          {t("apply.venture.success.body")}
-        </p>
-
-        {/* Next steps */}
-        <div className="mt-10 grid w-full max-w-2xl gap-4 text-left sm:grid-cols-3">
-          <NextStep
-            number="1"
-            title={t("apply.venture.success.next1Title")}
-            body={t("apply.venture.success.next1Body")}
-          />
-          <NextStep
-            number="2"
-            title={t("apply.venture.success.next2Title")}
-            body={t("apply.venture.success.next2Body")}
-          />
-          <NextStep
-            number="3"
-            title={t("apply.venture.success.next3Title")}
-            body={t("apply.venture.success.next3Body")}
-          />
+        <div>
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">
+            Apply as a Startup
+          </span>
+          <h1 className="mt-2 font-display text-4xl font-extrabold text-navy sm:text-5xl">
+            Application received.
+          </h1>
+          <p className="mt-3 text-lg text-navy/75">
+            You&apos;re in the Gen SEA Bootcamp. The 33 cohort is announced 2 June 2026.
+          </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href="/"
-            className="rounded-md border border-navy/20 bg-white px-6 py-3 text-sm font-semibold text-navy transition-colors hover:bg-cream-100"
-          >
-            {t("apply.success.backHome")}
+        <div className="w-full rounded-2xl border border-navy/10 bg-white p-6 shadow-soft">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-red">
+            What happens next
+          </h2>
+          <ul className="mt-4 space-y-4 text-sm text-navy">
+            <li className="flex gap-3">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" />
+              <div>
+                <strong className="block text-navy">Bootcamp access — sent to your inbox</strong>
+                <span className="text-navy/70">
+                  A confirmation email with your Gen SEA Bootcamp (GVP) enrollment link and Team
+                  Flow workspace invite is on its way.
+                </span>
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" />
+              <div>
+                <strong className="block text-navy">Cohort announcement — 2 June</strong>
+                <span className="text-navy/70">
+                  Selected ventures receive onboarding details for the pre-summit prep session
+                  (9–13 June).
+                </span>
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" />
+              <div>
+                <strong className="block text-navy">Catalogue brief — due 14 July</strong>
+                <span className="text-navy/70">
+                  Final venture brief for the Summit Catalogue. Live demo slots and Gala recognition
+                  on Day 1, 17 July.
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div className="mt-2 flex flex-wrap items-center gap-4">
+          <Link href="/" className="btn-primary">
+            <Home className="h-4 w-4" /> Back to home
           </Link>
           <a
             href="mailto:team@seabridge.space"
@@ -71,25 +81,5 @@ export default function VentureSuccessPage() {
         </div>
       </div>
     </main>
-  );
-}
-
-function NextStep({
-  number,
-  title,
-  body,
-}: {
-  number: string;
-  title: string;
-  body: string;
-}) {
-  return (
-    <div className="rounded-xl border border-cream-200 bg-white p-5">
-      <span className="font-display text-xs font-bold uppercase tracking-[0.16em] text-gold-500">
-        {number}
-      </span>
-      <h3 className="mt-1 font-display text-base font-bold text-navy">{title}</h3>
-      <p className="mt-1.5 text-sm leading-relaxed text-navy/65">{body}</p>
-    </div>
   );
 }

@@ -1,14 +1,10 @@
+import { Suspense } from "react";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
 import { Hero } from "@/components/landing/hero";
-import { StatsStrip } from "@/components/landing/stats-strip";
 import { ThemeSection } from "@/components/landing/theme-section";
-import { SectorsGrid } from "@/components/landing/sectors-grid";
-import { WhoCanApply } from "@/components/landing/who-can-apply";
-import { BenefitsList } from "@/components/landing/benefits-list";
-import { HowToGetIn } from "@/components/landing/how-to-get-in";
-import { Timeline } from "@/components/landing/timeline";
 import { FinalCta } from "@/components/landing/final-cta";
+import { TracksArea } from "@/components/landing/tracks-area";
 
 export default function HomePage() {
   return (
@@ -16,13 +12,10 @@ export default function HomePage() {
       <Header />
       <main id="main">
         <Hero />
-        {/* <StatsStrip /> */}
         <ThemeSection />
-        {/* <SectorsGrid />  */}
-        {/* <WhoCanApply /> */}
-        {/* <BenefitsList /> */}
-        {/* <HowToGetIn /> */}
-        <Timeline />
+        <Suspense fallback={<div className="h-40 bg-cream-100" aria-hidden />}>
+          <TracksArea />
+        </Suspense>
         <FinalCta />
       </main>
       <Footer />

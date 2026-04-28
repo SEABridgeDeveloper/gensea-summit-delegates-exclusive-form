@@ -5,13 +5,6 @@ import { useEffect, useState } from "react";
 import { useLocale } from "@/lib/i18n/provider";
 import { cn } from "@/lib/cn";
 import { BrandMark } from "./brand-mark";
-import { LanguageToggle } from "./language-toggle";
-
-const NAV_LINKS = [
-  { href: "/#program", labelKey: "nav.program" },
-  { href: "/#sectors", labelKey: "nav.sectors" },
-  { href: "/#timeline", labelKey: "nav.timeline" },
-];
 
 export function Header() {
   const { t } = useLocale();
@@ -52,10 +45,7 @@ export function Header() {
             </Link>
           ))}
         </nav> */}
-        <div className="flex items-center gap-3">
-          <LanguageToggle />
-         
-        </div>
+        <div className="flex items-center gap-3" />
       </div>
     </header>
   );

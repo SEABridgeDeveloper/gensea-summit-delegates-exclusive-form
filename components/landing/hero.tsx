@@ -63,18 +63,16 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Two-path cards */}
-        {/* Single CTA */}
-<div className="mt-5">
-  <Link
-    href="/apply"
-    className="inline-flex items-center gap-3 rounded-md bg-brand-red px-7 py-4 text-base font-semibold text-white shadow-sm transition-all hover:bg-brand-red/90 hover:shadow-md sm:text-lg"
-  >
-    {t("hero.cta.label")}
-    <ArrowRight className="h-5 w-5" />
-  </Link>
-
-</div>
+        {/* Single CTA — anchor jumps to the audience toggle below */}
+        <div className="mt-5">
+          <Link
+            href="#tracks"
+            className="inline-flex items-center gap-3 rounded-md bg-brand-red px-7 py-4 text-base font-semibold text-white shadow-sm transition-all hover:bg-brand-red/90 hover:shadow-md sm:text-lg"
+          >
+            {t("hero.cta.label")}
+            <ArrowRight className="h-5 w-5" />
+          </Link>
+        </div>
       </div>
 
       {/* Red ribbon at bottom */}
