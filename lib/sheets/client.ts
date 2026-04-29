@@ -3,26 +3,17 @@
  *
  * No database, no service-account JSON keys. The Sheet owner deploys an Apps
  * Script web app that exposes a single `doPost` endpoint, and we POST JSON to
- * it. The Apps Script writes one row per submission to the appropriate tab.
+ * it with an `action` discriminator. Three actions are supported:
  *
- * See `docs/apps-script.md` (or the file printed alongside) for the script
- * source and step-by-step setup. Once deployed, paste the web-app URL into
- * GSHEET_WEBHOOK_URL.
+ *   - (no action / default) → write a row to a tab    → writeSheetRow
+ *   - "lookup_advisor"      → fetch applicant context  → lookupAdvisorByToken
+ *   - "submit_letter"       → upload letter + status   → submitAdvisorLetter
  *
- * Files (CV, pitch deck, video) are sent as base64 strings; the Apps Script
- * uploads them to a Drive folder and writes the resulting URL into the row.
+ * See `docs/apps-script.md` for setup. Once deployed, paste the web-app URL
+ * into GSHEET_WEBHOOK_URL.
  */
 
 export type SheetTab = "individual" | "startup" | "advisor_letter";
-
-export type SheetRowInput = {
-  tab: SheetTab;
-  /**
-   * Object of column -> value pairs. Values can be strings, numbers, booleans,
-   * or { fileName, mimeType, base64 } for file uploads.
-   */
-  row: Record<string, string | number | boolean | SheetFile | undefined | null>;
-};
 
 export type SheetFile = {
   fileName: string;
@@ -34,15 +25,35 @@ export type SheetWriteResult =
   | { ok: true; rowNumber?: number }
   | { ok: false; error: string };
 
-export async function writeSheetRow(input: SheetRowInput): Promise<SheetWriteResult> {
-  const url = process.env.GSHEET_WEBHOOK_URL;
-  const sharedSecret = process.env.GSHEET_SHARED_SECRET;
+export type AdvisorContext = {
+  applicantName: string;
+  applicantEmail?: string;
+  university?: string;
+  faculty?: string;
+  advisorName?: string;
+  advisorEmail?: string;
+  deadline: string;
+  status: "pending" | "submitted";
+};
+
+export type AdvisorLookupResult =
+  | { ok: true; context: AdvisorContext }
+  | { ok: false; error: string };
+
+const WEBHOOK_TIMEOUT_MS = 30_000;
+
+function getConfig() {
+  return {
+    url: process.env.GSHEET_WEBHOOK_URL,
+    secret: process.env.GSHEET_SHARED_SECRET ?? "",
+  };
+}
+
+async function callAppsScript<T>(body: object): Promise<T | { ok: false; error: string }> {
+  const { url, secret } = getConfig();
 
   if (!url) {
-    console.warn(
-      "[sheets] GSHEET_WEBHOOK_URL not configured — skipping sheet write.",
-      { tab: input.tab },
-    );
+    console.warn("[sheets] GSHEET_WEBHOOK_URL not configured.");
     return { ok: false, error: "Sheets webhook not configured" };
   }
 
@@ -50,15 +61,8 @@ export async function writeSheetRow(input: SheetRowInput): Promise<SheetWriteRes
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // Apps Script web apps are stateless — we authenticate via a shared
-      // secret in the body so a leaked URL alone can't append rows.
-      body: JSON.stringify({
-        secret: sharedSecret ?? "",
-        tab: input.tab,
-        row: input.row,
-      }),
-      // Apps Script may take a few seconds; raise the default fetch timeout.
-      signal: AbortSignal.timeout(30_000),
+      body: JSON.stringify({ secret, ...body }),
+      signal: AbortSignal.timeout(WEBHOOK_TIMEOUT_MS),
     });
 
     if (!res.ok) {
@@ -67,21 +71,53 @@ export async function writeSheetRow(input: SheetRowInput): Promise<SheetWriteRes
       return { ok: false, error: `Sheets ${res.status}: ${detail}` };
     }
 
-    const body = (await res.json()) as { ok?: boolean; row?: number; error?: string };
-    if (!body.ok) {
-      return { ok: false, error: body.error ?? "Unknown Apps Script error" };
-    }
-    return { ok: true, rowNumber: body.row };
+    return (await res.json()) as T;
   } catch (err) {
-    console.error("[sheets] Network error writing row:", err);
+    console.error("[sheets] Network error:", err);
     return { ok: false, error: String(err) };
   }
 }
 
-/**
- * Convert a browser File (already on the server thanks to FormData) into the
- * shape the Apps Script expects. Returns undefined for falsy input.
- */
+// ── 1. Write row ──────────────────────────────────────────────────────────
+
+export type SheetRowInput = {
+  tab: SheetTab;
+  row: Record<string, string | number | boolean | SheetFile | undefined | null>;
+};
+
+export async function writeSheetRow(input: SheetRowInput): Promise<SheetWriteResult> {
+  return callAppsScript<SheetWriteResult>({
+    tab: input.tab,
+    row: input.row,
+  });
+}
+
+// ── 2. Lookup advisor by token ────────────────────────────────────────────
+
+export async function lookupAdvisorByToken(token: string): Promise<AdvisorLookupResult> {
+  return callAppsScript<AdvisorLookupResult>({
+    action: "lookup_advisor",
+    token,
+  });
+}
+
+// ── 3. Submit advisor letter ──────────────────────────────────────────────
+
+export async function submitAdvisorLetter(input: {
+  token: string;
+  file: SheetFile;
+  note?: string;
+}): Promise<SheetWriteResult & { applicantName?: string; advisorEmail?: string }> {
+  return callAppsScript({
+    action: "submit_letter",
+    token: input.token,
+    file: input.file,
+    note: input.note ?? "",
+  });
+}
+
+// ── File helper ──────────────────────────────────────────────────────────
+
 export async function fileToSheetFile(
   file: File | null | undefined,
 ): Promise<SheetFile | undefined> {

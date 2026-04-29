@@ -15,8 +15,29 @@ const PROGRAM_NAME = "Gen SEA Summit 2026";
 const SUMMIT_DATES = "16–18 July 2026";
 const SUMMIT_LOCATION = "Khon Kaen, Thailand";
 
+/**
+ * Resolve the logo URL used at the top of every email.
+ *
+ * Precedence:
+ *   1. EMAIL_LOGO_URL — explicit override (use this for a different image).
+ *   2. NEXT_PUBLIC_APP_URL + /genseasummit-logo.png — the public asset already
+ *      shipped in /public.
+ *   3. Hard-coded production fallback.
+ *
+ * NOTE: must be an absolute https URL — Gmail blocks relative URLs and
+ * http:// images by default.
+ */
+function getLogoUrl(): string {
+  if (process.env.EMAIL_LOGO_URL) return process.env.EMAIL_LOGO_URL;
+  const base =
+    process.env.NEXT_PUBLIC_APP_URL ??
+    "https://gensea-summit-delegates-exclusive-f.vercel.app";
+  return `${base.replace(/\/$/, "")}/genseasummit-logo.png`;
+}
+
 // Wrap a body in the same shell across all messages — keeps branding consistent.
 function shell(opts: { preheader: string; body: string }): string {
+  const logoUrl = getLogoUrl();
   // The preheader is the snippet shown in inbox previews. Hidden in the body.
   return `<!doctype html>
 <html lang="en">
@@ -27,8 +48,9 @@ function shell(opts: { preheader: string; body: string }): string {
         <td align="center">
           <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;background:#FFFAF1;border-radius:16px;overflow:hidden;border:1px solid rgba(15,27,61,0.1);">
             <tr>
-              <td style="padding:32px 40px 0;">
-                <p style="margin:0;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D9603C;font-weight:700;">${PROGRAM_NAME}</p>
+              <td align="left" style="padding:32px 40px 0;">
+                <img src="${logoUrl}" alt="${PROGRAM_NAME}" width="140" height="auto" style="display:block;border:0;outline:0;text-decoration:none;height:auto;width:140px;max-width:140px;">
+                <p style="margin:16px 0 0;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D9603C;font-weight:700;">${PROGRAM_NAME}</p>
               </td>
             </tr>
             <tr>
@@ -153,6 +175,37 @@ The Gen SEA Summit team`;
 
       <p style="margin:24px 0 0;font-size:13px;color:rgba(15,27,61,0.7);">If you weren't expecting this or don't recognise the applicant, please disregard this email — no action will be taken.</p>
       <p style="margin:8px 0 0;color:rgba(15,27,61,0.7);">— The Gen SEA Summit team</p>
+    `,
+  });
+
+  return { subject, html, text };
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// 2b. Advisor confirmation — sent to the advisor AFTER they submit the letter
+// ────────────────────────────────────────────────────────────────────────────
+
+export function advisorLetterReceivedEmail(args: {
+  advisorName: string;
+  applicantName: string;
+}) {
+  const subject = `Letter received — ${args.applicantName} (${PROGRAM_NAME})`;
+
+  const text = `Dear ${args.advisorName},
+
+Thank you for submitting a letter of recommendation for ${args.applicantName}.
+
+Your letter has been received and shared with the program selection team. No further action is needed.
+
+— The Gen SEA Summit team`;
+
+  const html = shell({
+    preheader: "Your recommendation letter has been received.",
+    body: `
+      <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3;font-weight:700;color:#0F1B3D;">Dear ${args.advisorName},</h1>
+      <p style="margin:0 0 16px;">Thank you for submitting a letter of recommendation for <strong>${args.applicantName}</strong>.</p>
+      <p style="margin:0 0 16px;">Your letter has been received and shared with the program selection team. No further action is needed.</p>
+      <p style="margin:24px 0 0;color:rgba(15,27,61,0.7);">— The Gen SEA Summit team</p>
     `,
   });
 

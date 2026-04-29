@@ -89,6 +89,22 @@ Apps Script web apps don't auto-update. After editing the script:
 
 The web-app URL stays the same — no code change needed on the Next.js side.
 
+## Adding the advisor letter flow
+
+The script supports three actions: appending application rows (default),
+`lookup_advisor` (the advisor upload page resolves a token → applicant
+context), and `submit_letter` (advisor uploads the PDF). All three share the
+same `doPost` endpoint and the same `SHARED_SECRET`.
+
+**On the Sheet side:** the `individual` tab gains four columns the first time
+an advisor submits — `advisorLetterStatus`, `advisorLetterUrl`,
+`advisorLetterSubmittedAt`, `advisorLetterNote`. The script auto-creates them.
+
+**On the Drive side:** advisor letters are uploaded to the same
+`UPLOAD_FOLDER_ID` folder as CVs and pitch decks. Filenames preserve whatever
+the advisor uploaded — consider periodically renaming them in Drive for
+sanity (`<applicantName>-letter.pdf`).
+
 ## Schema reference
 
 The Apps Script auto-discovers headers from the first row it writes to a tab.
