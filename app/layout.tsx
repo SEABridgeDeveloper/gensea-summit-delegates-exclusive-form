@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "/ICON.png",
+    shortcut: "/ICON.png",
+    apple: "/ICON.png",
   },
   openGraph: {
     type: "website",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/genseasummit-logo.png",
+        url: "/IMAGE.png",
         width: 1200,
         height: 630,
         alt: "Gen SEA Summit 2026",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/genseasummit-logo.png"],
+    images: ["/IMAGE.png"],
   },
 };
 
