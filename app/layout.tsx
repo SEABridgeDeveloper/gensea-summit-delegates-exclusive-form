@@ -11,10 +11,42 @@ const thai = IBM_Plex_Sans_Thai({
   display: "swap",
 });
 
+const SITE_TITLE = "Gen SEA Summit 2026 — Apply";
+const SITE_DESCRIPTION =
+  "Three days in Khon Kaen. 350+ founders, investors, and ministers from 10+ countries. Apply as an individual or as a startup.";
+
 export const metadata: Metadata = {
-  title: "Gen SEA Summit 2026 — Apply",
-  description:
-    "Three days in Khon Kaen. 350+ founders, investors, and ministers from 10+ countries. Apply as an individual or as a startup.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ??
+      "https://gensea-summit-delegates-exclusive-f.vercel.app",
+  ),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Gen SEA Summit 2026",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: "/genseasummit-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Gen SEA Summit 2026",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/genseasummit-logo.png"],
+  },
 };
 
 export const viewport: Viewport = {

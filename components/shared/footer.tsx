@@ -6,9 +6,9 @@ import { useLocale } from "@/lib/i18n/provider";
 import { BrandMark } from "./brand-mark";
 
 const SOCIAL_LINKS = [
-  { name: "LinkedIn", href: "https://linkedin.com/company/seabridge", Icon: Linkedin },
-  { name: "Facebook", href: "https://facebook.com/seabridge", Icon: Facebook },
-  { name: "Instagram", href: "https://instagram.com/seabridge", Icon: Instagram },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/growwithseabridge/posts/?feedView=all", Icon: Linkedin },
+  { name: "Facebook", href: "https://www.facebook.com/SEABridgeNextGen?locale=th_TH", Icon: Facebook },
+  { name: "Instagram", href: "https://www.instagram.com/seabridge.nextgen/", Icon: Instagram },
 ];
 
 const EMAIL = "team@seabridge.space";
