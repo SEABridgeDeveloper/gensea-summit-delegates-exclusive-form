@@ -40,32 +40,29 @@ export function TrackIndividual() {
           <TrackSwitchLink track="individual" />
         </div>
 
-<header className="max-w-5xl">
-  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-coral-600">
-    Apply as an Individual
-  </span>
-  <div className="mt-4 flex items-center gap-6">
-    <h2 className="font-display text-4xl font-bold text-navy sm:text-5xl w-[70%]">
-      Gen SEA Delegates 2026
-    </h2>
-    <div className="w-[30%] flex justify-end">
-      <Link
-        href="/apply/delegate"
-        className="inline-flex items-center gap-3 rounded-full bg-brand-red px-8 py-4 text-base font-semibold text-cream-50 shadow-soft transition hover:bg-coral-600 sm:text-lg whitespace-nowrap"
-      >
-        Apply as Individual
-        <ArrowRight className="h-5 w-5" />
-      </Link>
-    </div>
-  </div>
-  <p className="mt-5 text-lg text-navy/80 sm:text-xl">
-    For students and recent graduates, ages 18–30, motivated to understand how ventures are
-    built and scaled in ASEAN — whether or not they have a startup of their own.
-  </p>
-  <p className="mt-3 text-base font-semibold text-coral-600">No startup required.</p>
-</header>
+        <header className="max-w-4xl">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-coral-700">
+            Apply as an Individual
+          </span>
+          <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+            <h2 className="font-display text-4xl font-bold text-navy sm:text-5xl">
+              Gen SEA Delegates 2026
+            </h2>
+            <Link
+              href="/apply/delegate"
+              className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-brand-red px-6 py-3 text-sm font-semibold text-cream-50 shadow-soft transition hover:bg-brand-redDark sm:self-auto sm:text-base"
+            >
+              Apply as Individual
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <p className="mt-5 max-w-3xl text-lg text-navy/85 sm:text-xl">
+            For students and recent graduates, ages 18–30, motivated to understand how ventures are
+            built and scaled in ASEAN — whether or not they have a startup of their own.
+          </p>
+          <p className="mt-3 text-base font-semibold text-coral-700">No startup required.</p>
+        </header>
 
-        {/* What You Get */}
         <SectionCard
           step="01"
           kicker="What you get"
@@ -78,7 +75,10 @@ export function TrackIndividual() {
                 key={b}
                 className="flex gap-4 border-b border-navy/10 pb-4 text-base text-navy/85 last:border-b-0 last:pb-0"
               >
-                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-coral-500/15 text-coral-600">
+                <span
+                  className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-coral-500/15 text-coral-700"
+                  aria-hidden="true"
+                >
                   <Check className="h-3.5 w-3.5" strokeWidth={3} />
                 </span>
                 <span>{b}</span>
@@ -87,7 +87,6 @@ export function TrackIndividual() {
           </ul>
         </SectionCard>
 
-        {/* How to Win Your Seat */}
         <SectionCard
           step="02"
           kicker="How to win your seat"
@@ -97,17 +96,18 @@ export function TrackIndividual() {
           <ol className="space-y-6">
             {STEPS.map((s) => (
               <li key={s.n} className="flex gap-5">
-                <span className="font-display text-2xl font-bold text-coral-600">{s.n}</span>
+                <span className="font-display text-2xl font-bold text-coral-700" aria-hidden="true">
+                  {s.n}
+                </span>
                 <p className="text-base text-navy/85">{s.body}</p>
               </li>
             ))}
           </ol>
-          <div className="mt-8 rounded-2xl border-l-4 border-coral-500 bg-cream-100 p-5 text-base text-navy/80">
+          <div className="mt-8 rounded-2xl border-l-4 border-coral-500 bg-cream-100 p-5 text-base text-navy/85">
             Nomination prioritizes your application — it does not guarantee selection.
           </div>
         </SectionCard>
 
-        {/* Timeline */}
         <SectionCard
           step="03"
           kicker="Timeline"
@@ -117,9 +117,9 @@ export function TrackIndividual() {
           <div className="relative">
             <div
               className="absolute inset-x-0 top-3 hidden h-px bg-gold-500 lg:block"
-              aria-hidden
+              aria-hidden="true"
             />
-            <ol className="grid gap-10 lg:grid-cols-6 lg:gap-6">
+            <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-6 lg:gap-6">
               {TIMELINE.map((t) => (
                 <li
                   key={t.date}
@@ -127,13 +127,13 @@ export function TrackIndividual() {
                 >
                   <span
                     className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white ring-2 ring-gold-500"
-                    aria-hidden
+                    aria-hidden="true"
                   >
                     <span className="h-2.5 w-2.5 rounded-full bg-gold-500" />
                   </span>
                   <div className="lg:text-center">
                     <div className="font-display text-lg font-semibold text-navy">{t.date}</div>
-                    <div className="mt-1 text-sm text-navy/70">{t.label}</div>
+                    <div className="mt-1 text-sm text-navy/75">{t.label}</div>
                   </div>
                 </li>
               ))}

@@ -39,11 +39,7 @@ export const individualApplicationSchema = z.object({
     .trim()
     .min(1, { message: "required" })
     .max(800, { message: "tooLong800" }),
-  contribution: z
-    .string()
-    .trim()
-    .min(1, { message: "required" })
-    .max(1200, { message: "tooLong1200" }),
+  // contribution removed — form currently uses a single short-answer question.
 });
 
 export type IndividualApplicationValues = z.infer<typeof individualApplicationSchema>;

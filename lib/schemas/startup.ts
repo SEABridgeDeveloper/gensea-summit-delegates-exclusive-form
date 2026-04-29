@@ -52,9 +52,8 @@ export const startupApplicationSchema = z
       .int()
       .min(18, { message: "ageRange" })
       .max(30, { message: "ageRange" }),
-    founderGraduatedWithin5: z
-      .boolean()
-      .refine((v) => v === true, { message: "eligibility" }),
+    // Eligibility (graduated within 5y) is communicated via the section disclaimer.
+    // Not enforced as a checkbox — see venture form copy.
 
     pitchDeck: pitchDeckSchema,
 

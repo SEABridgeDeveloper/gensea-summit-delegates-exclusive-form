@@ -13,7 +13,7 @@ export default function HomePage() {
       <main id="main">
         <Hero />
         <ThemeSection />
-        <Suspense fallback={<div className="h-40 bg-cream-100" aria-hidden />}>
+        <Suspense fallback={<div className="min-h-[24rem] bg-cream-50" aria-hidden />}>
           <TracksArea />
         </Suspense>
         <FinalCta />

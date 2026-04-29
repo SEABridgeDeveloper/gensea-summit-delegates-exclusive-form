@@ -6,13 +6,9 @@ import { cn } from "@/lib/cn";
 type KickerVariant = "exclusive" | "default";
 
 interface KickerProps {
-  /** Main label, e.g. "Exclusive Scholarship" */
   primary: string;
-  /** Optional secondary label after a divider, e.g. "Nomination Only" */
   secondary?: string;
-  /** Visual variant — "exclusive" uses brand-red, "default" uses navy/cream */
   variant?: KickerVariant;
-  /** Show lock icon (auto-true for exclusive variant) */
   showIcon?: boolean;
   className?: string;
 }
@@ -32,8 +28,8 @@ export function Kicker({
       className={cn(
         "inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] backdrop-blur",
         isExclusive
-          ? "border-brand-red/25 bg-brand-red/5"
-          : "border-navy/15 bg-white/60",
+          ? "border-brand-red/40 bg-brand-red/10"
+          : "border-navy/20 bg-white/80",
         className,
       )}
     >
@@ -41,33 +37,33 @@ export function Kicker({
         <Lock
           className={cn(
             "h-3 w-3",
-            isExclusive ? "text-brand-red" : "text-navy/70",
+            isExclusive ? "text-brand-red" : "text-navy/75",
           )}
           strokeWidth={2.5}
+          aria-hidden="true"
         />
       ) : (
         <span
           className={cn(
             "h-1.5 w-1.5 rounded-full",
-            isExclusive ? "bg-brand-red" : "bg-coral-500",
+            isExclusive ? "bg-brand-red" : "bg-coral-600",
           )}
+          aria-hidden="true"
         />
       )}
 
-      <span className={isExclusive ? "text-brand-red" : "text-navy/70"}>
-        {primary}
-      </span>
+      <span className={isExclusive ? "text-brand-red" : "text-navy/85"}>{primary}</span>
 
       {secondary && (
         <>
           <span
             className={cn(
               "h-1 w-1 rounded-full",
-              isExclusive ? "bg-brand-red/40" : "bg-navy/30",
+              isExclusive ? "bg-brand-red/40" : "bg-navy/40",
             )}
             aria-hidden="true"
           />
-          <span className="text-navy/70">{secondary}</span>
+          <span className="text-navy/85">{secondary}</span>
         </>
       )}
     </div>

@@ -9,7 +9,9 @@ export function TracksArea() {
   return (
     <>
       <AudienceToggle track={track} />
-      {track === "individual" ? <TrackIndividual /> : <TrackStartup />}
+      <div key={track} className="animate-fade-up">
+        {track === "individual" ? <TrackIndividual /> : <TrackStartup />}
+      </div>
     </>
   );
 }

@@ -50,32 +50,28 @@ export function TrackStartup() {
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">
             Apply as a Startup
           </span>
-          <div className="mt-4 flex items-center gap-6">
-           <h2 className="font-display text-4xl font-bold text-navy sm:text-5xl w-[70%]">
-            Gen SEA Ventures 33
-          </h2>
-          {/* CTA */}
-        <div className="w-[30%] flex justify-end">
-          <Link
-            href="/apply/venture"
-            className="inline-flex items-center gap-3 rounded-full bg-brand-red px-8 py-4 text-base font-semibold text-cream-50 shadow-soft transition hover:bg-coral-600 sm:text-lg whitespace-nowrap"
-          >
-            Apply as Startup
-            <ArrowRight className="h-5 w-5" />
-          </Link>
-        </div>
-        </div>
-          <p className="mt-5 text-lg text-navy/80 sm:text-xl">
+          <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+            <h2 className="font-display text-4xl font-bold text-navy sm:text-5xl">
+              Gen SEA Ventures 33
+            </h2>
+            <Link
+              href="/apply/venture"
+              className="inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-brand-red px-6 py-3 text-sm font-semibold text-cream-50 shadow-soft transition hover:bg-brand-redDark sm:self-auto sm:text-base"
+            >
+              Apply as Startup
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <p className="mt-5 max-w-3xl text-lg text-navy/85 sm:text-xl">
             For youth-led early-stage ventures where at least one founder is aged 18–30 and
             graduated within 5 years.
           </p>
-          <p className="mt-3 text-base text-navy/75">
+          <p className="mt-3 max-w-3xl text-base text-navy/75">
             Building in Wellness, Food, AI, Creative, or Education — across Thailand, ASEAN, or
             internationally entering ASEAN.
           </p>
         </header>
 
-        {/* What You Get */}
         <SectionCard
           step="01"
           kicker="What you get · Total package USD 9,000+"
@@ -88,20 +84,22 @@ export function TrackStartup() {
                 key={b}
                 className="flex gap-4 border-b border-navy/10 pb-4 text-base text-navy/85 last:border-b-0 last:pb-0"
               >
-                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-red/10 text-brand-red">
+                <span
+                  className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-red/10 text-brand-red"
+                  aria-hidden="true"
+                >
                   <Check className="h-3.5 w-3.5" strokeWidth={3} />
                 </span>
                 <span>{b}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-sm text-navy/65">
+          <p className="mt-6 text-sm text-navy/75">
             Notable ventures selected by the organizing committee are offered a live demo slot on
             the Summit&apos;s main stage.
           </p>
         </SectionCard>
 
-        {/* How to Apply */}
         <SectionCard
           step="02"
           kicker="How to apply"
@@ -111,18 +109,19 @@ export function TrackStartup() {
           <ol className="space-y-6">
             {STEPS.map((s) => (
               <li key={s.n} className="flex gap-5">
-                <span className="font-display text-2xl font-bold text-brand-red">{s.n}</span>
+                <span className="font-display text-2xl font-bold text-brand-red" aria-hidden="true">
+                  {s.n}
+                </span>
                 <p className="text-base text-navy/85">{s.body}</p>
               </li>
             ))}
           </ol>
-          <div className="mt-8 rounded-2xl border-l-4 border-brand-red bg-cream-100 p-5 text-base text-navy/80">
+          <div className="mt-8 rounded-2xl border-l-4 border-brand-red bg-cream-100 p-5 text-base text-navy/85">
             <span className="font-semibold text-navy">For Thai ventures:</span> TED Fund and NIA
             portfolio ventures are strongly encouraged to apply through the standard pathway.
           </div>
         </SectionCard>
 
-        {/* Timeline */}
         <SectionCard
           step="03"
           kicker="Timeline"
@@ -132,9 +131,9 @@ export function TrackStartup() {
           <div className="relative">
             <div
               className="absolute inset-x-0 top-3 hidden h-px bg-gold-500 lg:block"
-              aria-hidden
+              aria-hidden="true"
             />
-            <ol className="grid gap-10 lg:grid-cols-6 lg:gap-6">
+            <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-6 lg:gap-6">
               {TIMELINE.map((t) => (
                 <li
                   key={t.date}
@@ -142,13 +141,13 @@ export function TrackStartup() {
                 >
                   <span
                     className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white ring-2 ring-gold-500"
-                    aria-hidden
+                    aria-hidden="true"
                   >
                     <span className="h-2.5 w-2.5 rounded-full bg-gold-500" />
                   </span>
                   <div className="lg:text-center">
                     <div className="font-display text-lg font-semibold text-navy">{t.date}</div>
-                    <div className="mt-1 text-sm text-navy/70">{t.label}</div>
+                    <div className="mt-1 text-sm text-navy/75">{t.label}</div>
                   </div>
                 </li>
               ))}

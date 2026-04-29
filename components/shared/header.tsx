@@ -20,8 +20,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-colors",
-        scrolled ? "bg-white backdrop-blur-md border-b border-navy/10" : "bg-transparent",
+        "sticky top-0 z-40 w-full transition-all",
+        scrolled
+          ? "border-b border-navy/10 bg-white/95 shadow-sm backdrop-blur-md"
+          : "bg-transparent",
       )}
     >
       <a
@@ -31,21 +33,9 @@ export function Header() {
         {t("nav.skipToContent")}
       </a>
       <div className="container-page flex items-center justify-between py-4">
-        <Link href="/" aria-label="1967 home">
+        <Link href="/" aria-label="Gen SEA Summit home">
           <BrandMark />
         </Link>
-        {/* <nav className="hidden items-center gap-20 md:flex"  aria-label="Primary">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-navy/70 transition hover:text-navy"
-            >
-              {t(link.labelKey)}
-            </Link>
-          ))}
-        </nav> */}
-        <div className="flex items-center gap-3" />
       </div>
     </header>
   );

@@ -10,7 +10,7 @@ export function DraftIndicator({ state, className }: { state: DraftState; classN
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 text-xs font-medium text-navy/55",
+        "inline-flex items-center gap-1.5 text-[13px] font-medium text-navy/75",
         className,
       )}
       role="status"
@@ -18,12 +18,12 @@ export function DraftIndicator({ state, className }: { state: DraftState; classN
     >
       {state === "saving" ? (
         <>
-          <Loader2 className="h-3 w-3 animate-spin" />
+          <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" />
           Saving draft…
         </>
       ) : (
         <>
-          <Check className="h-3 w-3 text-coral-500" strokeWidth={3} />
+          <Check className="h-3.5 w-3.5 text-coral-700" strokeWidth={3} aria-hidden="true" />
           Draft saved
         </>
       )}

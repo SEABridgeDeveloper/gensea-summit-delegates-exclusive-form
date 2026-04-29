@@ -17,12 +17,18 @@ const config: Config = {
         navy: {
           DEFAULT: "#0F1B3D",
           50: "#E6E8EE",
+          200: "#C4C8D5",
+          400: "#7A8099",
+          600: "#3F4A6E",
+          700: "#1F2C52",
           900: "#0A1330",
         },
         coral: {
           400: "#F39A7E",
           500: "#EC7A57",
           600: "#D9603C",
+          700: "#B8512F",
+          800: "#923E25",
         },
         gold: {
           400: "#E0BC72",
@@ -31,16 +37,13 @@ const config: Config = {
         },
         brand: {
           red: "#C8341E",
+          redDark: "#9A2616",
         },
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "var(--font-thai)", "system-ui", "sans-serif"],
         thai: ["var(--font-thai)", "var(--font-geist-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-geist-sans)", "var(--font-thai)", "system-ui", "sans-serif"],
-      },
-      fontSize: {
-        display: ["clamp(2.5rem, 6vw, 5rem)", { lineHeight: "1.05", letterSpacing: "-0.02em", fontWeight: "700" }],
-        hero: ["clamp(3rem, 7vw, 5.5rem)", { lineHeight: "1.02", letterSpacing: "-0.025em", fontWeight: "700" }],
       },
       boxShadow: {
         soft: "0 12px 40px -16px rgba(15, 27, 61, 0.18)",
