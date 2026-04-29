@@ -35,12 +35,7 @@ export const startupApplicationSchema = z
   .object({
     // Company
     legalName: z.string().trim().min(2, { message: "required" }).max(160),
-    foundingDate: z
-      .string()
-      .trim()
-      .min(1, { message: "required" })
-      .refine((v) => !Number.isNaN(Date.parse(v)), { message: "invalidDate" }),
-    incorporationCountry: z.string().trim().min(2, { message: "required" }).max(80),
+    // foundingDate + incorporationCountry intentionally omitted — collected later if needed.
     sector: z.enum(SECTORS, { errorMap: () => ({ message: "required" }) }),
 
     // Founder (lead applicant) — confirms at least one founder meets the eligibility

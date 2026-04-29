@@ -53,8 +53,6 @@ export async function POST(req: Request) {
       submittedAt: new Date().toISOString(),
       applicationId,
       ventureName,
-      foundingDate: get("foundingDate"),
-      incorporationCountry: get("incorporationCountry"),
       sector: get("sector"),
       founderName,
       founderEmail,

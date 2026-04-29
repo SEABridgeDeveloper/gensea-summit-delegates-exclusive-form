@@ -44,8 +44,6 @@ export default function StartupApplyPage() {
     mode: "onBlur",
     defaultValues: {
       legalName: "",
-      foundingDate: "",
-      incorporationCountry: "",
       sector: undefined as unknown as StartupApplicationValues["sector"],
       founderName: "",
       founderEmail: "",
@@ -148,6 +146,22 @@ export default function StartupApplyPage() {
     }
   };
 
+  // When validation rejects the submit, scroll the first invalid field into
+  // view so users can see what's wrong instead of "nothing happened".
+  const onInvalid = () => {
+    setSubmitError(null);
+    if (typeof document === "undefined") return;
+    requestAnimationFrame(() => {
+      const firstInvalid = document.querySelector<HTMLElement>('[aria-invalid="true"]');
+      if (firstInvalid) {
+        firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+        firstInvalid.focus({ preventScroll: true });
+      }
+    });
+  };
+
+  const errorCount = Object.keys(errors).length;
+
   return (
     <div className="min-h-screen bg-cream-50">
       <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream-50/90 backdrop-blur">
@@ -182,7 +196,7 @@ export default function StartupApplyPage() {
 
         <form
           noValidate
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit, onInvalid)}
           className="space-y-10 rounded-3xl border border-navy/10 bg-white p-6 shadow-soft sm:p-10"
         >
           <fieldset className="space-y-5">
@@ -195,23 +209,8 @@ export default function StartupApplyPage() {
                 {...register("legalName")}
               />
             </Field>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Founding date" required error={errors.foundingDate?.message}>
-                <input type="date" className="field-input" {...register("foundingDate")} />
-              </Field>
-              <Field
-                label="Country of incorporation"
-                required
-                error={errors.incorporationCountry?.message}
-              >
-                <input
-                  type="text"
-                  className="field-input"
-                  placeholder="e.g. Thailand"
-                  {...register("incorporationCountry")}
-                />
-              </Field>
-            </div>
+            
+          
 
             <fieldset>
               <legend className="mb-1.5 text-sm font-medium text-navy">
@@ -349,6 +348,16 @@ export default function StartupApplyPage() {
               </div>
             </div>
           </fieldset>
+
+          {errorCount > 0 && (
+            <p
+              role="alert"
+              aria-live="polite"
+              className="rounded-xl border border-brand-red/30 bg-brand-red/5 p-4 text-sm text-brand-red"
+            >
+              Please fix the {errorCount === 1 ? "highlighted field" : `${errorCount} highlighted fields`} above before submitting.
+            </p>
+          )}
 
           {submitError && (
             <p
