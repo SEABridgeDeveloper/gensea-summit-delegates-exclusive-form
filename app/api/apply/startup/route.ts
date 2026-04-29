@@ -48,7 +48,7 @@ export async function POST(req: Request) {
   const videoFileEntry = await fileToSheetFile(videoFile);
 
   const sheetPromise = writeSheetRow({
-    tab: "startup",
+    tab: "youth-summit-startup",
     row: {
       submittedAt: new Date().toISOString(),
       applicationId,

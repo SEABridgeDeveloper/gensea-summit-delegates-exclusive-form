@@ -57,12 +57,7 @@ export function AdvisorUploadView() {
         const body = await res.json();
         if (cancelled) return;
         if (!res.ok || !body.ok) {
-          setLookup({
-            kind: "error",
-            message:
-              body.error ??
-              "We couldn't find an application for this link. Please check the email and try again.",
-          });
+          setLookup({ kind: "error", message: humanizeLookupError(body.error) });
           return;
         }
         setLookup({ kind: "ready", context: body.context });
@@ -78,6 +73,10 @@ export function AdvisorUploadView() {
       cancelled = true;
     };
   }, [token]);
+
+  // Map the raw error string from the API to a recipient-friendly message.
+  // The raw error is still in server logs for debugging.
+  // (Defined inline so it shares the component's copy tone.)
 
   const onFileChange = (f: File | undefined) => {
     setFileError(undefined);
@@ -364,6 +363,22 @@ function SuccessCard({ applicantName }: { applicantName: string }) {
       <p className="mt-4 text-sm text-navy/70">You can close this page now.</p>
     </div>
   );
+}
+
+// Map machine-readable errors to user-friendly copy.
+function humanizeLookupError(raw: string | undefined): string {
+  if (!raw) {
+    return "We couldn't find an application for this link. Please check the email and try again.";
+  }
+  if (raw === "Token not found") {
+    return "This link doesn't match any applicant on file. The applicant may have used a different email address — please ask them to resend you the recommendation request.";
+  }
+  if (raw === "Missing token") {
+    return "This link is missing a token. Please use the exact URL from the email we sent you.";
+  }
+  // Anything else (Forbidden, Sheets webhook not configured, network errors,
+  // etc.) is an operational problem on our side — don't leak the raw string.
+  return "Our system can't reach the application database right now. The team has been notified — please email team@seabridge.space and we'll process your letter manually.";
 }
 
 // ── File input (matches the apply forms) ─────────────────────────────────

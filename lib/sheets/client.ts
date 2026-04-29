@@ -13,7 +13,10 @@
  * into GSHEET_WEBHOOK_URL.
  */
 
-export type SheetTab = "individual" | "startup" | "advisor_letter";
+export type SheetTab =
+  | "youth-summit-individual"
+  | "youth-summit-startup"
+  | "youth-summit-advisor_letter";
 
 export type SheetFile = {
   fileName: string;
@@ -52,9 +55,21 @@ function getConfig() {
 async function callAppsScript<T>(body: object): Promise<T | { ok: false; error: string }> {
   const { url, secret } = getConfig();
 
+  // Surface configuration issues prominently so they're visible in Vercel logs.
   if (!url) {
-    console.warn("[sheets] GSHEET_WEBHOOK_URL not configured.");
+    console.error(
+      "[sheets] CONFIG ERROR: GSHEET_WEBHOOK_URL is not set. " +
+        "Set it in .env.local and Vercel env vars. See docs/apps-script.md.",
+    );
     return { ok: false, error: "Sheets webhook not configured" };
+  }
+  if (!secret) {
+    console.error(
+      "[sheets] CONFIG ERROR: GSHEET_SHARED_SECRET is not set. " +
+        "Set it in .env.local and Vercel env vars to the same value as " +
+        "SHARED_SECRET inside your Apps Script.",
+    );
+    return { ok: false, error: "Sheets shared secret not configured" };
   }
 
   try {
@@ -67,13 +82,32 @@ async function callAppsScript<T>(body: object): Promise<T | { ok: false; error: 
 
     if (!res.ok) {
       const detail = await res.text();
-      console.error("[sheets] Apps Script rejected:", res.status, detail);
+      console.error("[sheets] Apps Script rejected (HTTP):", res.status, detail);
       return { ok: false, error: `Sheets ${res.status}: ${detail}` };
     }
 
-    return (await res.json()) as T;
+    const json = (await res.json()) as T & { ok?: boolean; error?: string };
+
+    // Apps Script returns 200 for "logical" errors (Forbidden, Token not found,
+    // etc.) — log them so the cause is visible in Vercel function logs even
+    // though the HTTP layer says 200.
+    if (json && (json as { ok?: boolean }).ok === false) {
+      const errMsg = (json as { error?: string }).error;
+      if (errMsg === "Forbidden") {
+        console.error(
+          "[sheets] Apps Script returned Forbidden — the SHARED_SECRET in " +
+            "your deployed Apps Script does not match GSHEET_SHARED_SECRET. " +
+            "Did you redeploy the Apps Script after editing? " +
+            "(Deploy → Manage deployments → New version)",
+        );
+      } else {
+        console.warn("[sheets] Apps Script returned ok=false:", errMsg);
+      }
+    }
+
+    return json;
   } catch (err) {
-    console.error("[sheets] Network error:", err);
+    console.error("[sheets] Network error reaching Apps Script:", err);
     return { ok: false, error: String(err) };
   }
 }

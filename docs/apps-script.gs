@@ -22,8 +22,12 @@ const SHARED_SECRET = "PASTE_RANDOM_SECRET_HERE";
 // Below this line: no edits needed for normal use.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const INDIVIDUAL_TAB = "individual";
-const STARTUP_TAB = "startup";
+// Sheet tab names. Must match exactly what the Next.js client sends in
+// `payload.tab`. If you rename your tabs in the Sheet, update both this
+// constant and lib/sheets/client.ts SheetTab.
+const INDIVIDUAL_TAB = "youth-summit-individual";
+const STARTUP_TAB = "youth-summit-startup";
+const ADVISOR_LETTER_TAB = "youth-summit-advisor_letter";
 const ADVISOR_TOKEN_COL = "advisorToken";
 
 function doPost(e) {
@@ -52,8 +56,9 @@ function doPost(e) {
 
 function handleWriteRow(payload) {
   const tab = String(payload.tab || "");
-  if (![INDIVIDUAL_TAB, STARTUP_TAB, "advisor_letter"].indexOf(tab) === -1) {
-    // (typo guard — fall through and let getSheetByName fail below)
+  const allowed = [INDIVIDUAL_TAB, STARTUP_TAB, ADVISOR_LETTER_TAB];
+  if (allowed.indexOf(tab) === -1) {
+    return jsonResponse({ ok: false, error: "Unknown tab: " + tab });
   }
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();

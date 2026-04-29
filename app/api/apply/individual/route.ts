@@ -62,7 +62,7 @@ export async function POST(req: Request) {
 
   // Side effect 1 — Google Sheet row
   const sheetPromise = writeSheetRow({
-    tab: "individual",
+    tab: "youth-summit-individual",
     row: {
       submittedAt: new Date().toISOString(),
       applicationId,
