@@ -35,6 +35,70 @@ function getLogoUrl(): string {
   return `${base.replace(/\/$/, "")}/genseasummit-logo.png`;
 }
 
+/**
+ * Sign-off block at the bottom of every email body.
+ *
+ * If EMAIL_SIGNATURE_NAME is set, renders a personal signature card
+ * (name + title + org, optional photo + LinkedIn). Otherwise falls back
+ * to the generic "— The Gen SEA Summit team" line.
+ *
+ * Configured entirely via env vars — see .env.example.
+ */
+function signOff(): { html: string; text: string } {
+  const name = process.env.EMAIL_SIGNATURE_NAME?.trim();
+  const title = process.env.EMAIL_SIGNATURE_TITLE?.trim();
+  const org = process.env.EMAIL_SIGNATURE_ORG?.trim();
+  const photoUrl = process.env.EMAIL_SIGNATURE_PHOTO_URL?.trim();
+  const linkedinUrl = process.env.EMAIL_SIGNATURE_LINKEDIN?.trim();
+
+  if (!name) {
+    return {
+      html: `<p style="margin:24px 0 0;color:rgba(15,27,61,0.7);">— The Gen SEA Summit team</p>`,
+      text: `— The Gen SEA Summit team`,
+    };
+  }
+
+  const subtitle = [title, org].filter(Boolean).join(" · ");
+  const subtitleText = [title, org].filter(Boolean).join(", ");
+  const linkedinLabel = linkedinUrl?.replace(/^https?:\/\//, "");
+
+  // Plain-text version
+  const textLines = [`— ${name}`];
+  if (subtitleText) textLines.push(subtitleText);
+  if (linkedinUrl) textLines.push(linkedinUrl);
+  const text = textLines.join("\n");
+
+  // HTML version — table layout for max email-client compatibility
+  const html = `
+    <table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:32px;border-top:1px solid rgba(15,27,61,0.1);padding-top:20px;">
+      <tr>
+        ${
+          photoUrl
+            ? `<td style="vertical-align:top;padding-right:16px;width:64px;">
+                <img src="${photoUrl}" alt="${name}" width="56" height="56" style="border-radius:50%;display:block;border:0;outline:0;">
+              </td>`
+            : ""
+        }
+        <td style="vertical-align:top;font-size:14px;line-height:1.5;">
+          <strong style="color:#0F1B3D;font-size:15px;">${name}</strong>
+          ${
+            subtitle
+              ? `<br><span style="color:rgba(15,27,61,0.7);">${subtitle}</span>`
+              : ""
+          }
+          ${
+            linkedinUrl
+              ? `<br><a href="${linkedinUrl}" style="color:#D9603C;text-decoration:none;">${linkedinLabel}</a>`
+              : ""
+          }
+        </td>
+      </tr>
+    </table>
+  `.trim();
+
+  return { html, text };
+}
+
 // Wrap a body in the same shell across all messages — keeps branding consistent.
 function shell(opts: { preheader: string; body: string }): string {
   const logoUrl = getLogoUrl();
@@ -85,6 +149,7 @@ export function individualConfirmationEmail(args: {
   advisorEmail: string;
 }) {
   const subject = `You're in the Bootcamp — ${PROGRAM_NAME}`;
+  const sig = signOff();
 
   const text = `Hi ${args.applicantName},
 
@@ -102,7 +167,7 @@ We've also emailed your advisor (${args.advisorEmail}) a private link to upload 
 
 Save the dates: ${SUMMIT_DATES} in ${SUMMIT_LOCATION}.
 
-— The Gen SEA Summit team`;
+${sig.text}`;
 
   const html = shell({
     preheader: "Your bootcamp access is inside.",
@@ -122,7 +187,7 @@ Save the dates: ${SUMMIT_DATES} in ${SUMMIT_LOCATION}.
       </p>
 
       <p style="margin:0 0 8px;">Save the dates: <strong>${SUMMIT_DATES}</strong> in ${SUMMIT_LOCATION}.</p>
-      <p style="margin:24px 0 0;color:rgba(15,27,61,0.7);">— The Gen SEA Summit team</p>
+      ${sig.html}
     `,
   });
 
@@ -140,6 +205,7 @@ export function advisorRequestEmail(args: {
   deadline: string;
 }) {
   const subject = `Recommendation request — ${args.applicantName} (${PROGRAM_NAME})`;
+  const sig = signOff();
 
   const text = `Dear ${args.advisorName},
 
@@ -154,7 +220,7 @@ Deadline: ${args.deadline}
 If you weren't expecting this or don't recognise the applicant, please disregard this email — no action will be taken.
 
 Thank you,
-The Gen SEA Summit team`;
+${sig.text}`;
 
   const html = shell({
     preheader: `${args.applicantName} has named you as their referee. Please submit a letter by ${args.deadline}.`,
@@ -174,7 +240,7 @@ The Gen SEA Summit team`;
       </p>
 
       <p style="margin:24px 0 0;font-size:13px;color:rgba(15,27,61,0.7);">If you weren't expecting this or don't recognise the applicant, please disregard this email — no action will be taken.</p>
-      <p style="margin:8px 0 0;color:rgba(15,27,61,0.7);">— The Gen SEA Summit team</p>
+      ${sig.html}
     `,
   });
 
@@ -190,6 +256,7 @@ export function advisorLetterReceivedEmail(args: {
   applicantName: string;
 }) {
   const subject = `Letter received — ${args.applicantName} (${PROGRAM_NAME})`;
+  const sig = signOff();
 
   const text = `Dear ${args.advisorName},
 
@@ -197,7 +264,7 @@ Thank you for submitting a letter of recommendation for ${args.applicantName}.
 
 Your letter has been received and shared with the program selection team. No further action is needed.
 
-— The Gen SEA Summit team`;
+${sig.text}`;
 
   const html = shell({
     preheader: "Your recommendation letter has been received.",
@@ -205,7 +272,7 @@ Your letter has been received and shared with the program selection team. No fur
       <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3;font-weight:700;color:#0F1B3D;">Dear ${args.advisorName},</h1>
       <p style="margin:0 0 16px;">Thank you for submitting a letter of recommendation for <strong>${args.applicantName}</strong>.</p>
       <p style="margin:0 0 16px;">Your letter has been received and shared with the program selection team. No further action is needed.</p>
-      <p style="margin:24px 0 0;color:rgba(15,27,61,0.7);">— The Gen SEA Summit team</p>
+      ${sig.html}
     `,
   });
 
@@ -223,6 +290,7 @@ export function startupConfirmationEmail(args: {
   teamFlowUrl: string;
 }) {
   const subject = `${args.ventureName} is in the Bootcamp — ${PROGRAM_NAME}`;
+  const sig = signOff();
 
   const text = `Hi ${args.founderName},
 
@@ -239,7 +307,7 @@ Two things to do now:
 Pre-summit prep: 9–13 June 2026 (online).
 Summit: ${SUMMIT_DATES} in ${SUMMIT_LOCATION}.
 
-— The Gen SEA Summit team`;
+${sig.text}`;
 
   const html = shell({
     preheader: "Your bootcamp access for Gen SEA Ventures 33.",
@@ -260,7 +328,7 @@ Summit: ${SUMMIT_DATES} in ${SUMMIT_LOCATION}.
         Summit: ${SUMMIT_DATES} in ${SUMMIT_LOCATION}
       </p>
 
-      <p style="margin:24px 0 0;color:rgba(15,27,61,0.7);">— The Gen SEA Summit team</p>
+      ${sig.html}
     `,
   });
 
