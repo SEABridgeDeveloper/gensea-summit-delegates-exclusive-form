@@ -57,16 +57,16 @@ export function Field({
   return (
     <div>
       <div className="mb-1.5 flex items-center justify-between gap-3">
-        <label htmlFor={id} className="text-sm font-medium text-navy">
+        <label htmlFor={id} className="text-sm font-medium text-bone">
           {label}
           {required && (
-            <span className="ml-0.5 text-brand-red" aria-hidden="true">
+            <span className="ml-0.5 text-sunset-400" aria-hidden="true">
               *
             </span>
           )}
           {required && <span className="sr-only"> (required)</span>}
         </label>
-        {hint && <span className="text-xs font-normal text-navy/70">{hint}</span>}
+        {hint && <span className="text-xs font-normal text-bone-subtle">{hint}</span>}
       </div>
       {injectedChildren}
       {error && <FormError error={{ message: error }} />}
@@ -92,7 +92,7 @@ export function FormFooter({
   helper?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col-reverse gap-4 border-t border-navy/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col-reverse gap-4 border-t border-bone-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-3">
         {onBack && backLabel ? (
           <button
@@ -105,7 +105,7 @@ export function FormFooter({
             {backLabel}
           </button>
         ) : null}
-        {helper && <span className="text-xs text-navy/70">{helper}</span>}
+        {helper && <span className="text-xs text-bone-subtle">{helper}</span>}
       </div>
       <button
         type="submit"
@@ -155,7 +155,7 @@ export function YesNo<T extends FieldValues>({
       <legend className="field-label">
         {label}
         {required && (
-          <span className="ml-0.5 text-brand-red" aria-hidden="true">
+          <span className="ml-0.5 text-sunset-400" aria-hidden="true">
             *
           </span>
         )}
@@ -174,7 +174,7 @@ export function YesNo<T extends FieldValues>({
               <label
                 key={String(v)}
                 data-checked={field.value === v ? "true" : undefined}
-                className="flex cursor-pointer items-center gap-3 rounded-xl border border-navy/20 bg-white px-4 py-3 transition has-[:checked]:border-coral-500 has-[:checked]:bg-coral-500/5 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-coral-500 has-[:focus-visible]:ring-offset-2"
+                className="flex cursor-pointer items-center gap-3 rounded-xl border border-bone-hairline bg-ink-elevated px-4 py-3 transition has-[:checked]:border-sunset-500 has-[:checked]:bg-sunset-500/10 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-sunset-500 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-ink"
               >
                 <input
                   type="radio"
@@ -182,9 +182,9 @@ export function YesNo<T extends FieldValues>({
                   checked={field.value === v}
                   onChange={() => field.onChange(v)}
                   onBlur={field.onBlur}
-                  className="h-4 w-4 accent-coral-500"
+                  className="h-4 w-4 accent-sunset-500"
                 />
-                <span className="text-sm text-navy">{l}</span>
+                <span className="text-sm text-bone">{l}</span>
               </label>
             ))}
           </div>
@@ -209,17 +209,17 @@ export function ConsentCheckbox<T extends FieldValues>({
   register: UseFormRegister<T>;
 }) {
   return (
-    <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-navy/20 bg-white p-4 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-coral-500 has-[:focus-visible]:ring-offset-2">
+    <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-bone-hairline bg-ink-elevated p-4 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-sunset-500 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-ink">
       <input
         type="checkbox"
         aria-required={required}
         {...register(name)}
-        className="mt-1 h-4 w-4 flex-shrink-0 rounded accent-coral-500"
+        className="mt-1 h-4 w-4 flex-shrink-0 rounded accent-sunset-500"
       />
       <div className="flex-1">
-        <p className="text-sm leading-relaxed text-navy">
+        <p className="text-sm leading-relaxed text-bone">
           {required && (
-            <span className="mr-1 font-semibold text-brand-red" aria-hidden="true">
+            <span className="mr-1 font-semibold text-sunset-400" aria-hidden="true">
               *
             </span>
           )}
