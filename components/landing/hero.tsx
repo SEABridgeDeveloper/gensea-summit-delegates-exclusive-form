@@ -12,6 +12,10 @@ export function Hero() {
   return (
     // Full-viewport hero. `min-h-[100dvh]` uses dynamic viewport units so
     // mobile browsers don't include the address bar in the calculation.
+    //
+    // The /public/hero-poster.png source is large (~1.9 MB), but Next/Image
+    // serves WebP/AVIF variants to browsers automatically — user-facing
+    // bytes are already optimized. Repo size only.
     <section className="surface-poster relative isolate flex min-h-[100dvh] flex-col overflow-hidden">
       {/* Hero artwork already carries the diagonal triangle + sunset temple
           composition baked in, so it spans the full section. A subtle
@@ -19,26 +23,27 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         <Image
           src="/hero-poster.png"
-          alt=""
-          aria-hidden="true"
+          alt={t("hero.imageAlt")}
           fill
           priority
           sizes="100vw"
           className="object-cover object-right"
         />
         <div
+          aria-hidden="true"
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(90deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.78) 22%, rgba(10,10,10,0.45) 42%, rgba(10,10,10,0.15) 62%, rgba(10,10,10,0) 80%)",
+              "linear-gradient(90deg, rgb(10 10 10 / 0.92) 0%, rgb(10 10 10 / 0.78) 22%, rgb(10 10 10 / 0.45) 42%, rgb(10 10 10 / 0.15) 62%, rgb(10 10 10 / 0) 80%)",
           }}
         />
         {/* Mobile: lift the bottom so headline stays readable over the artwork */}
         <div
+          aria-hidden="true"
           className="absolute inset-0 lg:hidden"
           style={{
             background:
-              "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 50%, rgba(10,10,10,0.85) 100%)",
+              "linear-gradient(180deg, rgb(10 10 10 / 0.55) 0%, rgb(10 10 10 / 0.35) 50%, rgb(10 10 10 / 0.85) 100%)",
           }}
         />
       </div>
@@ -68,15 +73,15 @@ export function Hero() {
           style={{ animationDelay: "120ms" }}
         >
           <h1 className="font-display font-extrabold leading-[0.95] tracking-tight">
-            <span className="gradient-text-brand block text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
+            <span className="gradient-text-brand block text-display-xl">
               {t("hero.headlineLine1")}
             </span>
-            <span className="mt-3 block text-2xl text-cream-50/95 md:text-2xl xl:text-4xl">
+            <span className="mt-3 block text-2xl text-bone md:text-2xl xl:text-4xl">
               {t("hero.headlineLine2")}
             </span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-cream-50/85 sm:text-lg">
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-bone-muted sm:text-lg">
             {t("hero.subhead")}
           </p>
         </div>
@@ -87,7 +92,7 @@ export function Hero() {
         >
           <Link
             href="#tracks"
-            className="group inline-flex items-center gap-3 rounded-full bg-sunset-600 px-7 py-4 text-base font-semibold text-cream-50 shadow-ember transition hover:bg-sunset-700 hover:-translate-y-0.5 active:translate-y-0 sm:text-lg"
+            className="group inline-flex items-center gap-3 rounded-full bg-sunset-600 px-7 py-4 text-base font-semibold text-bone shadow-ember transition hover:bg-sunset-700 hover:-translate-y-0.5 active:translate-y-0 sm:text-lg"
           >
             {t("hero.cta.label")}
             <ArrowRight
@@ -98,18 +103,15 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll cue — bottom-centered, gently pulsing chevron. Decorative,
-          so it's hidden from assistive tech. Reduced-motion users get a
-          static chevron via the global media query. */}
+      {/* Scroll cue — bottom-centered, gently pulsing chevron. Reduced-motion
+          users get a static chevron via the global media query. */}
       <Link
         href="#tracks"
         aria-label="Scroll to application tracks"
-        className="group relative z-10 mb-6 mt-2 flex items-center justify-center self-center rounded-full text-cream-50/55 transition hover:text-sunset-400 sm:mb-8"
+        className="group relative z-10 mb-6 mt-2 flex items-center justify-center self-center rounded-full text-bone-subtle transition hover:text-sunset-400 sm:mb-8"
       >
         <span className="flex flex-col items-center gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.32em]">
-            Scroll
-          </span>
+          <span className="text-metadata">Scroll</span>
           <ChevronDown
             className="h-5 w-5 animate-scroll-cue"
             strokeWidth={2.5}
@@ -119,7 +121,7 @@ export function Hero() {
       </Link>
 
       {/* Gradient ribbon strip — the signature element from the bottom of the
-          poster. Solid sunset gradient flush against the section edge. */}
+          poster. */}
       <div className="h-2 bg-brand-gradient" aria-hidden="true" />
     </section>
   );
