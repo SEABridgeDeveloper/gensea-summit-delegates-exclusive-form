@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-const phoneRegex = /^\+?[\d\s\-()]{7,20}$/;
+// Strict E.164: leading "+", country code + national digits, 7–15 digits
+// total. The PhoneInput component always produces output in this shape.
+const phoneRegex = /^\+\d{7,15}$/;
 
 // CV upload is optional — only validate type/size when a file is provided.
 const optionalFileSchema = z

@@ -12,6 +12,7 @@ import {
 } from "@/lib/schemas/individual";
 import { BrandMark } from "@/components/shared/brand-mark";
 import { Field } from "@/components/apply/form-primitives";
+import { PhoneInput } from "@/components/apply/phone-input";
 import { UniversityCombobox } from "@/components/apply/university-combobox";
 import { DraftIndicator, type DraftState } from "@/components/apply/draft-indicator";
 import { getFacultiesFor } from "@/lib/data/faculties";
@@ -240,18 +241,21 @@ export default function IndividualApplyPage() {
                 />
               </Field>
             </div>
-            <div className="max-w-sm">
-              <Field label="Phone" required error={errors.phone?.message}>
-                <input
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  className="field-input"
-                  placeholder="+66 81 234 5678"
-                  {...register("phone")}
-                />
-              </Field>
-            </div>
+            <Field label="Phone" required error={errors.phone?.message}>
+              <Controller
+                control={control}
+                name="phone"
+                render={({ field }) => (
+                  <PhoneInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    invalid={!!errors.phone}
+                    placeholder="81 234 5678"
+                  />
+                )}
+              />
+            </Field>
             <Field
               label="LinkedIn"
               hint="Optional"

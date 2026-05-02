@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, ArrowRight, Loader2, Upload } from "lucide-react";
 import {
@@ -13,6 +13,7 @@ import {
 } from "@/lib/schemas/startup";
 import { BrandMark } from "@/components/shared/brand-mark";
 import { Field } from "@/components/apply/form-primitives";
+import { PhoneInput } from "@/components/apply/phone-input";
 import { DraftIndicator, type DraftState } from "@/components/apply/draft-indicator";
 
 const DRAFT_KEY = "gen-sea-startup-draft-v4";
@@ -60,6 +61,7 @@ export default function StartupApplyPage() {
 
   const {
     register,
+    control,
     watch,
     setValue,
     handleSubmit,
@@ -306,13 +308,18 @@ export default function StartupApplyPage() {
                 />
               </Field>
               <Field label="Founder phone" required error={errors.founderPhone?.message}>
-                <input
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  className="field-input"
-                  placeholder="+66 81 234 5678"
-                  {...register("founderPhone")}
+                <Controller
+                  control={control}
+                  name="founderPhone"
+                  render={({ field }) => (
+                    <PhoneInput
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      invalid={!!errors.founderPhone}
+                      placeholder="81 234 5678"
+                    />
+                  )}
                 />
               </Field>
             </div>
