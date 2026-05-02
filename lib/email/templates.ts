@@ -67,65 +67,99 @@ function getLogoUrl(): string {
 /**
  * Sign-off block at the bottom of every email body.
  *
- * If EMAIL_SIGNATURE_NAME is set, renders a personal signature card
- * (name + title + org, optional photo + LinkedIn). Otherwise falls back
- * to the generic "— The Gen SEA Summit team" line.
+ * Pattern matches the corporate Gmail signature provided by the team:
  *
- * Configured entirely via env vars — see .env.example.
+ *     Yours sincerely,
+ *     Mr. Kananate Watewitee
+ *     Head of Business Partnerships  ·  SEA Bridge Team
+ *
+ * If EMAIL_SIGNATURE_NAME is set, renders that pattern with the
+ * configured name/title/org. Otherwise falls back to a generic team
+ * sign-off (still using the salutation + name pattern).
+ *
+ * Localization hook: `isThai` is wired up but always false today —
+ * the project doesn't ship a Thai dictionary. When it does, pass the
+ * locale through and the salutation switches to "ด้วยความนับถือ".
+ *
+ * Env vars used:
+ *   EMAIL_SIGNATURE_NAME   — e.g. "Mr. Kananate Watewitee"
+ *   EMAIL_SIGNATURE_TITLE  — e.g. "Head of Business Partnerships"
+ *   EMAIL_SIGNATURE_ORG    — e.g. "SEA Bridge Team"
  */
-function signOff(): { html: string; text: string } {
+function signOff(opts: { isThai?: boolean } = {}): { html: string; text: string } {
   const name = process.env.EMAIL_SIGNATURE_NAME?.trim();
   const title = process.env.EMAIL_SIGNATURE_TITLE?.trim();
   const org = process.env.EMAIL_SIGNATURE_ORG?.trim();
-  const photoUrl = process.env.EMAIL_SIGNATURE_PHOTO_URL?.trim();
-  const linkedinUrl = process.env.EMAIL_SIGNATURE_LINKEDIN?.trim();
+  const isThai = opts.isThai ?? false;
+  const salutation = isThai ? "ด้วยความนับถือ" : "Yours sincerely,";
 
-  if (!name) {
-    return {
-      html: `<p style="margin:24px 0 0;color:${BRAND.navyMuted};">— The Gen SEA Summit team</p>`,
-      text: `— The Gen SEA Summit team`,
-    };
-  }
-
+  // Resolved fallbacks so an unconfigured project still renders cleanly.
+  const displayName = name || "The Gen SEA Summit team";
   const subtitle = [title, org].filter(Boolean).join(" · ");
   const subtitleText = [title, org].filter(Boolean).join(", ");
-  const linkedinLabel = linkedinUrl?.replace(/^https?:\/\//, "");
 
-  // Plain-text version
-  const textLines = [`— ${name}`];
-  if (subtitleText) textLines.push(subtitleText);
-  if (linkedinUrl) textLines.push(linkedinUrl);
-  const text = textLines.join("\n");
-
-  // HTML version — table layout for max email-client compatibility
   const html = `
-    <table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:32px;border-top:1px solid ${BRAND.navyHairline};padding-top:20px;">
-      <tr>
-        ${
-          photoUrl
-            ? `<td style="vertical-align:top;padding-right:16px;width:64px;">
-                <img src="${photoUrl}" alt="${name}" width="56" height="56" style="border-radius:50%;display:block;border:0;outline:0;">
-              </td>`
-            : ""
-        }
-        <td style="vertical-align:top;font-size:14px;line-height:1.5;">
-          <strong style="color:${BRAND.navy};font-size:15px;">${name}</strong>
-          ${
-            subtitle
-              ? `<br><span style="color:${BRAND.navyMuted};">${subtitle}</span>`
-              : ""
-          }
-          ${
-            linkedinUrl
-              ? `<br><a href="${linkedinUrl}" style="color:${BRAND.coralAccent};text-decoration:none;">${linkedinLabel}</a>`
-              : ""
-          }
-        </td>
-      </tr>
-    </table>
+    <p style="margin:24px 0 2px;font-size:14px;color:${BRAND.navyMuted};">${salutation}</p>
+    <p style="margin:0;font-size:14px;font-weight:700;color:${BRAND.navy};">${displayName}</p>
+    ${
+      subtitle
+        ? `<p style="margin:2px 0 16px;font-size:13px;color:${BRAND.navyMuted};">${subtitle}</p>`
+        : `<p style="margin:0 0 16px;"></p>`
+    }
   `.trim();
 
-  return { html, text };
+  const textLines = [salutation, displayName];
+  if (subtitleText) textLines.push(subtitleText);
+  return { html, text: textLines.join("\n") };
+}
+
+/**
+ * Corporate footer block — sits at the bottom of every email card.
+ *
+ * Renders the SEA Bridge / Really Corp. contact card the team uses in
+ * Gmail, with the contact details sourced from env vars (so the same
+ * code can serve a different signer without redeploying).
+ *
+ * Env vars used (with sensible defaults):
+ *   EMAIL_SENDER_WEBSITE       — default "https://seabridge.space"
+ *   EMAIL_SENDER_CONTACT       — default "team@seabridge.space"
+ *   EMAIL_SENDER_PHONE         — default "(+66) 919946459"
+ *   EMAIL_SENDER_CHANNELS_URL  — default "https://www.openlink.co/seabridge"
+ *   EMAIL_SENDER_COMPANY       — default "SEA Bridge"
+ *   EMAIL_SENDER_PARENT        — default "Really Corp."
+ *
+ * Link color is kept as Gmail's standard blue (#1a73e8) — using sunset
+ * orange here would blend with regular text and hurt link affordance.
+ */
+function corporateFooter(): string {
+  const websiteUrl = (process.env.EMAIL_SENDER_WEBSITE ?? "https://seabridge.space").trim();
+  const senderEmail = (process.env.EMAIL_SENDER_CONTACT ?? "team@seabridge.space").trim();
+  const phone = (process.env.EMAIL_SENDER_PHONE ?? "(+66) 919946459").trim();
+  const channelsUrl = (
+    process.env.EMAIL_SENDER_CHANNELS_URL ?? "https://www.openlink.co/seabridge"
+  ).trim();
+  const company = (process.env.EMAIL_SENDER_COMPANY ?? "SEA Bridge").trim();
+  const parent = (process.env.EMAIL_SENDER_PARENT ?? "Really Corp.").trim();
+  const websiteLabel = websiteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+  return `
+    <div style="background:#ffffff;padding:24px 28px;border-top:1px solid ${BRAND.navyHairline};">
+      <p style="margin:0 0 4px;font-size:12px;color:${BRAND.navy};">
+        <strong style="color:${BRAND.red};">${company}</strong> &nbsp;|&nbsp; ${parent}
+      </p>
+      <p style="margin:0 0 4px;font-size:12px;color:${BRAND.navy};">
+        <strong>Web:</strong> <a href="${websiteUrl}" style="color:#1a73e8;text-decoration:none;">${websiteLabel}</a>
+        &nbsp;|&nbsp; <strong>Email:</strong> <a href="mailto:${senderEmail}" style="color:#1a73e8;text-decoration:none;">${senderEmail}</a>
+      </p>
+      <p style="margin:0 0 4px;font-size:12px;color:${BRAND.navy};"><strong>Tel:</strong> ${phone}</p>
+      <p style="margin:0 0 12px;font-size:12px;color:${BRAND.navy};">
+        <strong>${company} Channels:</strong> <a href="${channelsUrl}" style="color:#1a73e8;text-decoration:none;">${channelsUrl}</a>
+      </p>
+      <p style="margin:0;font-size:11px;color:${BRAND.navyMuted};font-style:italic;">
+        If you didn't expect this email, just ignore it — no action needed.
+      </p>
+    </div>
+  `.trim();
 }
 
 // Wrap a body in the same shell across all messages — keeps branding consistent.
@@ -155,10 +189,12 @@ function shell(opts: { preheader: string; body: string }): string {
               </td>
             </tr>
             <tr>
-              <td style="padding:24px 40px;background:${BRAND.creamSoft};border-top:1px solid ${BRAND.navyHairline};font-size:12px;color:${BRAND.navyMuted};">
-                ${PROGRAM_NAME} · ${SUMMIT_DATES} · ${SUMMIT_LOCATION}<br>
-                If you didn't expect this email, just ignore it — no action needed.
+              <td style="padding:16px 40px;background:${BRAND.creamSoft};border-top:1px solid ${BRAND.navyHairline};font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;color:${BRAND.coralAccent};">
+                ${PROGRAM_NAME} · ${SUMMIT_DATES} · ${SUMMIT_LOCATION}
               </td>
+            </tr>
+            <tr>
+              <td style="padding:0;">${corporateFooter()}</td>
             </tr>
             <tr>
               <td style="height:4px;background:${BRAND.gradient};line-height:4px;font-size:0;">&nbsp;</td>
