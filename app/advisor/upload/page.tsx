@@ -9,8 +9,8 @@ export default function AdvisorUploadPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex min-h-screen items-center justify-center bg-cream-50">
-          <span className="text-sm text-navy/70">Loading…</span>
+        <div className="flex min-h-screen items-center justify-center bg-ink">
+          <span className="text-sm text-bone-muted">Loading…</span>
         </div>
       }
     >

@@ -74,10 +74,6 @@ export function AdvisorUploadView() {
     };
   }, [token]);
 
-  // Map the raw error string from the API to a recipient-friendly message.
-  // The raw error is still in server logs for debugging.
-  // (Defined inline so it shares the component's copy tone.)
-
   const onFileChange = (f: File | undefined) => {
     setFileError(undefined);
     if (!f) {
@@ -128,8 +124,8 @@ export function AdvisorUploadView() {
   };
 
   return (
-    <div className="min-h-screen bg-cream-50">
-      <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream-50/90 backdrop-blur">
+    <div className="min-h-screen bg-ink">
+      <header className="sticky top-0 z-40 border-b border-bone-hairline bg-ink/90 backdrop-blur">
         <div className="container-page flex items-center justify-between py-4">
           <Link href="/" aria-label="Gen SEA Summit home">
             <BrandMark />
@@ -139,10 +135,8 @@ export function AdvisorUploadView() {
 
       <main id="main" className="container-page max-w-2xl pb-24 pt-10 sm:pt-16">
         <div className="mb-8">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-coral-700">
-            Gen SEA Summit 2026
-          </span>
-          <h1 className="mt-2 font-display text-3xl font-bold text-navy sm:text-4xl">
+          <span className="eyebrow">Gen SEA Summit 2026</span>
+          <h1 className="mt-2 font-display text-3xl font-bold text-bone sm:text-4xl">
             Recommendation letter
           </h1>
         </div>
@@ -175,26 +169,29 @@ export function AdvisorUploadView() {
 
 function LoadingCard() {
   return (
-    <div className="rounded-3xl border border-navy/10 bg-white p-8 text-center shadow-soft">
-      <Loader2 className="mx-auto h-6 w-6 animate-spin text-coral-700" aria-hidden="true" />
-      <p className="mt-3 text-sm text-navy/75">Looking up the applicant…</p>
+    <div className="rounded-3xl border border-sunset-500/20 bg-ink-elevated p-8 text-center shadow-ink">
+      <Loader2 className="mx-auto h-6 w-6 animate-spin text-sunset-400" aria-hidden="true" />
+      <p className="mt-3 text-sm text-bone-muted">Looking up the applicant…</p>
     </div>
   );
 }
 
 function ErrorCard({ message }: { message: string }) {
   return (
-    <div className="rounded-3xl border border-brand-red/30 bg-brand-red/5 p-8 shadow-soft">
-      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-red/10 text-brand-red">
+    <div className="rounded-3xl border border-sunset-500/40 bg-sunset-500/10 p-8 shadow-ink">
+      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sunset-500/15 text-sunset-400 ring-1 ring-sunset-500/40">
         <CircleAlert className="h-5 w-5" aria-hidden="true" />
       </span>
-      <h2 className="mt-4 font-display text-xl font-bold text-navy">
+      <h2 className="mt-4 font-display text-xl font-bold text-bone">
         We couldn&apos;t open this link
       </h2>
-      <p className="mt-2 text-sm text-navy/85">{message}</p>
-      <p className="mt-4 text-sm text-navy/75">
+      <p className="mt-2 text-sm text-bone-muted">{message}</p>
+      <p className="mt-4 text-sm text-bone-subtle">
         Need help? Email{" "}
-        <a href="mailto:team@seabridge.space" className="font-semibold text-brand-red hover:underline">
+        <a
+          href="mailto:team@seabridge.space"
+          className="font-semibold text-sunset-400 hover:text-sunset-300"
+        >
           team@seabridge.space
         </a>
         .
@@ -231,76 +228,72 @@ function FormCard(props: {
     <form
       noValidate
       onSubmit={onSubmit}
-      className="space-y-8 rounded-3xl border border-navy/10 bg-white p-6 shadow-soft sm:p-10"
+      className="space-y-8 rounded-3xl border border-sunset-500/20 bg-ink-elevated p-6 shadow-ink sm:p-10"
     >
       {/* Applicant context */}
       <section>
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-navy/70">
-          Recommendation for
-        </span>
-        <p className="mt-1 font-display text-2xl font-bold text-navy sm:text-3xl">
+        <span className="eyebrow">Recommendation for</span>
+        <p className="mt-1 font-display text-2xl font-bold text-bone sm:text-3xl">
           {context.applicantName}
         </p>
         {(context.university || context.faculty) && (
-          <p className="mt-1 text-sm text-navy/75">
+          <p className="mt-1 text-sm text-bone-muted">
             {[context.faculty, context.university].filter(Boolean).join(" · ")}
           </p>
         )}
         {context.status === "submitted" && (
-          <div className="mt-4 rounded-xl border border-coral-500/30 bg-coral-500/10 p-3 text-sm text-navy/85">
+          <div className="mt-4 rounded-xl border border-sunset-500/40 bg-sunset-500/10 p-3 text-sm text-bone-muted">
             A letter was already submitted for this applicant. You can replace it by uploading a
             new one below.
           </div>
         )}
-        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-3 py-1 text-xs font-semibold text-navy">
+        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-sunset-500/40 bg-sunset-500/10 px-3 py-1 text-xs font-semibold text-sunset-400">
           Deadline: {context.deadline}
         </div>
       </section>
 
       {/* Guidance */}
-      <section className="rounded-2xl border border-navy/10 bg-cream-100/60 p-5">
-        <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-navy/70">
-          What to include
-        </h2>
-        <ul className="mt-3 space-y-2 text-sm text-navy/85">
+      <section className="rounded-2xl border border-bone-hairline bg-ink-subtle/40 p-5">
+        <h2 className="eyebrow">What to include</h2>
+        <ul className="mt-3 space-y-2 text-sm text-bone-muted">
           <li className="flex gap-2">
-            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-coral-500" aria-hidden="true" />
+            <span
+              className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-sunset-500"
+              aria-hidden="true"
+            />
             <span>Your role and how you know the applicant.</span>
           </li>
           <li className="flex gap-2">
-            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-coral-500" aria-hidden="true" />
+            <span
+              className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-sunset-500"
+              aria-hidden="true"
+            />
             <span>
               Specific examples of leadership, initiative, or impact you&apos;ve seen first-hand.
             </span>
           </li>
           <li className="flex gap-2">
-            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-coral-500" aria-hidden="true" />
-            <span>Why this applicant would benefit the room and contribute to ASEAN&apos;s next decade.</span>
+            <span
+              className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-sunset-500"
+              aria-hidden="true"
+            />
+            <span>
+              Why this applicant would benefit the room and contribute to ASEAN&apos;s next decade.
+            </span>
           </li>
         </ul>
-        <p className="mt-3 text-xs text-navy/70">
+        <p className="mt-3 text-xs text-bone-subtle">
           One page is plenty. Submit as a PDF — max 5MB.
         </p>
       </section>
 
       {/* Upload */}
-      <Field
-        label="Recommendation letter (PDF)"
-        required
-        error={fileError}
-      >
-        <FileInput
-          accept="application/pdf"
-          file={letter}
-          onChange={onFileChange}
-        />
+      <Field label="Recommendation letter (PDF)" required error={fileError}>
+        <FileInput accept="application/pdf" file={letter} onChange={onFileChange} />
       </Field>
 
       {/* Optional note */}
-      <Field
-        label="Brief note to the program team"
-        hint="Optional"
-      >
+      <Field label="Brief note to the program team" hint="Optional">
         <textarea
           rows={4}
           className="field-input resize-y"
@@ -314,14 +307,14 @@ function FormCard(props: {
         <p
           role="alert"
           aria-live="polite"
-          className="rounded-xl border border-brand-red/30 bg-brand-red/5 p-4 text-sm text-brand-red"
+          className="rounded-xl border border-sunset-500/40 bg-sunset-500/10 p-4 text-sm text-sunset-400"
         >
           {errorMessage}
         </p>
       )}
 
-      <div className="flex flex-col-reverse gap-4 border-t border-navy/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-        <span className="text-xs text-navy/70">
+      <div className="flex flex-col-reverse gap-4 border-t border-bone-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <span className="text-xs text-bone-subtle">
           We&apos;ll email you a confirmation once it&apos;s in.
         </span>
         <button
@@ -348,19 +341,19 @@ function FormCard(props: {
 
 function SuccessCard({ applicantName }: { applicantName: string }) {
   return (
-    <div className="rounded-3xl border border-navy/10 bg-white p-8 shadow-soft">
-      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-coral-500/15 text-coral-700">
+    <div className="rounded-3xl border border-sunset-500/20 bg-ink-elevated p-8 shadow-ink">
+      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sunset-500/15 text-sunset-400 ring-1 ring-sunset-500/40">
         <Check className="h-6 w-6" strokeWidth={2.4} aria-hidden="true" />
       </span>
-      <h2 className="mt-4 font-display text-2xl font-bold text-navy sm:text-3xl">
+      <h2 className="mt-4 font-display text-2xl font-bold text-bone sm:text-3xl">
         Letter received.
       </h2>
-      <p className="mt-2 text-base text-navy/85">
+      <p className="mt-2 text-base text-bone-muted">
         Thank you for taking the time to recommend{" "}
-        <strong className="text-navy">{applicantName}</strong>. We&apos;ve shared your letter with
+        <strong className="text-bone">{applicantName}</strong>. We&apos;ve shared your letter with
         the program selection team. A confirmation email is on its way.
       </p>
-      <p className="mt-4 text-sm text-navy/70">You can close this page now.</p>
+      <p className="mt-4 text-sm text-bone-subtle">You can close this page now.</p>
     </div>
   );
 }
@@ -393,19 +386,19 @@ function FileInput({
   onChange: (file: File | undefined) => void;
 }) {
   return (
-    <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-navy/30 bg-cream-100/50 px-4 py-3 transition hover:border-navy/50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-coral-500 has-[:focus-visible]:ring-offset-2">
-      <span className="flex items-center gap-3 text-sm text-navy/85">
+    <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-bone-hairline bg-ink-subtle/50 px-4 py-3 transition hover:border-sunset-500/50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-sunset-500 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-ink">
+      <span className="flex items-center gap-3 text-sm text-bone-muted">
         <Upload className="h-4 w-4" aria-hidden="true" />
         {file ? (
-          <span className="text-navy">
+          <span className="text-bone">
             {file.name}{" "}
-            <span className="text-navy/70">({Math.round(file.size / 1024)} KB)</span>
+            <span className="text-bone-subtle">({Math.round(file.size / 1024)} KB)</span>
           </span>
         ) : (
           <span>Click to upload PDF</span>
         )}
       </span>
-      <span className="text-xs font-semibold text-coral-700">
+      <span className="text-xs font-semibold text-sunset-400">
         {file ? "Replace" : "Browse"}
       </span>
       <input
