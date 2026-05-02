@@ -1,5 +1,13 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Landing-tree tokens. The redesign in `docs/landing-redesign-plan.md`
+ * adds a `bone` text ramp + `display-*` type scale + ink role-names.
+ * Legacy tokens (cream, navy, brand.*, ink.{600..950}) are kept in place
+ * here because the /apply/* form pages still use them; landing components
+ * are migrating onto the new ramp commit by commit. A final cleanup pass
+ * will delete anything proven unreachable from the landing tree.
+ */
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
@@ -9,6 +17,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // ── Forms surface (kept for /apply/*; do NOT use on landing) ─
         cream: {
           50: "#FFFAF1",
           100: "#FBF1E1",
@@ -23,8 +32,15 @@ const config: Config = {
           700: "#1F2C52",
           900: "#0A1330",
         },
+
+        // ── Surfaces (dark continuum) ───────────────────────────────
+        // `ink` keeps the legacy 600..950 numeric stops for now so the
+        // mid-migration commits keep rendering. New code uses the
+        // role-named slots (DEFAULT, elevated, subtle).
         ink: {
-          DEFAULT: "#0A0A0A",
+          DEFAULT: "#0A0A0A",  // canonical poster-black (= ink.900)
+          elevated: "#16171A", // card / panel surface (= ink.800)
+          subtle: "#1F2024",   // hover / pressed surface (= ink.700)
           950: "#050505",
           900: "#0A0A0A",
           850: "#101010",
@@ -32,6 +48,8 @@ const config: Config = {
           700: "#1F2024",
           600: "#2A2C31",
         },
+
+        // ── Brand sunset (only orange ramp on the landing) ──────────
         sunset: {
           50: "#FFF3EA",
           100: "#FFE3CE",
@@ -44,6 +62,20 @@ const config: Config = {
           800: "#9A2616",
           900: "#6B1B10",
         },
+
+        // ── Text on dark (canonical ramp, role-named) ───────────────
+        // Replaces ad-hoc cream-50/{10..95} on the landing. The legacy
+        // cream-50/<n> classes still render (cream stays in the palette
+        // above) — landing components migrate onto these names.
+        bone: {
+          DEFAULT: "#FFFAF1",
+          muted: "rgb(255 250 241 / 0.78)",
+          subtle: "rgb(255 250 241 / 0.55)",
+          hairline: "rgb(255 250 241 / 0.10)",
+        },
+
+        // Legacy palettes — kept until the cleanup commit confirms no
+        // landing component or /apply/* page references them.
         coral: {
           50: "#FFF1EA",
           100: "#FFE0CF",
@@ -68,31 +100,53 @@ const config: Config = {
           glow: "#FFD08A",
         },
       },
+
       backgroundImage: {
-        // Poster-matched ribbon: deep ember → flame → sunset → amber.
         "brand-gradient":
           "linear-gradient(90deg, #C8341E 0%, #E54A0F 28%, #FF6B1A 58%, #FF8A3D 82%, #FFB347 100%)",
         "brand-gradient-soft":
           "linear-gradient(135deg, rgba(200,52,30,0.10) 0%, rgba(255,107,26,0.10) 55%, rgba(255,179,71,0.12) 100%)",
         "brand-gradient-vertical":
           "linear-gradient(180deg, #C8341E 0%, #FF5722 50%, #FF8A3D 100%)",
+        "ink-spotlight":
+          "radial-gradient(ellipse 65% 70% at 85% 25%, rgb(255 138 61 / 0.35) 0%, rgb(255 87 34 / 0.18) 25%, rgb(10 10 10 / 0) 65%)",
         "ink-radial":
           "radial-gradient(ellipse 80% 60% at 30% 30%, rgba(255,107,26,0.18) 0%, rgba(255,87,34,0.06) 35%, rgba(10,10,10,0) 70%)",
-        "ink-spotlight":
-          "radial-gradient(ellipse 65% 70% at 85% 25%, rgba(255,138,61,0.35) 0%, rgba(255,87,34,0.18) 25%, rgba(10,10,10,0) 65%)",
       },
+
       fontFamily: {
         sans: ["var(--font-geist-sans)", "var(--font-thai)", "system-ui", "sans-serif"],
         thai: ["var(--font-thai)", "var(--font-geist-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-geist-sans)", "var(--font-thai)", "system-ui", "sans-serif"],
       },
-      boxShadow: {
-        soft: "0 12px 40px -16px rgba(15, 27, 61, 0.18)",
-        elevated: "0 20px 50px -24px rgba(15, 27, 61, 0.28)",
-        glow: "0 0 0 6px rgba(255, 107, 26, 0.22)",
-        ember: "0 18px 50px -18px rgba(255, 87, 34, 0.55)",
-        ink: "0 24px 60px -20px rgba(0, 0, 0, 0.65)",
+
+      fontSize: {
+        // Modular display scale. Letter-spacing baked in. Replaces
+        // ad-hoc text-[5.5rem] + the tracking-[0.16em..0.32em] grid.
+        eyebrow: ["0.75rem", { lineHeight: "1", letterSpacing: "0.22em", fontWeight: "600" }],
+        metadata: ["0.625rem", { lineHeight: "1", letterSpacing: "0.32em", fontWeight: "600" }],
+        "display-sm": [
+          "clamp(2.25rem, 4vw, 3rem)",
+          { lineHeight: "1.05", letterSpacing: "-0.01em", fontWeight: "700" },
+        ],
+        display: [
+          "clamp(2.75rem, 6vw, 4.5rem)",
+          { lineHeight: "1", letterSpacing: "-0.015em", fontWeight: "800" },
+        ],
+        "display-xl": [
+          "clamp(3.5rem, 9vw, 5.5rem)",
+          { lineHeight: "0.95", letterSpacing: "-0.02em", fontWeight: "800" },
+        ],
       },
+
+      boxShadow: {
+        soft: "0 12px 40px -16px rgb(15 27 61 / 0.18)",
+        elevated: "0 20px 50px -24px rgb(15 27 61 / 0.28)",
+        glow: "0 0 0 6px rgb(255 107 26 / 0.22)",
+        ember: "0 18px 50px -18px rgb(255 87 34 / 0.55)",
+        ink: "0 24px 60px -20px rgb(0 0 0 / 0.65)",
+      },
+
       keyframes: {
         "fade-up": {
           "0%": { opacity: "0", transform: "translateY(12px)" },
@@ -102,8 +156,6 @@ const config: Config = {
           "0%, 100%": { opacity: "0.65" },
           "50%": { opacity: "1" },
         },
-        // Soft scroll cue: chevron drifts down + fades, then resets.
-        // Slow + subtle so it doesn't pull focus from the hero.
         "scroll-cue": {
           "0%, 100%": { opacity: "0.55", transform: "translateY(0)" },
           "50%": { opacity: "1", transform: "translateY(6px)" },
