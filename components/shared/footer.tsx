@@ -24,13 +24,14 @@ export function Footer() {
           <Link href="/" aria-label="Gen SEA Summit home">
             <BrandMark />
           </Link>
-          <p className="mt-4 max-w-md text-sm text-cream-50/75">{t("footer.tagline")}</p>
+          <p className="mt-4 max-w-md text-sm text-bone-muted">{t("footer.tagline")}</p>
         </div>
 
         <div>
-          <h2 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-sunset-400">
-            Connect
-          </h2>
+          {/* h2 → h3: was a sibling of the FinalCta + Hero h2/h1, breaking
+              the heading hierarchy. "Connect" is a sub-heading of the
+              footer block, not a top-level page section. */}
+          <h3 className="eyebrow mb-4">Connect</h3>
           <ul className="flex items-center gap-4">
             {SOCIAL_LINKS.map(({ name, href, Icon }) => (
               <li key={name}>
@@ -39,7 +40,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${name} (opens in new tab)`}
-                  className="text-cream-50/85 transition-colors hover:text-sunset-400"
+                  className="text-bone-muted transition-colors hover:text-sunset-400"
                 >
                   <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
                 </a>
@@ -48,15 +49,15 @@ export function Footer() {
           </ul>
           <a
             href={`mailto:${EMAIL}`}
-            className="mt-4 inline-flex items-center gap-2 text-sm text-cream-50/85 transition-colors hover:text-sunset-400"
+            className="mt-4 inline-flex items-center gap-2 text-sm text-bone-muted transition-colors hover:text-sunset-400"
           >
             <Mail className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
             {EMAIL}
           </a>
         </div>
       </div>
-      <div className="border-t border-cream-50/10">
-        <div className="container-page flex flex-col gap-2 py-5 text-xs text-cream-50/60 md:flex-row md:items-center md:justify-between">
+      <div className="border-t border-bone-hairline">
+        <div className="container-page flex flex-col gap-2 py-5 text-xs text-bone-subtle md:flex-row md:items-center md:justify-between">
           <span>{t("footer.rights")}</span>
           <span>Khon Kaen · {t("brand.year")}</span>
         </div>
