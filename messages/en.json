@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "1967 — Win Your Seat",
-    "description": "50 students. One room. ASEAN's next decade starts here. Apply for the 1967 fellowship in Khon Kaen."
+    "title": "Gen SEA Summit 2026 — Apply",
+    "description": "Three days in Khon Kaen. 350+ founders, investors, and ministers from 10+ countries. Apply as a delegate or submit a venture for Gen SEA Summit 2026."
   },
   "nav": {
     "apply": "Apply",
@@ -12,7 +12,7 @@
     "skipToContent": "Skip to content"
   },
   "brand": {
-    "name": "1967",
+    "name": "Gen SEA Summit 2026",
     "year": "2026",
     "tagline": "Building Amidst Chaos"
   },
@@ -43,8 +43,8 @@
     },
     "badgeTop": "Join a group with",
     "badgeBottom": "Your University",
-    "headlineLine1": "Gen SEA Summit",
-    "headlineLine2": "Youth Delegation Application",
+    "headlineLine1": "Building Amidst Chaos.",
+    "headlineLine2": "What are you making?",
     "subhead": "Three days. 350+ founders, investors, and ministers from 10+ countries. Apply as an individual or as a startup — both tracks open below.",
     "pathDelegate": {
       "kicker": "For Students",
@@ -63,7 +63,7 @@
       "deadline": "Nomination deadline: 23 May 2026"
     },
     "cta": {
-      "label": "Choose your track"
+      "label": "See your track"
     }
   },
   "common": {
@@ -93,7 +93,7 @@
   },
   "apply": {
     "header": {
-      "title": "Apply for 1967",
+      "title": "Apply for Gen SEA Summit 2026",
       "subtitle": "Five steps. About 25 minutes. You can come back to finish later — answers stay in this browser.",
       "back": "Back to home"
     },
@@ -267,8 +267,8 @@
       },
       "consents": {
         "heading": "Consent",
-        "pdpa": "I consent to 1967 processing my personal data under Thailand's PDPA for the purpose of this application. (Required)",
-        "photo": "I consent to being photographed and filmed during the program for use in 1967's communications. (Optional)",
+        "pdpa": "I consent to Gen SEA Summit processing my personal data under Thailand's PDPA for the purpose of this application. (Required)",
+        "photo": "I consent to being photographed and filmed during the program for use in Gen SEA Summit's communications. (Optional)",
         "truthful": "I confirm that everything I have submitted is true and complete to the best of my knowledge. (Required)"
       }
     },
@@ -457,13 +457,95 @@
   },
   "theme": {
     "kicker": "The 2026 theme",
-    "heading": "Gen SEA Summit",
-    "body": "Climate, conflict, capital flight, AI displacement — the next ten years will not be patient with anyone who waits for permission. 1967 brings together the under-30s already building inside the storm: founders, organisers, researchers, artists, civil servants. Three days. Five sectors. One question — what will you have built before you turn thirty?",
+    "heading": "Building Amidst Chaos.",
+    "body": "Climate, conflict, capital flight, AI displacement — the next ten years will not be patient with anyone who waits for permission. Gen SEA Summit brings together the under-30s already building inside the storm: founders, organisers, researchers, artists, civil servants. Three days. Five sectors. One question — what will you have built before you turn thirty?",
     "pull": "We're not looking for the most polished applicants. We're looking for the ones already moving.",
     "sponsor": {
       "kicker": "Partners & Sponsors",
       "body": "Help us make this happen. We're partnering with organizations who believe in ASEAN's next generation of builders.",
       "cta": "Become a sponsor"
+    }
+  },
+  "tracks": {
+    "switchPrompt": "Looking for the other track?",
+    "switchToIndividual": "Switch to Delegate",
+    "switchToStartup": "Switch to Venture",
+    "individual": {
+      "eyebrow": "Apply as a Delegate",
+      "heading": "Be one of 50.",
+      "subhead": "For students and recent graduates, ages 18–30, motivated to understand how ventures are built and scaled in ASEAN — whether or not they have a startup of their own.",
+      "tag": "No startup required.",
+      "cta": "Start your delegate application",
+      "benefitsKicker": "What you get",
+      "benefitsTitle": "The full Summit, fully covered.",
+      "benefits": [
+        "Ticket to 3 days at Gen SEA Summit 2026, Khon Kaen",
+        "Room with 350+ founders, investors, and ministers from 10+ countries",
+        "Gen SEA Bootcamp — USD 1,500 standalone value, included",
+        "Scholarships up to 100% of the USD 300 Delegate Pass",
+        "Fast-track to SEA Bridge Fellowships and partner internships",
+        "Khon Kaen during Isan Creative Festival 2026"
+      ],
+      "stepsKicker": "How to win your seat",
+      "stepsTitle": "Three steps. No tricks.",
+      "steps": [
+        { "n": "01", "body": "Apply directly, or be nominated by your university (up to 10 ranked) or faculty (up to 5 ranked)." },
+        { "n": "02", "body": "Complete the Gen SEA Bootcamp." },
+        { "n": "03", "body": "Top 50 selected on Bootcamp Capstone + application strength." }
+      ],
+      "stepsNote": "Nomination prioritizes your application — it does not guarantee selection.",
+      "timelineKicker": "Timeline",
+      "timelineTitle": "Mark the dates",
+      "timeline": [
+        { "date": "28 Apr", "label": "Applications & nominations open. Bootcamp begins immediately." },
+        { "date": "15 May", "label": "Application & nomination deadline." },
+        { "date": "16 May – 5 Jun", "label": "Gen SEA Bootcamp." },
+        { "date": "6 Jun", "label": "Bootcamp Capstone submission due." },
+        { "date": "7 Jun", "label": "50 Delegates announced." },
+        { "date": "16–18 Jul", "label": "Gen SEA Summit 2026, Khon Kaen." }
+      ]
+    },
+    "startup": {
+      "eyebrow": "Apply as a Venture",
+      "heading": "Join the 33.",
+      "subhead": "For youth-led early-stage ventures where at least one founder is aged 18–30 and graduated within 5 years.",
+      "tag": "Building in Wellness, Food, AI, Creative, or Education — across Thailand, ASEAN, or internationally entering ASEAN.",
+      "cta": "Submit your venture",
+      "benefitsKicker": "What you get · Total package USD 9,000+",
+      "benefitsTitle": "The full Summit, fully covered.",
+      "benefits": [
+        "Featured in the Gen SEA Summit 2026 Venture Catalogue (part of ASEAN Youth White Paper distribution)",
+        "Venture deep-dive brief — market sizing, ASEAN expansion mapping, partner-matching analysis (USD 6,000 value)",
+        "Gen SEA Bootcamp (USD 1,500 standalone value, included)",
+        "Accommodation for 1 founder, 2 nights (covered by KKU APDS)",
+        "Day 2 closed-door access — TED Fund, NIA, regional VCs, corporate venture arms",
+        "Public recognition at Gen SEA Summit Gala, 17 July evening"
+      ],
+      "benefitsFootnote": "Notable ventures selected by the organizing committee are offered a live demo slot on the Summit's main stage.",
+      "stepsKicker": "How to apply",
+      "stepsTitle": "Three steps to the cohort.",
+      "steps": [
+        { "n": "01", "body": "Apply directly, or be nominated by your incubation center, science park, or university entrepreneurship program." },
+        { "n": "02", "body": "Submit your venture overview, sector, and (recommended) a 2-minute video pitch." },
+        { "n": "03", "body": "33 ventures selected based on founder commitment, problem clarity, ASEAN relevance, and cohort diversity." }
+      ],
+      "stepsNote": "For Thai ventures: TED Fund and NIA portfolio ventures are strongly encouraged to apply through the standard pathway.",
+      "timelineKicker": "Timeline",
+      "timelineTitle": "Mark the dates",
+      "timeline": [
+        { "date": "28 Apr", "label": "Open call and institutional nominations open." },
+        { "date": "23 May", "label": "Application and nomination deadline." },
+        { "date": "2 Jun", "label": "Gen SEA Ventures 33 cohort publicly announced." },
+        { "date": "9–13 Jun", "label": "Pre-summit virtual preparation session (online)." },
+        { "date": "14 Jul", "label": "Final venture brief submitted for Catalogue." },
+        { "date": "17 Jul", "label": "Live demo slots and Gala recognition, Day 1." }
+      ]
+    },
+    "toggle": {
+      "eyebrow": "Choose your application path",
+      "individual": "Delegate Applicant",
+      "startup": "Venture Applicant",
+      "groupLabel": "Application track"
     }
   },
   "sectors": {
@@ -591,14 +673,14 @@
       },
       {
         "date": "Jul 16–18",
-        "label": "1967 in Khon Kaen"
+        "label": "Gen SEA Summit in Khon Kaen"
       }
     ]
   },
   "finalCta": {
     "heading": "The room is small. The window is open.",
-    "body": "Individual applications close 15 May. Startup applications close 23 May.",
-    "cta": "Choose your track"
+    "body": "Delegate applications close 15 May. Venture applications close 23 May.",
+    "cta": "Open the application"
   },
   "footer": {
     "tagline": "Gen SEA Summit 2026 — Building amidst chaos.",
