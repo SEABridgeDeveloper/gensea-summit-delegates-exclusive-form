@@ -270,7 +270,7 @@ ${sig.text}`;
         <a href="${args.uploadUrl}" style="display:inline-block;background:${BRAND.red};color:${BRAND.cream};padding:14px 28px;border-radius:9999px;font-weight:600;text-decoration:none;">Submit recommendation letter</a>
       </p>
 
-      <p style="margin:0 0 16px;padding:16px;background:${BRAND.goldTint};border-left:4px solid ${BRAND.gold};border-radius:8px;">
+      <p style="margin:0 0 16px;padding:16px;background:${BRAND.sunsetTint};border-left:4px solid ${BRAND.sunset};border-radius:8px;">
         <strong>Deadline:</strong> ${args.deadline}
       </p>
 
