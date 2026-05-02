@@ -16,17 +16,19 @@ const EMAIL = "team@seabridge.space";
 export function Footer() {
   const { t } = useLocale();
   return (
-    <footer className="border-t border-navy/10 bg-cream-100">
+    <footer className="surface-poster relative">
+      {/* Top gradient seam ties the footer into the dark continuum. */}
+      <div className="gradient-strip" aria-hidden="true" />
       <div className="container-page flex flex-col gap-10 py-14 md:flex-row md:items-start md:justify-between md:gap-12">
         <div>
           <Link href="/" aria-label="Gen SEA Summit home">
             <BrandMark />
           </Link>
-          <p className="mt-4 max-w-md text-sm text-navy/75">{t("footer.tagline")}</p>
+          <p className="mt-4 max-w-md text-sm text-cream-50/75">{t("footer.tagline")}</p>
         </div>
 
         <div>
-          <h2 className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy/65">
+          <h2 className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-sunset-400">
             Connect
           </h2>
           <ul className="flex items-center gap-4">
@@ -37,7 +39,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${name} (opens in new tab)`}
-                  className="text-navy transition-colors hover:text-coral-700"
+                  className="text-cream-50/85 transition-colors hover:text-sunset-400"
                 >
                   <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
                 </a>
@@ -46,15 +48,15 @@ export function Footer() {
           </ul>
           <a
             href={`mailto:${EMAIL}`}
-            className="mt-4 inline-flex items-center gap-2 text-sm text-navy transition-colors hover:text-coral-700"
+            className="mt-4 inline-flex items-center gap-2 text-sm text-cream-50/85 transition-colors hover:text-sunset-400"
           >
             <Mail className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
             {EMAIL}
           </a>
         </div>
       </div>
-      <div className="border-t border-navy/10">
-        <div className="container-page flex flex-col gap-2 py-5 text-xs text-navy/70 md:flex-row md:items-center md:justify-between">
+      <div className="border-t border-cream-50/10">
+        <div className="container-page flex flex-col gap-2 py-5 text-xs text-cream-50/60 md:flex-row md:items-center md:justify-between">
           <span>{t("footer.rights")}</span>
           <span>Khon Kaen · {t("brand.year")}</span>
         </div>

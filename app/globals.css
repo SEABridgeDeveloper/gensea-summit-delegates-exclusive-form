@@ -18,7 +18,7 @@
   }
 
   ::selection {
-    @apply bg-coral-500/30 text-navy;
+    @apply bg-sunset-500/30 text-navy;
   }
 
   /* Reduce motion */
@@ -33,9 +33,9 @@
     }
   }
 
-  /* Surface-agnostic focus ring: use outline so it works on cream / white / navy backgrounds. */
+  /* Surface-agnostic focus ring tuned to the poster's sunset orange. */
   :focus-visible {
-    outline: 2px solid theme("colors.coral.500");
+    outline: 2px solid theme("colors.sunset.500");
     outline-offset: 2px;
     border-radius: 0.25rem;
   }
@@ -48,7 +48,7 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-red px-7 py-3.5 text-base font-semibold text-cream-50 shadow-soft transition hover:bg-brand-redDark active:translate-y-[1px];
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-sunset-600 px-7 py-3.5 text-base font-semibold text-cream-50 shadow-soft transition hover:bg-sunset-700 hover:shadow-ember active:translate-y-[1px];
   }
 
   .btn-secondary {
@@ -60,7 +60,7 @@
   }
 
   .btn-inverse {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-cream-50 px-7 py-3.5 text-base font-semibold text-brand-red transition hover:bg-cream-100 active:translate-y-[1px];
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-cream-50 px-7 py-3.5 text-base font-semibold text-sunset-700 transition hover:bg-cream-100 hover:text-sunset-800 active:translate-y-[1px];
   }
 
   .btn-ghost {
@@ -76,7 +76,7 @@
   }
 
   .field-input {
-    @apply w-full rounded-xl border border-navy/20 bg-white px-4 py-3 text-base text-navy placeholder:text-navy/55 transition focus:border-coral-500 focus:outline-none focus:ring-2 focus:ring-coral-500/30 disabled:cursor-not-allowed disabled:bg-cream-100;
+    @apply w-full rounded-xl border border-navy/20 bg-white px-4 py-3 text-base text-navy placeholder:text-navy/55 transition focus:border-sunset-500 focus:outline-none focus:ring-2 focus:ring-sunset-500/30 disabled:cursor-not-allowed disabled:bg-cream-100;
   }
 
   .field-error {
@@ -88,19 +88,44 @@
   }
 
   .icon-halo {
-    @apply inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-coral-500/15 text-coral-600;
+    @apply inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sunset-50 text-sunset-700;
   }
 
   .icon-halo-lg {
-    @apply inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-coral-500/15 text-coral-600;
+    @apply inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-sunset-50 text-sunset-700;
   }
 
   .card-soft {
     @apply rounded-2xl border border-navy/10 bg-white p-6 shadow-soft;
   }
 
+  /*
+   * Single source of truth for the brand gradient text treatment.
+   * Used by hero headline + theme heading. Falls back to solid CanvasText
+   * under forced-colors so the text remains legible.
+   */
+  .gradient-text-brand {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
+  }
+
+  /* Poster-style dark surface. Mirrors the GEN SEA Summit deck:
+   * black ink base + sunset radial spotlight + faint gradient seam.
+   */
+  .surface-poster {
+    background-color: theme("colors.ink.900");
+    background-image: theme("backgroundImage.ink-spotlight");
+    color: theme("colors.cream.50");
+  }
+
+  /* Thin gradient strip — the orange ribbon that anchors the bottom of the
+   * poster. Used as a section seam accent. */
+  .gradient-strip {
+    @apply h-1.5 w-full bg-brand-gradient;
+  }
+
   /* Forced-colors / Windows High-Contrast fallback for gradient text. */
   @media (forced-colors: active) {
+    .gradient-text-brand,
     .gradient-text {
       background: none !important;
       color: CanvasText !important;

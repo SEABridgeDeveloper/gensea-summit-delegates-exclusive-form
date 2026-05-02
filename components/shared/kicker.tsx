@@ -26,44 +26,39 @@ export function Kicker({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] backdrop-blur",
+        "inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] backdrop-blur",
+        // Both variants now lean into the poster's sunset palette so the
+        // pill reads cleanly on the dark hero and on light sections.
         isExclusive
-          ? "border-brand-red/40 bg-brand-red/10"
-          : "border-navy/20 bg-white/80",
+          ? "border-sunset-500/50 bg-sunset-500/15 text-sunset-100"
+          : "border-sunset-500/40 bg-cream-50/10 text-cream-50",
         className,
       )}
     >
       {renderIcon ? (
         <Lock
-          className={cn(
-            "h-3 w-3",
-            isExclusive ? "text-brand-red" : "text-navy/75",
-          )}
+          className="h-3 w-3 text-sunset-500"
           strokeWidth={2.5}
           aria-hidden="true"
         />
       ) : (
         <span
-          className={cn(
-            "h-1.5 w-1.5 rounded-full",
-            isExclusive ? "bg-brand-red" : "bg-coral-600",
-          )}
+          className="h-1.5 w-1.5 rounded-full bg-sunset-500 shadow-[0_0_10px_rgba(255,107,26,0.8)]"
           aria-hidden="true"
         />
       )}
 
-      <span className={isExclusive ? "text-brand-red" : "text-navy/85"}>{primary}</span>
+      <span className="text-sunset-400">{primary}</span>
 
       {secondary && (
         <>
           <span
-            className={cn(
-              "h-1 w-1 rounded-full",
-              isExclusive ? "bg-brand-red/40" : "bg-navy/40",
-            )}
+            className="h-1 w-1 rounded-full bg-sunset-500/50"
             aria-hidden="true"
           />
-          <span className="text-navy/85">{secondary}</span>
+          <span className={isExclusive ? "text-sunset-100" : "text-cream-50/90"}>
+            {secondary}
+          </span>
         </>
       )}
     </div>

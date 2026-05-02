@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useLocale } from "@/lib/i18n/provider";
 import { Kicker } from "../shared/kicker";
 
@@ -10,89 +10,117 @@ export function Hero() {
   const { t } = useLocale();
 
   return (
-    <section className="relative isolate overflow-hidden bg-cream-50">
-      {/* Right-side hero image — temple skyline at golden hour. Faded on mobile so
-          it doesn't compete with the headline; full opacity from lg up. */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-full opacity-30 lg:w-[52%] lg:opacity-100">
+    // Full-viewport hero. `min-h-[100dvh]` uses dynamic viewport units so
+    // mobile browsers don't include the address bar in the calculation.
+    <section className="surface-poster relative isolate flex min-h-[100dvh] flex-col overflow-hidden">
+      {/* Hero artwork already carries the diagonal triangle + sunset temple
+          composition baked in, so it spans the full section. A subtle
+          ink-fade gutter on the left protects headline contrast. */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
         <Image
-          src="https://images.unsplash.com/photo-1563492065599-3520f775eeed?q=80&w=2574&auto=format&fit=crop"
+          src="/hero-poster.png"
           alt=""
           aria-hidden="true"
           fill
           priority
-          sizes="(max-width: 1024px) 100vw, 52vw"
-          className="object-cover object-center"
+          sizes="100vw"
+          className="object-cover object-right"
         />
-
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(90deg, rgba(250,247,240,1) 0%, rgba(250,247,240,0.92) 28%, rgba(250,247,240,0.55) 48%, rgba(250,247,240,0.15) 68%, rgba(250,247,240,0) 88%)",
+              "linear-gradient(90deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.78) 22%, rgba(10,10,10,0.45) 42%, rgba(10,10,10,0.15) 62%, rgba(10,10,10,0) 80%)",
+          }}
+        />
+        {/* Mobile: lift the bottom so headline stays readable over the artwork */}
+        <div
+          className="absolute inset-0 lg:hidden"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 50%, rgba(10,10,10,0.85) 100%)",
           }}
         />
       </div>
 
-      <div className="container-page relative pb-24 pt-8 sm:pt-12 lg:pb-36 lg:pt-16">
-        <Kicker
-          primary={t("hero.kicker.primary")}
-          secondary={t("hero.kicker.secondary")}
-          variant="default"
-          showIcon={false}
-          className="mb-6"
-        />
+      {/* Soft sunset glow behind the headline */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-32 top-24 -z-10 h-[28rem] w-[28rem] rounded-full bg-sunset-500/25 blur-[140px] animate-ember-pulse"
+      />
 
-        <div className="max-w-3xl">
-          <h1 className="font-display font-extrabold leading-[0.95] tracking-tight ">
-            <span
-              className="gradient-text block text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem]"
-              style={{
-                background:
-                  "linear-gradient(90deg, #C81E2D 0%, #E63946 35%, #F26B3A 70%, #F59E2D 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
+      {/* Vertically-centered content column. Flex-1 absorbs any leftover
+          height so the hero always fills the viewport without leaving a
+          dead band above the scroll cue. */}
+      <div className="container-page relative flex flex-1 flex-col justify-center pb-12 pt-28 sm:pt-32 lg:pt-36">
+        <div className="animate-fade-up">
+          <Kicker
+            primary={t("hero.kicker.primary")}
+            secondary={t("hero.kicker.secondary")}
+            variant="default"
+            showIcon={false}
+            className="mb-6"
+          />
+        </div>
+
+        <div
+          className="max-w-3xl animate-fade-up"
+          style={{ animationDelay: "120ms" }}
+        >
+          <h1 className="font-display font-extrabold leading-[0.95] tracking-tight">
+            <span className="gradient-text-brand block text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
               {t("hero.headlineLine1")}
             </span>
-            <span className="block text-navy mt-2 text-2xl md:text-2xl xl:text-4xl ">{t("hero.headlineLine2")}</span>
+            <span className="mt-3 block text-2xl text-cream-50/95 md:text-2xl xl:text-4xl">
+              {t("hero.headlineLine2")}
+            </span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-navy/85 sm:text-lg">
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-cream-50/85 sm:text-lg">
             {t("hero.subhead")}
           </p>
         </div>
 
-        <div className="mt-8 sm:mt-10">
+        <div
+          className="mt-8 sm:mt-10 animate-fade-up"
+          style={{ animationDelay: "240ms" }}
+        >
           <Link
             href="#tracks"
-            className="inline-flex items-center gap-3 rounded-full bg-brand-red px-7 py-4 text-base font-semibold text-cream-50 shadow-soft transition hover:bg-brand-redDark sm:text-lg"
+            className="group inline-flex items-center gap-3 rounded-full bg-sunset-600 px-7 py-4 text-base font-semibold text-cream-50 shadow-ember transition hover:bg-sunset-700 hover:-translate-y-0.5 active:translate-y-0 sm:text-lg"
           >
             {t("hero.cta.label")}
-            <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            <ArrowRight
+              className="h-5 w-5 transition-transform group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
           </Link>
         </div>
       </div>
 
-      {/* Red ribbon at bottom */}
-      <div className="absolute inset-x-0 bottom-0 h-8 overflow-hidden lg:h-12" aria-hidden="true">
-        <svg
-          viewBox="0 0 1440 80"
-          preserveAspectRatio="none"
-          className="absolute inset-0 h-full w-full"
-        >
-          <path
-            d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,80 L0,80 Z"
-            fill="#E63946"
-            opacity="0.95"
+      {/* Scroll cue — bottom-centered, gently pulsing chevron. Decorative,
+          so it's hidden from assistive tech. Reduced-motion users get a
+          static chevron via the global media query. */}
+      <Link
+        href="#tracks"
+        aria-label="Scroll to application tracks"
+        className="group relative z-10 mb-6 mt-2 flex items-center justify-center self-center rounded-full text-cream-50/55 transition hover:text-sunset-400 sm:mb-8"
+      >
+        <span className="flex flex-col items-center gap-1.5">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.32em]">
+            Scroll
+          </span>
+          <ChevronDown
+            className="h-5 w-5 animate-scroll-cue"
+            strokeWidth={2.5}
+            aria-hidden="true"
           />
-          <path
-            d="M0,50 C240,90 480,10 720,40 C960,70 1200,20 1440,50 L1440,80 L0,80 Z"
-            fill="#C81E2D"
-          />
-        </svg>
-      </div>
+        </span>
+      </Link>
+
+      {/* Gradient ribbon strip — the signature element from the bottom of the
+          poster. Solid sunset gradient flush against the section edge. */}
+      <div className="h-2 bg-brand-gradient" aria-hidden="true" />
     </section>
   );
 }
