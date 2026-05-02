@@ -43,8 +43,8 @@
     },
     "badgeTop": "Join a group with",
     "badgeBottom": "Your University",
-    "headlineLine1": "Building Amidst Chaos.",
-    "headlineLine2": "What are you making?",
+    "headlineLine1": "Gen SEA Summit",
+    "headlineLine2": "Youth Delegation Application",
     "subhead": "Three days. 350+ founders, investors, and ministers from 10+ countries. Apply as an individual or as a startup — both tracks open below.",
     "pathDelegate": {
       "kicker": "For Students",
@@ -63,7 +63,7 @@
       "deadline": "Nomination deadline: 23 May 2026"
     },
     "cta": {
-      "label": "See your track"
+      "label": "Choose your track"
     }
   },
   "common": {
@@ -457,7 +457,7 @@
   },
   "theme": {
     "kicker": "The 2026 theme",
-    "heading": "Building Amidst Chaos.",
+    "heading": "Gen SEA Summit",
     "body": "Climate, conflict, capital flight, AI displacement — the next ten years will not be patient with anyone who waits for permission. Gen SEA Summit brings together the under-30s already building inside the storm: founders, organisers, researchers, artists, civil servants. Three days. Five sectors. One question — what will you have built before you turn thirty?",
     "pull": "We're not looking for the most polished applicants. We're looking for the ones already moving.",
     "sponsor": {
@@ -468,14 +468,14 @@
   },
   "tracks": {
     "switchPrompt": "Looking for the other track?",
-    "switchToIndividual": "Switch to Delegate",
-    "switchToStartup": "Switch to Venture",
+    "switchToIndividual": "Switch to Individual Applicant",
+    "switchToStartup": "Switch to Startup Applicant",
     "individual": {
-      "eyebrow": "Apply as a Delegate",
-      "heading": "Be one of 50.",
+      "eyebrow": "Apply as an Individual",
+      "heading": "Gen SEA Delegates 2026",
       "subhead": "For students and recent graduates, ages 18–30, motivated to understand how ventures are built and scaled in ASEAN — whether or not they have a startup of their own.",
       "tag": "No startup required.",
-      "cta": "Start your delegate application",
+      "cta": "Apply as Individual",
       "benefitsKicker": "What you get",
       "benefitsTitle": "The full Summit, fully covered.",
       "benefits": [
@@ -506,11 +506,11 @@
       ]
     },
     "startup": {
-      "eyebrow": "Apply as a Venture",
-      "heading": "Join the 33.",
+      "eyebrow": "Apply as a Startup",
+      "heading": "Gen SEA Ventures 33",
       "subhead": "For youth-led early-stage ventures where at least one founder is aged 18–30 and graduated within 5 years.",
       "tag": "Building in Wellness, Food, AI, Creative, or Education — across Thailand, ASEAN, or internationally entering ASEAN.",
-      "cta": "Submit your venture",
+      "cta": "Apply as Startup",
       "benefitsKicker": "What you get · Total package USD 9,000+",
       "benefitsTitle": "The full Summit, fully covered.",
       "benefits": [
@@ -543,8 +543,8 @@
     },
     "toggle": {
       "eyebrow": "Choose your application path",
-      "individual": "Delegate Applicant",
-      "startup": "Venture Applicant",
+      "individual": "Individual Applicant",
+      "startup": "Startup Applicant",
       "groupLabel": "Application track"
     }
   },
@@ -679,8 +679,8 @@
   },
   "finalCta": {
     "heading": "The room is small. The window is open.",
-    "body": "Delegate applications close 15 May. Venture applications close 23 May.",
-    "cta": "Open the application"
+    "body": "Individual applications close 15 May. Startup applications close 23 May.",
+    "cta": "Choose your track"
   },
   "footer": {
     "tagline": "Gen SEA Summit 2026 — Building amidst chaos.",
