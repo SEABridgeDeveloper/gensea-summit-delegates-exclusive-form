@@ -3,56 +3,75 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useLocale } from "@/lib/i18n/provider";
-import Image from "next/image";
 import { Reveal } from "@/components/shared/reveal";
 
 const SPONSORSHIP_URL = "https://genseasummit.seabridge.space";
 
+/**
+ * Theme manifesto.
+ *
+ * Surfaces `theme.body` (the Climate-conflict-capital paragraph already
+ * in en.json) and `theme.pull` — a strong pull quote that was prepared
+ * in i18n but never rendered before this redesign. The sponsor link is
+ * demoted to a small footer-style row at the bottom of the section so
+ * its institutional tone doesn't interrupt the manifesto register.
+ */
 export function ThemeSection() {
   const { t } = useLocale();
 
   return (
-    // Poster-style ink section: dark surface, sunset spotlight, gradient seam.
     <section className="surface-poster relative isolate overflow-hidden">
       <div className="gradient-strip" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-32 top-10 -z-10 h-96 w-96 rounded-full bg-sunset-500/20 blur-[120px]"
       />
-      <div className="container-page grid gap-10 py-20 sm:py-28 lg:grid-cols-[1fr_1.4fr] lg:items-start lg:gap-16">
-        <Reveal>
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-sunset-400">
-            {t("theme.kicker")}
-          </span>
-          <h2 className="gradient-text-brand mt-4 font-display text-4xl font-bold sm:text-5xl">
+
+      <div className="container-page py-20 sm:py-28 lg:py-32">
+        <Reveal className="max-w-2xl">
+          <span className="eyebrow">{t("theme.kicker")}</span>
+          <h2 className="gradient-text-brand mt-4 font-display text-display">
             {t("theme.heading")}
           </h2>
-          <Image
-            src="/genseasummit-logo.png"
-            width={400}
-            height={400}
-            alt=""
-            aria-hidden="true"
-            className="mt-8 h-48 w-auto opacity-95 lg:h-64"
-          />
         </Reveal>
 
-        <Reveal delay={120} className="space-y-6">
-          <p className="text-lg text-cream-50/85 sm:text-xl">{t("theme.body")}</p>
+        <Reveal
+          delay={120}
+          className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-[1.1fr_1fr] lg:gap-16"
+        >
+          <p className="max-w-xl text-lg leading-relaxed text-bone-muted sm:text-xl">
+            {t("theme.body")}
+          </p>
 
-          <div className="border-t border-cream-50/15 pt-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sunset-400">
-              {t("theme.sponsor.kicker")}
-            </p>
-            <blockquote className="mt-3 border-l-4 border-sunset-500 pl-5 font-display text-lg text-cream-50">
-              <p className="text-base text-cream-50/85">{t("theme.sponsor.body")}</p>
+          {/* Pull quote — previously unrendered. The poster's voice. */}
+          <figure className="relative pl-6 sm:pl-8">
+            <div
+              aria-hidden="true"
+              className="absolute inset-y-0 left-0 w-1 rounded-full bg-brand-gradient"
+            />
+            <blockquote>
+              <p className="font-display text-2xl leading-snug text-bone sm:text-3xl">
+                {t("theme.pull")}
+              </p>
             </blockquote>
+          </figure>
+        </Reveal>
+
+        {/* Demoted sponsor row — small, footer-style. */}
+        <Reveal delay={200} className="mt-16 border-t border-bone-hairline pt-6 sm:mt-20">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="eyebrow">{t("theme.sponsor.kicker")}</p>
+              <p className="mt-1 max-w-xl text-sm text-bone-muted">
+                {t("theme.sponsor.body")}
+              </p>
+            </div>
             <Link
               href={SPONSORSHIP_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t("theme.sponsor.cta")} (opens in new tab)`}
-              className="group mt-4 inline-flex items-center gap-2 text-base font-semibold text-sunset-400 transition hover:text-sunset-300"
+              className="group inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-sunset-400 transition hover:text-sunset-300 sm:self-auto"
             >
               {t("theme.sponsor.cta")}
               <ArrowUpRight
@@ -63,6 +82,7 @@ export function ThemeSection() {
           </div>
         </Reveal>
       </div>
+
       <div className="gradient-strip" aria-hidden="true" />
     </section>
   );
