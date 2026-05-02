@@ -163,8 +163,8 @@ export default function StartupApplyPage() {
   const errorCount = Object.keys(errors).length;
 
   return (
-    <div className="min-h-screen bg-cream-50">
-      <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream-50/90 backdrop-blur">
+    <div className="min-h-screen bg-ink">
+      <header className="sticky top-0 z-40 border-b border-bone-hairline bg-ink/90 backdrop-blur">
         <div className="container-page flex items-center justify-between py-4">
           <Link href="/" className="inline-flex items-center gap-3" aria-label="Gen SEA Summit home">
             <BrandMark />
@@ -179,14 +179,12 @@ export default function StartupApplyPage() {
       <main id="main" className="container-page max-w-3xl pb-24 pt-10 sm:pt-16">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-red">
-              Apply as a Startup
-            </span>
-            <h1 className="mt-2 font-display text-3xl font-bold text-navy sm:text-4xl">
+            <span className="eyebrow">Apply as a Startup</span>
+            <h1 className="mt-2 font-display text-3xl font-bold text-bone sm:text-4xl">
               Gen SEA Ventures 33
             </h1>
-            <p className="mt-3 max-w-2xl text-base text-navy/75">
-              Application deadline: <strong className="text-navy">{APPLICATION_DEADLINE}</strong>.
+            <p className="mt-3 max-w-2xl text-base text-bone-muted">
+              Application deadline: <strong className="text-bone">{APPLICATION_DEADLINE}</strong>.
               All required fields are below — you can see the full scope before you start. We email
               your bootcamp access immediately on submit.
             </p>
@@ -197,7 +195,7 @@ export default function StartupApplyPage() {
         <form
           noValidate
           onSubmit={handleSubmit(onSubmit, onInvalid)}
-          className="space-y-10 rounded-3xl border border-navy/10 bg-white p-6 shadow-soft sm:p-10"
+          className="space-y-10 rounded-3xl border border-sunset-500/20 bg-ink-elevated p-6 shadow-ink sm:p-10"
         >
           <fieldset className="space-y-5">
             <SectionHeader title="Company info" />
@@ -209,25 +207,23 @@ export default function StartupApplyPage() {
                 {...register("legalName")}
               />
             </Field>
-            
-          
 
             <fieldset>
-              <legend className="mb-1.5 text-sm font-medium text-navy">
+              <legend className="mb-1.5 text-sm font-medium text-bone">
                 Sector
-                <span className="ml-0.5 text-brand-red" aria-hidden="true">*</span>
+                <span className="ml-0.5 text-sunset-400" aria-hidden="true">*</span>
                 <span className="sr-only"> (required)</span>
               </legend>
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {SECTORS.map((s) => (
                   <label
                     key={s}
-                    className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-navy/20 bg-white px-4 py-3 text-sm font-medium text-navy transition has-[:checked]:border-brand-red has-[:checked]:bg-brand-red/5 has-[:checked]:text-brand-red has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-coral-500 has-[:focus-visible]:ring-offset-2"
+                    className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-bone-hairline bg-ink-elevated px-4 py-3 text-sm font-medium text-bone transition has-[:checked]:border-sunset-500 has-[:checked]:bg-sunset-500/10 has-[:checked]:text-sunset-400 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-sunset-500 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-ink"
                   >
                     <input
                       type="radio"
                       value={s}
-                      className="h-4 w-4 accent-brand-red"
+                      className="h-4 w-4 accent-sunset-500"
                       {...register("sector")}
                     />
                     {SECTOR_LABELS[s]}
@@ -311,12 +307,12 @@ export default function StartupApplyPage() {
               />
             </Field>
 
-            <div className="rounded-xl border border-navy/10 bg-cream-100/40 p-5">
-              <p className="text-sm font-semibold text-navy">
+            <div className="rounded-xl border border-bone-hairline bg-ink-subtle/40 p-5">
+              <p className="text-sm font-semibold text-bone">
                 2-minute video pitch{" "}
-                <span className="font-normal text-navy/70">(recommended, not required)</span>
+                <span className="font-normal text-bone-subtle">(recommended, not required)</span>
               </p>
-              <p className="mt-1 text-xs text-navy/70">
+              <p className="mt-1 text-xs text-bone-subtle">
                 Provide a link (YouTube, Loom, Vimeo, Drive) or upload a file.
               </p>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -353,7 +349,7 @@ export default function StartupApplyPage() {
             <p
               role="alert"
               aria-live="polite"
-              className="rounded-xl border border-brand-red/30 bg-brand-red/5 p-4 text-sm text-brand-red"
+              className="rounded-xl border border-sunset-500/40 bg-sunset-500/10 p-4 text-sm text-sunset-400"
             >
               Please fix the {errorCount === 1 ? "highlighted field" : `${errorCount} highlighted fields`} above before submitting.
             </p>
@@ -363,14 +359,14 @@ export default function StartupApplyPage() {
             <p
               role="alert"
               aria-live="polite"
-              className="rounded-xl border border-brand-red/30 bg-brand-red/5 p-4 text-sm text-brand-red"
+              className="rounded-xl border border-sunset-500/40 bg-sunset-500/10 p-4 text-sm text-sunset-400"
             >
               {submitError}
             </p>
           )}
 
-          <div className="flex flex-col-reverse gap-4 border-t border-navy/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <span className="text-xs text-navy/70">
+          <div className="flex flex-col-reverse gap-4 border-t border-bone-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-xs text-bone-subtle">
               Drafts save automatically to this browser.
             </span>
             <button
@@ -400,10 +396,10 @@ export default function StartupApplyPage() {
 function SectionHeader({ title, hint }: { title: string; hint?: string }) {
   return (
     <legend className="block">
-      <span className="block font-display text-2xl font-bold text-navy sm:text-3xl">
+      <span className="block font-display text-2xl font-bold text-bone sm:text-3xl">
         {title}
       </span>
-      {hint && <span className="mt-2 block text-sm text-navy/75">{hint}</span>}
+      {hint && <span className="mt-2 block text-sm text-bone-muted">{hint}</span>}
     </legend>
   );
 }
@@ -420,19 +416,19 @@ function FileInput({
   label?: string;
 }) {
   return (
-    <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-navy/30 bg-cream-100/50 px-4 py-3 transition hover:border-navy/50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-coral-500 has-[:focus-visible]:ring-offset-2">
-      <span className="flex items-center gap-3 text-sm text-navy/75">
+    <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-bone-hairline bg-ink-subtle/50 px-4 py-3 transition hover:border-sunset-500/50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-sunset-500 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-ink">
+      <span className="flex items-center gap-3 text-sm text-bone-muted">
         <Upload className="h-4 w-4" aria-hidden="true" />
         {file ? (
-          <span className="text-navy">
+          <span className="text-bone">
             {file.name}{" "}
-            <span className="text-navy/65">({Math.round(file.size / 1024)} KB)</span>
+            <span className="text-bone-subtle">({Math.round(file.size / 1024)} KB)</span>
           </span>
         ) : (
           <span>{label}</span>
         )}
       </span>
-      <span className="text-xs font-semibold text-coral-700">
+      <span className="text-xs font-semibold text-sunset-400">
         {file ? "Replace" : "Browse"}
       </span>
       <input

@@ -60,7 +60,6 @@ export default function IndividualApplyPage() {
   } = form;
 
   const universityId = watch("university");
-  const cvFile = watch("cv") as File | undefined;
   const faculties = useMemo(() => getFacultiesFor(universityId), [universityId]);
 
   useEffect(() => {
@@ -155,8 +154,8 @@ export default function IndividualApplyPage() {
   const errorCount = Object.keys(errors).length;
 
   return (
-    <div className="min-h-screen bg-cream-50">
-      <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream-50/90 backdrop-blur">
+    <div className="min-h-screen bg-ink">
+      <header className="sticky top-0 z-40 border-b border-bone-hairline bg-ink/90 backdrop-blur">
         <div className="container-page flex items-center justify-between py-4">
           <Link href="/" className="inline-flex items-center gap-3" aria-label="Gen SEA Summit home">
             <BrandMark />
@@ -171,14 +170,12 @@ export default function IndividualApplyPage() {
       <main id="main" className="container-page max-w-3xl pb-24 pt-10 sm:pt-16">
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-coral-600">
-              Apply as an Individual
-            </span>
-            <h1 className="mt-2 font-display text-3xl font-bold text-navy sm:text-4xl">
+            <span className="eyebrow">Apply as an Individual</span>
+            <h1 className="mt-2 font-display text-3xl font-bold text-bone sm:text-4xl">
               Gen SEA Delegates 2026
             </h1>
-            <p className="mt-3 max-w-2xl text-base text-navy/75">
-              Application deadline: <strong className="text-navy">{APPLICATION_DEADLINE}</strong>.
+            <p className="mt-3 max-w-2xl text-base text-bone-muted">
+              Application deadline: <strong className="text-bone">{APPLICATION_DEADLINE}</strong>.
               Once you submit, we&apos;ll send you bootcamp access immediately and email your
               advisor a private upload link for the recommendation letter.
             </p>
@@ -189,7 +186,7 @@ export default function IndividualApplyPage() {
         <form
           noValidate
           onSubmit={handleSubmit(onSubmit, onInvalid)}
-          className="space-y-10 rounded-3xl border border-navy/10 bg-white p-6 shadow-soft sm:p-10"
+          className="space-y-10 rounded-3xl border border-sunset-500/20 bg-ink-elevated p-6 shadow-ink sm:p-10"
         >
           <fieldset className="space-y-5">
             <SectionHeader title="Personal info" />
@@ -333,7 +330,7 @@ export default function IndividualApplyPage() {
             <p
               role="alert"
               aria-live="polite"
-              className="rounded-xl border border-brand-red/30 bg-brand-red/5 p-4 text-sm text-brand-red"
+              className="rounded-xl border border-sunset-500/40 bg-sunset-500/10 p-4 text-sm text-sunset-400"
             >
               Please fix the {errorCount === 1 ? "highlighted field" : `${errorCount} highlighted fields`} above before submitting.
             </p>
@@ -343,14 +340,14 @@ export default function IndividualApplyPage() {
             <p
               role="alert"
               aria-live="polite"
-              className="rounded-xl border border-brand-red/30 bg-brand-red/5 p-4 text-sm text-brand-red"
+              className="rounded-xl border border-sunset-500/40 bg-sunset-500/10 p-4 text-sm text-sunset-400"
             >
               {submitError}
             </p>
           )}
 
-          <div className="flex flex-col-reverse gap-4 border-t border-navy/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <span className="text-xs text-navy/70">
+          <div className="flex flex-col-reverse gap-4 border-t border-bone-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-xs text-bone-subtle">
               Drafts save automatically to this browser.
             </span>
             <button
@@ -380,47 +377,10 @@ export default function IndividualApplyPage() {
 function SectionHeader({ title, hint }: { title: string; hint?: string }) {
   return (
     <legend className="block">
-      <span className="block font-display text-2xl font-bold text-navy sm:text-3xl">
+      <span className="block font-display text-2xl font-bold text-bone sm:text-3xl">
         {title}
       </span>
-      {hint && <span className="mt-2 block text-sm text-navy/75">{hint}</span>}
+      {hint && <span className="mt-2 block text-sm text-bone-muted">{hint}</span>}
     </legend>
-  );
-}
-
-function FileInput({
-  accept,
-  file,
-  onChange,
-  label = "Click to upload PDF",
-}: {
-  accept: string;
-  file?: File;
-  onChange: (file: File | undefined) => void;
-  label?: string;
-}) {
-  return (
-    <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-navy/30 bg-cream-100/50 px-4 py-3 transition hover:border-navy/50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-coral-500 has-[:focus-visible]:ring-offset-2">
-      <span className="flex items-center gap-3 text-sm text-navy/75">
-        <Upload className="h-4 w-4" aria-hidden="true" />
-        {file ? (
-          <span className="text-navy">
-            {file.name}{" "}
-            <span className="text-navy/65">({Math.round(file.size / 1024)} KB)</span>
-          </span>
-        ) : (
-          <span>{label}</span>
-        )}
-      </span>
-      <span className="text-xs font-semibold text-coral-700">
-        {file ? "Replace" : "Browse"}
-      </span>
-      <input
-        type="file"
-        accept={accept}
-        className="sr-only"
-        onChange={(e) => onChange(e.target.files?.[0])}
-      />
-    </label>
   );
 }

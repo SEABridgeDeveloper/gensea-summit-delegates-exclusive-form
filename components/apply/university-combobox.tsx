@@ -121,29 +121,29 @@ export function UniversityCombobox({
         aria-invalid={invalid || undefined}
         className={cn(
           "field-input flex items-center justify-between text-left",
-          invalid && "border-brand-red focus:border-brand-red focus:ring-brand-red/20",
-          !selected && "text-navy/55",
+          invalid && "border-sunset-500 focus:border-sunset-500 focus:ring-sunset-500/30",
+          !selected && "text-bone-subtle",
         )}
       >
         <span className="truncate">
           {selected ? (
             <>
-              <span className="text-navy">{selected.name}</span>
+              <span className="text-bone">{selected.name}</span>
               {selected.country !== "—" && (
-                <span className="ml-2 text-xs text-navy/65">{selected.country}</span>
+                <span className="ml-2 text-xs text-bone-subtle">{selected.country}</span>
               )}
             </>
           ) : (
             placeholder
           )}
         </span>
-        <ChevronDown className="h-4 w-4 shrink-0 text-navy/65" aria-hidden="true" />
+        <ChevronDown className="h-4 w-4 shrink-0 text-bone-subtle" aria-hidden="true" />
       </button>
 
       {open && (
-        <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-navy/15 bg-white shadow-soft">
-          <div className="flex items-center gap-2 border-b border-navy/10 px-3 py-2.5">
-            <Search className="h-4 w-4 text-navy/65" aria-hidden="true" />
+        <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-bone-hairline bg-ink-elevated shadow-ink">
+          <div className="flex items-center gap-2 border-b border-bone-hairline px-3 py-2.5">
+            <Search className="h-4 w-4 text-bone-subtle" aria-hidden="true" />
             <input
               ref={inputRef}
               value={query}
@@ -152,14 +152,14 @@ export function UniversityCombobox({
               placeholder={placeholder}
               aria-controls={listboxId}
               aria-activedescendant={activeOptionId}
-              className="w-full bg-transparent text-sm text-navy placeholder:text-navy/55 focus:outline-none"
+              className="w-full bg-transparent text-sm text-bone placeholder:text-bone-subtle focus:outline-none"
             />
             {query && (
               <button
                 type="button"
                 onClick={() => setQuery("")}
                 aria-label="Clear search"
-                className="text-navy/65 hover:text-navy"
+                className="text-bone-subtle hover:text-bone"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -172,7 +172,7 @@ export function UniversityCombobox({
             className="max-h-[min(18rem,50vh)] overflow-y-auto py-1"
           >
             {results.length === 0 && (
-              <li className="px-4 py-3 text-sm text-navy/70">{emptyLabel}</li>
+              <li className="px-4 py-3 text-sm text-bone-subtle">{emptyLabel}</li>
             )}
             {results.map((u, i) => (
               <li key={u.id}>
@@ -188,19 +188,19 @@ export function UniversityCombobox({
                   onMouseEnter={() => setActiveIndex(i)}
                   className={cn(
                     "flex w-full items-center justify-between px-4 py-2.5 text-left text-sm transition",
-                    i === activeIndex ? "bg-cream-100" : "hover:bg-cream-100",
+                    i === activeIndex ? "bg-ink-subtle" : "hover:bg-ink-subtle",
                     u.id === value && "font-semibold",
                   )}
                 >
-                  <span className="text-navy">{u.name}</span>
+                  <span className="text-bone">{u.name}</span>
                   {u.country !== "—" && (
-                    <span className="ml-3 shrink-0 text-xs text-navy/70">{u.country}</span>
+                    <span className="ml-3 shrink-0 text-xs text-bone-subtle">{u.country}</span>
                   )}
                 </button>
               </li>
             ))}
           </ul>
-          <div className="border-t border-navy/10 px-4 py-2 text-[11px] text-navy/65">
+          <div className="border-t border-bone-hairline px-4 py-2 text-[11px] text-bone-subtle">
             {universities.length}+ ASEAN institutions
           </div>
         </div>
