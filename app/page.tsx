@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Footer } from "@/components/shared/footer";
+import { Header } from "@/components/shared/header";
 import { Hero } from "@/components/landing/hero";
 import { StatsStrip } from "@/components/landing/stats-strip";
 import { ThemeSection } from "@/components/landing/theme-section";
@@ -11,10 +12,8 @@ import { SkipToContent } from "@/components/shared/skip-to-content";
 export default function HomePage() {
   return (
     <>
-      {/* Skip-to-content lives on the page root now that the sticky header
-          is gone. Hidden until focused — keyboard/screen-reader users can
-          still jump past the hero straight into <main>. */}
       <SkipToContent />
+      <Header />
       <main id="main">
         <Hero />
         <StatsStrip />
