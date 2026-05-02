@@ -15,6 +15,22 @@ const PROGRAM_NAME = "Gen SEA Summit 2026";
 const SUMMIT_DATES = "16–18 July 2026";
 const SUMMIT_LOCATION = "Khon Kaen, Thailand";
 
+// Any user-supplied string that lands inside an HTML email body must pass
+// through this — otherwise an applicant can inject phishing CTAs into the
+// staff/advisor notification (the recipient and submitter are different
+// parties). Subjects and the plain-text body are not HTML-rendered and do
+// not need escaping here.
+const HTML_ESCAPE: Record<string, string> = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+};
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (ch) => HTML_ESCAPE[ch]!);
+}
+
 /**
  * Brand palette mirrored from tailwind.config.ts. Email clients (Gmail in
  * particular) strip <style> from <head>, so colors must be inlined. Keeping
@@ -243,7 +259,7 @@ ${sig.text}`;
   const html = shell({
     preheader: "Your bootcamp access is inside.",
     body: `
-      <h1 style="margin:0 0 16px;font-size:24px;line-height:1.2;font-weight:700;color:${BRAND.navy};">Hi ${args.applicantName},</h1>
+      <h1 style="margin:0 0 16px;font-size:24px;line-height:1.2;font-weight:700;color:${BRAND.navy};">Hi ${escapeHtml(args.applicantName)},</h1>
       <p style="margin:0 0 16px;">Your application is in. You're <strong>enrolled in the Gen SEA Bootcamp</strong> — selection for the Top 50 Delegates happens after the Capstone.</p>
 
       <h2 style="margin:32px 0 12px;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:${BRAND.coralAccent};">Two things to do now</h2>
@@ -254,7 +270,7 @@ ${sig.text}`;
       </ol>
 
       <p style="margin:24px 0 16px;padding:16px;background:${BRAND.coralTint};border-left:4px solid ${BRAND.coral};border-radius:8px;">
-        We've also emailed <strong>${args.advisorEmail}</strong> a private link for your recommendation letter. Your advisor has until <strong>${args.advisorLetterDeadline}</strong> to submit it.
+        We've also emailed <strong>${escapeHtml(args.advisorEmail)}</strong> a private link for your recommendation letter. Your advisor has until <strong>${args.advisorLetterDeadline}</strong> to submit it.
       </p>
 
       <p style="margin:0 0 8px;">Save the dates: <strong>${SUMMIT_DATES}</strong> in ${SUMMIT_LOCATION}.</p>
@@ -294,11 +310,11 @@ Thank you,
 ${sig.text}`;
 
   const html = shell({
-    preheader: `${args.applicantName} has named you as their referee. Please submit a letter by ${args.deadline}.`,
+    preheader: `${escapeHtml(args.applicantName)} has named you as their referee. Please submit a letter by ${args.deadline}.`,
     body: `
-      <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3;font-weight:700;color:${BRAND.navy};">Dear ${args.advisorName},</h1>
+      <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3;font-weight:700;color:${BRAND.navy};">Dear ${escapeHtml(args.advisorName)},</h1>
 
-      <p style="margin:0 0 16px;"><strong>${args.applicantName}</strong> has applied to ${PROGRAM_NAME} (Gen SEA Delegates 2026 — Top 50) and has named you as their academic referee.</p>
+      <p style="margin:0 0 16px;"><strong>${escapeHtml(args.applicantName)}</strong> has applied to ${PROGRAM_NAME} (Gen SEA Delegates 2026 — Top 50) and has named you as their academic referee.</p>
 
       <p style="margin:0 0 24px;">Could you submit a brief letter of recommendation through the secure link below? It takes about 5 minutes — you can paste plain text or upload a PDF.</p>
 
@@ -340,8 +356,8 @@ ${sig.text}`;
   const html = shell({
     preheader: "Your recommendation letter has been received.",
     body: `
-      <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3;font-weight:700;color:${BRAND.navy};">Dear ${args.advisorName},</h1>
-      <p style="margin:0 0 16px;">Thank you for submitting a letter of recommendation for <strong>${args.applicantName}</strong>.</p>
+      <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3;font-weight:700;color:${BRAND.navy};">Dear ${escapeHtml(args.advisorName)},</h1>
+      <p style="margin:0 0 16px;">Thank you for submitting a letter of recommendation for <strong>${escapeHtml(args.applicantName)}</strong>.</p>
       <p style="margin:0 0 16px;">Your letter has been received and shared with the program selection team. No further action is needed.</p>
       ${sig.html}
     `,
@@ -383,8 +399,8 @@ ${sig.text}`;
   const html = shell({
     preheader: "Your bootcamp access for Gen SEA Ventures 33.",
     body: `
-      <h1 style="margin:0 0 16px;font-size:24px;line-height:1.2;font-weight:700;color:${BRAND.navy};">Hi ${args.founderName},</h1>
-      <p style="margin:0 0 16px;">Thanks for applying with <strong>${args.ventureName}</strong>. You're <strong>enrolled in the Gen SEA Bootcamp</strong> — the Top 33 cohort is announced <strong>2 June 2026</strong>.</p>
+      <h1 style="margin:0 0 16px;font-size:24px;line-height:1.2;font-weight:700;color:${BRAND.navy};">Hi ${escapeHtml(args.founderName)},</h1>
+      <p style="margin:0 0 16px;">Thanks for applying with <strong>${escapeHtml(args.ventureName)}</strong>. You're <strong>enrolled in the Gen SEA Bootcamp</strong> — the Top 33 cohort is announced <strong>2 June 2026</strong>.</p>
 
       <h2 style="margin:32px 0 12px;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:${BRAND.red};">Two things to do now</h2>
 
