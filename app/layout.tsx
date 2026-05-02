@@ -18,7 +18,7 @@ const SITE_DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL ??
-      "https://gensea-summit-delegates-exclusive-f.vercel.app",
+      "",
   ),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
