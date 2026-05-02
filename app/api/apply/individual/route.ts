@@ -72,12 +72,17 @@ export async function POST(req: Request) {
       nationality: get("nationality"),
       email: applicantEmail,
       phone: get("phone"),
+      linkedinUrl: get("linkedinUrl"),
       university: get("university"),
+      // Free-text fallback when university === "other".
+      universityOther: get("universityOther"),
       faculty: get("faculty"),
+      // Faculty-referral fields (UI label) — schema field names retained.
       advisorName,
       advisorEmail,
       motivation: get("motivation"),
       cv: cvFile, // Apps Script uploads to Drive and writes a URL
+      cvUrl: get("cvUrl"),
       bootcampUrl,
       teamFlowUrl,
       advisorUploadUrl,

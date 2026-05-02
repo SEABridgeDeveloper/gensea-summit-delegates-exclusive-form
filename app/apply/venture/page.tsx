@@ -15,7 +15,7 @@ import { BrandMark } from "@/components/shared/brand-mark";
 import { Field } from "@/components/apply/form-primitives";
 import { DraftIndicator, type DraftState } from "@/components/apply/draft-indicator";
 
-const DRAFT_KEY = "gen-sea-startup-draft-v3";
+const DRAFT_KEY = "gen-sea-startup-draft-v4";
 const APPLICATION_DEADLINE = "23 May 2026";
 
 const SECTOR_LABELS: Record<(typeof SECTORS)[number], string> = {
@@ -44,11 +44,14 @@ export default function StartupApplyPage() {
     mode: "onBlur",
     defaultValues: {
       legalName: "",
+      companyWebsite: "",
       sector: undefined as unknown as StartupApplicationValues["sector"],
       founderName: "",
       founderEmail: "",
       founderPhone: "",
       founderAge: undefined as unknown as number,
+      linkedinUrl: "",
+      nominatingPartner: "",
       pitchDeck: undefined,
       videoUrl: "",
       videoFile: undefined,
@@ -208,6 +211,20 @@ export default function StartupApplyPage() {
               />
             </Field>
 
+            <Field
+              label="Company website"
+              hint="Optional"
+              error={errors.companyWebsite?.message}
+            >
+              <input
+                type="url"
+                inputMode="url"
+                className="field-input"
+                placeholder="https://yourcompany.com"
+                {...register("companyWebsite")}
+              />
+            </Field>
+
             <fieldset>
               <legend className="mb-1.5 text-sm font-medium text-bone">
                 Sector
@@ -236,6 +253,19 @@ export default function StartupApplyPage() {
                 </p>
               )}
             </fieldset>
+
+            <Field
+              label="Nominating Partner / Incubator / University"
+              hint="Optional · helps prioritise pre-vetted ventures"
+              error={errors.nominatingPartner?.message}
+            >
+              <input
+                type="text"
+                className="field-input"
+                placeholder="e.g. NIA, TED Fund, NUS Enterprise, BLOCK71"
+                {...register("nominatingPartner")}
+              />
+            </Field>
           </fieldset>
 
           <fieldset className="space-y-5">
@@ -286,6 +316,19 @@ export default function StartupApplyPage() {
                 />
               </Field>
             </div>
+            <Field
+              label="LinkedIn"
+              hint="Optional"
+              error={errors.linkedinUrl?.message}
+            >
+              <input
+                type="url"
+                inputMode="url"
+                className="field-input"
+                placeholder="https://linkedin.com/in/founder"
+                {...register("linkedinUrl")}
+              />
+            </Field>
           </fieldset>
 
           <fieldset className="space-y-5">

@@ -16,7 +16,7 @@ import { UniversityCombobox } from "@/components/apply/university-combobox";
 import { DraftIndicator, type DraftState } from "@/components/apply/draft-indicator";
 import { getFacultiesFor } from "@/lib/data/faculties";
 
-const DRAFT_KEY = "gen-sea-individual-draft-v3";
+const DRAFT_KEY = "gen-sea-individual-draft-v4";
 const ADVISOR_LETTER_DEADLINE = "22 May 2026";
 const APPLICATION_DEADLINE = "15 May 2026";
 
@@ -42,8 +42,11 @@ export default function IndividualApplyPage() {
       email: "",
       phone: "",
       university: "",
+      universityOther: "",
       faculty: "",
       cv: undefined,
+      cvUrl: "",
+      linkedinUrl: "",
       advisorName: "",
       advisorEmail: "",
       motivation: "",
@@ -60,7 +63,9 @@ export default function IndividualApplyPage() {
   } = form;
 
   const universityId = watch("university");
+  const cvFile = watch("cv") as File | undefined;
   const faculties = useMemo(() => getFacultiesFor(universityId), [universityId]);
+  const isOtherUniversity = universityId === "other";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -112,6 +117,10 @@ export default function IndividualApplyPage() {
     if (lastUniversityRef.current !== universityId) {
       lastUniversityRef.current = universityId;
       setValue("faculty", "", { shouldValidate: false });
+      // Clear the manual override when switching off "Other".
+      if (universityId !== "other") {
+        setValue("universityOther", "", { shouldValidate: false });
+      }
     }
   }, [universityId, setValue]);
 
@@ -122,7 +131,7 @@ export default function IndividualApplyPage() {
       const fd = new FormData();
       Object.entries(values).forEach(([k, v]) => {
         if (v instanceof File) fd.append(k, v);
-        else if (v !== undefined && v !== null) fd.append(k, String(v));
+        else if (v !== undefined && v !== null && v !== "") fd.append(k, String(v));
       });
       const res = await fetch("/api/apply/individual", { method: "POST", body: fd });
       if (!res.ok) throw new Error(`Submit failed: ${res.status}`);
@@ -177,7 +186,7 @@ export default function IndividualApplyPage() {
             <p className="mt-3 max-w-2xl text-base text-bone-muted">
               Application deadline: <strong className="text-bone">{APPLICATION_DEADLINE}</strong>.
               Once you submit, we&apos;ll send you bootcamp access immediately and email your
-              advisor a private upload link for the recommendation letter.
+              faculty reference a private upload link for the recommendation letter.
             </p>
           </div>
           <DraftIndicator state={draftState} className="shrink-0" />
@@ -243,10 +252,26 @@ export default function IndividualApplyPage() {
                 />
               </Field>
             </div>
+            <Field
+              label="LinkedIn"
+              hint="Optional"
+              error={errors.linkedinUrl?.message}
+            >
+              <input
+                type="url"
+                inputMode="url"
+                className="field-input"
+                placeholder="https://linkedin.com/in/yourprofile"
+                {...register("linkedinUrl")}
+              />
+            </Field>
           </fieldset>
 
           <fieldset className="space-y-5">
-            <SectionHeader title="University & faculty" />
+            <SectionHeader
+              title="University & faculty"
+              hint="If your institution isn't in the list, pick Other / Not listed and type the name below."
+            />
             <Field label="University" required error={errors.university?.message}>
               <Controller
                 control={control}
@@ -260,33 +285,84 @@ export default function IndividualApplyPage() {
                 )}
               />
             </Field>
-            <Field label="Faculty / School" required error={errors.faculty?.message}>
-              <select
-                disabled={!universityId}
-                aria-required="true"
-                className="field-input"
-                {...register("faculty")}
+            {isOtherUniversity && (
+              <Field
+                label="Specify your university"
+                required
+                error={errors.universityOther?.message}
+                hint="Type the full name as it appears on your transcript"
               >
-                <option value="">
-                  {universityId ? "Pick your faculty" : "Choose a university first"}
-                </option>
-                {faculties.map((f) => (
-                  <option key={f} value={f}>
-                    {f}
+                <input
+                  type="text"
+                  className="field-input"
+                  placeholder="e.g. University of Yangon"
+                  autoComplete="organization"
+                  {...register("universityOther")}
+                />
+              </Field>
+            )}
+            <Field label="Faculty / School" required error={errors.faculty?.message}>
+              {isOtherUniversity ? (
+                <input
+                  type="text"
+                  className="field-input"
+                  placeholder="e.g. Faculty of Engineering"
+                  {...register("faculty")}
+                />
+              ) : (
+                <select
+                  disabled={!universityId}
+                  aria-required="true"
+                  className="field-input"
+                  {...register("faculty")}
+                >
+                  <option value="">
+                    {universityId ? "Pick your faculty" : "Choose a university first"}
                   </option>
-                ))}
-              </select>
+                  {faculties.map((f) => (
+                    <option key={f} value={f}>
+                      {f}
+                    </option>
+                  ))}
+                </select>
+              )}
             </Field>
           </fieldset>
 
+          <fieldset className="space-y-5">
+            <SectionHeader
+              title="CV"
+              hint="Either upload a PDF or paste a public link (LinkedIn, Drive, Notion). Optional."
+            />
+            <Field label="Upload CV (PDF)" hint="Optional · max 5MB" error={errors.cv?.message as string | undefined}>
+              <FileInput
+                accept="application/pdf"
+                file={cvFile instanceof File ? cvFile : undefined}
+                onChange={(f) =>
+                  setValue("cv", f as unknown as IndividualApplicationValues["cv"], {
+                    shouldValidate: true,
+                  })
+                }
+              />
+            </Field>
+            <Field label="Or link to your CV" hint="Optional" error={errors.cvUrl?.message}>
+              <input
+                type="url"
+                inputMode="url"
+                className="field-input"
+                placeholder="https://drive.google.com/…"
+                {...register("cvUrl")}
+              />
+            </Field>
+          </fieldset>
 
           <fieldset className="space-y-5">
             <SectionHeader
-              title="Advisor"
-              hint={`After you submit, we'll automatically email your advisor a private link to upload their recommendation letter. Your advisor has until ${ADVISOR_LETTER_DEADLINE} to submit the letter via the link we send them.`}
+              title="Faculty Referral"
+              hint={`After you submit, we'll automatically email your faculty reference a private link to upload their recommendation letter. They have until ${ADVISOR_LETTER_DEADLINE} to submit it via the link we send them.`}
             />
             <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Advisor's full name" required error={errors.advisorName?.message}>
+              <Field label="Reference's full name" required error={errors.advisorName?.message}>
                 <input
                   type="text"
                   className="field-input"
@@ -295,7 +371,7 @@ export default function IndividualApplyPage() {
                 />
               </Field>
               <Field
-                label="Advisor's institutional email"
+                label="Reference's institutional email"
                 required
                 error={errors.advisorEmail?.message}
               >
@@ -303,7 +379,7 @@ export default function IndividualApplyPage() {
                   type="email"
                   inputMode="email"
                   className="field-input"
-                  placeholder="advisor@university.ac.th"
+                  placeholder="reference@university.ac.th"
                   {...register("advisorEmail")}
                 />
               </Field>
@@ -382,5 +458,42 @@ function SectionHeader({ title, hint }: { title: string; hint?: string }) {
       </span>
       {hint && <span className="mt-2 block text-sm text-bone-muted">{hint}</span>}
     </legend>
+  );
+}
+
+function FileInput({
+  accept,
+  file,
+  onChange,
+  label = "Click to upload PDF",
+}: {
+  accept: string;
+  file?: File;
+  onChange: (file: File | undefined) => void;
+  label?: string;
+}) {
+  return (
+    <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-bone-hairline bg-ink-subtle/50 px-4 py-3 transition hover:border-sunset-500/50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-sunset-500 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-ink">
+      <span className="flex items-center gap-3 text-sm text-bone-muted">
+        <Upload className="h-4 w-4" aria-hidden="true" />
+        {file ? (
+          <span className="text-bone">
+            {file.name}{" "}
+            <span className="text-bone-subtle">({Math.round(file.size / 1024)} KB)</span>
+          </span>
+        ) : (
+          <span>{label}</span>
+        )}
+      </span>
+      <span className="text-xs font-semibold text-sunset-400">
+        {file ? "Replace" : "Browse"}
+      </span>
+      <input
+        type="file"
+        accept={accept}
+        className="sr-only"
+        onChange={(e) => onChange(e.target.files?.[0])}
+      />
+    </label>
   );
 }
