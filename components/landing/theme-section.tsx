@@ -30,7 +30,7 @@ export function ThemeSection() {
       <div className="container-page py-20 sm:py-28 lg:py-32">
         <Reveal className="max-w-2xl">
           <span className="eyebrow">{t("theme.kicker")}</span>
-          <h2 className="gradient-text-brand mt-4 font-display text-display">
+          <h2 className="gradient-text-brand mt-4 font-display text-4xl font-extrabold leading-tight sm:text-5xl">
             {t("theme.heading")}
           </h2>
         </Reveal>

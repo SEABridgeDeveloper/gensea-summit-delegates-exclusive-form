@@ -17,7 +17,7 @@ export function FinalCta() {
       />
       <Reveal className="container-page flex flex-col gap-8 py-20 text-bone sm:py-24 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
-          <h2 className="font-display text-display">
+          <h2 className="font-display text-4xl font-bold leading-tight sm:text-5xl">
             <span className="gradient-text-brand">{t("finalCta.heading")}</span>
           </h2>
           <p className="mt-4 text-lg text-bone-muted">{t("finalCta.body")}</p>

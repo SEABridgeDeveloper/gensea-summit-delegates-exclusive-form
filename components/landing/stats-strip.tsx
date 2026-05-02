@@ -40,10 +40,10 @@ export function StatsStrip() {
                 key={stat.label}
                 className="bg-ink-elevated p-5 transition-colors duration-300 hover:bg-ink-subtle sm:p-6"
               >
-                <span className="block font-display text-display-sm text-sunset-400">
+                <span className="block font-display text-2xl font-bold leading-tight text-sunset-400 sm:text-3xl">
                   {stat.value}
                 </span>
-                <span className="mt-2 block text-xs text-bone-muted sm:text-sm">
+                <span className="mt-2 block text-xs leading-snug text-bone-muted sm:text-sm">
                   {stat.label}
                 </span>
               </li>

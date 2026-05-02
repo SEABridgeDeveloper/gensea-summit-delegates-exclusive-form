@@ -73,7 +73,7 @@ export function Hero() {
           style={{ animationDelay: "120ms" }}
         >
           <h1 className="font-display font-extrabold leading-[0.95] tracking-tight">
-            <span className="gradient-text-brand block text-display-xl">
+            <span className="gradient-text-brand block text-5xl sm:text-6xl lg:text-7xl xl:text-[5rem]">
               {t("hero.headlineLine1")}
             </span>
             <span className="mt-3 block text-2xl text-bone md:text-2xl xl:text-4xl">

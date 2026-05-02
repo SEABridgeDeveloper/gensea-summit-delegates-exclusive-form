@@ -31,7 +31,7 @@ export function TrackStartup() {
         <Reveal as="header" className="max-w-4xl">
           <span className="eyebrow">{t("tracks.startup.eyebrow")}</span>
           <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-            <h2 className="font-display text-display text-bone">
+            <h2 className="font-display text-4xl font-bold text-bone sm:text-5xl">
               {t("tracks.startup.heading")}
             </h2>
             <Link

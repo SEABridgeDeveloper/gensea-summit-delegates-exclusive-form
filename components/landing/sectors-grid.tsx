@@ -47,7 +47,7 @@ export function SectorsGrid() {
       <div className="container-page py-20 sm:py-28">
         <Reveal as="header" className="max-w-2xl">
           <span className="eyebrow">{t("sectors.kicker")}</span>
-          <h2 id="sectors-heading" className="mt-4 font-display text-display-sm text-bone">
+          <h2 id="sectors-heading" className="mt-4 font-display text-3xl font-bold text-bone sm:text-4xl">
             {t("sectors.heading")}
           </h2>
           <p className="mt-5 text-lg text-bone-muted sm:text-xl">
