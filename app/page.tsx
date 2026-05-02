@@ -3,6 +3,7 @@ import { Footer } from "@/components/shared/footer";
 import { Hero } from "@/components/landing/hero";
 import { StatsStrip } from "@/components/landing/stats-strip";
 import { ThemeSection } from "@/components/landing/theme-section";
+import { SectorsGrid } from "@/components/landing/sectors-grid";
 import { FinalCta } from "@/components/landing/final-cta";
 import { TracksArea } from "@/components/landing/tracks-area";
 import { SkipToContent } from "@/components/shared/skip-to-content";
@@ -18,7 +19,8 @@ export default function HomePage() {
         <Hero />
         <StatsStrip />
         <ThemeSection />
-        <Suspense fallback={<div className="min-h-[24rem] bg-ink-900" aria-hidden />}>
+        <SectorsGrid />
+        <Suspense fallback={<div className="min-h-[24rem] bg-ink" aria-hidden />}>
           <TracksArea />
         </Suspense>
         <FinalCta />
