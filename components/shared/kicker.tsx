@@ -31,7 +31,7 @@ export function Kicker({
         // pill reads cleanly on the dark hero and on light sections.
         isExclusive
           ? "border-sunset-500/50 bg-sunset-500/15 text-sunset-100"
-          : "border-sunset-500/40 bg-cream-50/10 text-cream-50",
+          : "border-sunset-500/40 bg-bone/10 text-bone",
         className,
       )}
     >
@@ -56,7 +56,7 @@ export function Kicker({
             className="h-1 w-1 rounded-full bg-sunset-500/50"
             aria-hidden="true"
           />
-          <span className={isExclusive ? "text-sunset-100" : "text-cream-50/90"}>
+          <span className={isExclusive ? "text-sunset-100" : "text-bone-muted"}>
             {secondary}
           </span>
         </>
