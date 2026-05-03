@@ -14,7 +14,7 @@ export function UniversityCombobox({
   onChange,
   onUseTyped,
   invalid,
-  placeholder = "Search 140+ ASEAN universities",
+  placeholder = "Search universities worldwide",
   emptyLabel = "No matches. Try a different spelling or pick Other.",
   id: propId,
 }: {
@@ -43,7 +43,7 @@ export function UniversityCombobox({
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const selected = getUniversityById(value);
-  const results = useMemo(() => searchUniversities(query, 16), [query]);
+  const results = useMemo(() => searchUniversities(query, 24), [query]);
 
   // Show an inline "Use my own" option when the typed query has no exact name
   // match — gives users a one-click escape hatch to commit free-text instead
@@ -258,7 +258,7 @@ export function UniversityCombobox({
             )}
           </ul>
           <div className="border-t border-bone-hairline px-4 py-2 text-[11px] text-bone-subtle">
-            {universities.length}+ ASEAN institutions
+            {universities.length} institutions worldwide
           </div>
         </div>
       )}

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useLocale } from "@/lib/i18n/provider";
 import { BrandMark } from "./brand-mark";
@@ -21,9 +20,14 @@ export function Footer() {
       <div className="gradient-strip" aria-hidden="true" />
       <div className="container-page flex flex-col gap-10 py-14 md:flex-row md:items-start md:justify-between md:gap-12">
         <div>
-          <Link href="/" aria-label="Gen SEA Summit home">
+          <a
+            href="https://www.seabridge.space/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="SEA Bridge (opens in new tab)"
+          >
             <BrandMark />
-          </Link>
+          </a>
           <p className="mt-4 max-w-md text-sm text-bone-muted">{t("footer.tagline")}</p>
         </div>
 
