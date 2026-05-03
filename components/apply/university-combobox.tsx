@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { ChevronDown, Search, X } from "lucide-react";
+import { ChevronDown, Plus, Search, X } from "lucide-react";
 import {
   searchUniversities,
   getUniversityById,
@@ -12,6 +12,7 @@ import { cn } from "@/lib/cn";
 export function UniversityCombobox({
   value,
   onChange,
+  onUseTyped,
   invalid,
   placeholder = "Search 140+ ASEAN universities",
   emptyLabel = "No matches. Try a different spelling or pick Other.",
@@ -19,6 +20,12 @@ export function UniversityCombobox({
 }: {
   value: string;
   onChange: (id: string) => void;
+  /**
+   * Called when the user commits a free-text query that isn't in the list.
+   * Receives the typed text so the parent can pre-fill the "Other" field.
+   * The combobox itself emits `onChange("other")` alongside this.
+   */
+  onUseTyped?: (text: string) => void;
   invalid?: boolean;
   placeholder?: string;
   emptyLabel?: string;
@@ -37,6 +44,16 @@ export function UniversityCombobox({
 
   const selected = getUniversityById(value);
   const results = useMemo(() => searchUniversities(query, 16), [query]);
+
+  // Show an inline "Use my own" option when the typed query has no exact name
+  // match — gives users a one-click escape hatch to commit free-text instead
+  // of scroll-hunting for "Other / Not listed" and re-typing.
+  const trimmedQuery = query.trim();
+  const showUseTyped =
+    trimmedQuery.length > 0 &&
+    !results.some((u) => u.name.toLowerCase() === trimmedQuery.toLowerCase());
+  const useTypedIndex = showUseTyped ? results.length : -1;
+  const totalOptions = results.length + (showUseTyped ? 1 : 0);
 
   // Reset active option when results change.
   useEffect(() => {
@@ -69,11 +86,20 @@ export function UniversityCombobox({
     setQuery("");
   };
 
+  const handleSelectTyped = () => {
+    const text = trimmedQuery;
+    if (!text) return;
+    onUseTyped?.(text);
+    onChange("other");
+    setOpen(false);
+    setQuery("");
+  };
+
   const handleListboxKey = (e: React.KeyboardEvent) => {
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setActiveIndex((i) => Math.min(i + 1, Math.max(results.length - 1, 0)));
+        setActiveIndex((i) => Math.min(i + 1, Math.max(totalOptions - 1, 0)));
         break;
       case "ArrowUp":
         e.preventDefault();
@@ -81,7 +107,8 @@ export function UniversityCombobox({
         break;
       case "Enter":
         e.preventDefault();
-        if (results[activeIndex]) handleSelect(results[activeIndex].id);
+        if (activeIndex === useTypedIndex) handleSelectTyped();
+        else if (results[activeIndex]) handleSelect(results[activeIndex].id);
         break;
       case "Escape":
         e.preventDefault();
@@ -93,7 +120,7 @@ export function UniversityCombobox({
         break;
       case "End":
         e.preventDefault();
-        setActiveIndex(Math.max(results.length - 1, 0));
+        setActiveIndex(Math.max(totalOptions - 1, 0));
         break;
     }
   };
@@ -105,8 +132,13 @@ export function UniversityCombobox({
     }
   };
 
-  const activeOptionId =
-    open && results[activeIndex] ? `${baseId}-opt-${results[activeIndex].id}` : undefined;
+  const activeOptionId = open
+    ? activeIndex === useTypedIndex
+      ? `${baseId}-opt-use-typed`
+      : results[activeIndex]
+        ? `${baseId}-opt-${results[activeIndex].id}`
+        : undefined
+    : undefined;
 
   return (
     <div ref={wrapperRef} className="relative">
@@ -171,7 +203,7 @@ export function UniversityCombobox({
             aria-label="Universities"
             className="max-h-[min(18rem,50vh)] overflow-y-auto py-1"
           >
-            {results.length === 0 && (
+            {results.length === 0 && !showUseTyped && (
               <li className="px-4 py-3 text-sm text-bone-subtle">{emptyLabel}</li>
             )}
             {results.map((u, i) => (
@@ -199,6 +231,31 @@ export function UniversityCombobox({
                 </button>
               </li>
             ))}
+            {showUseTyped && (
+              <li>
+                <button
+                  ref={(el) => {
+                    optionRefs.current[useTypedIndex] = el;
+                  }}
+                  type="button"
+                  role="option"
+                  id={`${baseId}-opt-use-typed`}
+                  aria-selected={false}
+                  onClick={handleSelectTyped}
+                  onMouseEnter={() => setActiveIndex(useTypedIndex)}
+                  className={cn(
+                    "flex w-full items-center gap-2 border-t border-bone-hairline px-4 py-2.5 text-left text-sm transition",
+                    useTypedIndex === activeIndex ? "bg-ink-subtle" : "hover:bg-ink-subtle",
+                  )}
+                >
+                  <Plus className="h-4 w-4 shrink-0 text-sunset-400" aria-hidden="true" />
+                  <span className="truncate text-bone">
+                    Use <span className="font-semibold">&ldquo;{trimmedQuery}&rdquo;</span>
+                  </span>
+                  <span className="ml-auto shrink-0 text-xs text-bone-subtle">Not listed</span>
+                </button>
+              </li>
+            )}
           </ul>
           <div className="border-t border-bone-hairline px-4 py-2 text-[11px] text-bone-subtle">
             {universities.length}+ ASEAN institutions

@@ -284,6 +284,9 @@ export default function IndividualApplyPage() {
                   <UniversityCombobox
                     value={field.value}
                     onChange={field.onChange}
+                    onUseTyped={(text) =>
+                      setValue("universityOther", text, { shouldValidate: true })
+                    }
                     invalid={!!errors.university}
                   />
                 )}
