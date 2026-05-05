@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
   ArrowRight,
   Check,
   CircleAlert,
+  Clock,
   Loader2,
   Upload,
 } from "lucide-react";
@@ -247,9 +248,7 @@ function FormCard(props: {
             new one below.
           </div>
         )}
-        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-sunset-500/40 bg-sunset-500/10 px-3 py-1 text-xs font-semibold text-sunset-400">
-          Deadline: {context.deadline}
-        </div>
+        <DeadlineBadge value={context.deadline} />
       </section>
 
       {/* Guidance */}
@@ -354,6 +353,93 @@ function SuccessCard({ applicantName }: { applicantName: string }) {
         the program selection team. A confirmation email is on its way.
       </p>
       <p className="mt-4 text-sm text-bone-subtle">You can close this page now.</p>
+    </div>
+  );
+}
+
+// ── Deadline badge ───────────────────────────────────────────────────────
+//
+// The Apps Script lookup returns the deadline as whatever the Sheet cell
+// holds — typically an ISO string ("2026-05-21T17:00:00.000Z"), occasionally
+// a pre-formatted label ("22 May 2026"). Render a friendly date plus a live
+// countdown when we can parse it; otherwise fall back to the raw string.
+
+function parseDeadline(value: string): Date | undefined {
+  const t = Date.parse(value);
+  return Number.isNaN(t) ? undefined : new Date(t);
+}
+
+function formatDeadlineDate(d: Date): string {
+  return d.toLocaleString(undefined, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short",
+  });
+}
+
+function formatCountdown(ms: number): { label: string; tone: "ok" | "soon" | "expired" } {
+  if (ms <= 0) return { label: "Deadline has passed", tone: "expired" };
+  const sec = Math.floor(ms / 1000);
+  const min = Math.floor(sec / 60);
+  const hr = Math.floor(min / 60);
+  const day = Math.floor(hr / 24);
+  const tone: "ok" | "soon" = day >= 2 ? "ok" : "soon";
+  if (day >= 1) {
+    const remHr = hr - day * 24;
+    return { label: `${day} day${day === 1 ? "" : "s"} ${remHr} hr left`, tone };
+  }
+  if (hr >= 1) {
+    const remMin = min - hr * 60;
+    return { label: `${hr} hr ${remMin} min left`, tone };
+  }
+  if (min >= 1) return { label: `${min} min left`, tone: "soon" };
+  return { label: `${sec} sec left`, tone: "soon" };
+}
+
+function DeadlineBadge({ value }: { value: string }) {
+  const parsed = useMemo(() => parseDeadline(value), [value]);
+  const [now, setNow] = useState<number>(() => Date.now());
+
+  useEffect(() => {
+    if (!parsed) return;
+    const id = window.setInterval(() => setNow(Date.now()), 60_000);
+    return () => window.clearInterval(id);
+  }, [parsed]);
+
+  if (!parsed) {
+    return (
+      <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-sunset-500/40 bg-sunset-500/10 px-3 py-1 text-xs font-semibold text-sunset-400">
+        <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+        Deadline: {value}
+      </div>
+    );
+  }
+
+  const remaining = parsed.getTime() - now;
+  const { label, tone } = formatCountdown(remaining);
+  const toneClasses =
+    tone === "expired"
+      ? "border-sunset-700/60 bg-sunset-700/15 text-sunset-300"
+      : tone === "soon"
+        ? "border-sunset-500/60 bg-sunset-500/15 text-sunset-300"
+        : "border-sunset-500/40 bg-sunset-500/10 text-sunset-400";
+
+  return (
+    <div className={`mt-4 flex flex-wrap items-center gap-3 rounded-2xl border px-4 py-3 ${toneClasses}`}>
+      <Clock className="h-4 w-4 shrink-0" aria-hidden="true" />
+      <div className="min-w-0 text-sm">
+        <p className="font-semibold uppercase tracking-[0.18em] text-[11px]">
+          Deadline
+        </p>
+        <p className="mt-0.5 text-bone">
+          <time dateTime={parsed.toISOString()}>{formatDeadlineDate(parsed)}</time>
+        </p>
+        <p className="mt-0.5 text-xs font-semibold">{label}</p>
+      </div>
     </div>
   );
 }
